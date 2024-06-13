@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using WorksheetGenerator.Utilities;
+using WorksheetGenerator.Elements;
 
 namespace WorksshetGenerator
 {
@@ -17,14 +18,14 @@ namespace WorksshetGenerator
             // Load document
             string filePath = $"docs/{args[0]}/word/document.xml";
             XDocument originalDoc = XDocument.Load(filePath);
-            IEnumerable<XElement> paragraphs = originalDoc.Descendants(HF.w + "p");
+            IEnumerable<XElement> paragraphs = originalDoc.Descendants(El.w + "p");
 
             // Create new document
             XDocument newDoc = new XDocument(
                 HF.GetDocumentAndBodyOnly(originalDoc)
             );
 
-            XElement? newBody = newDoc.Descendants(HF.w + "body").FirstOrDefault();
+            XElement? newBody = newDoc.Descendants(El.w + "body").FirstOrDefault();
 
             foreach (XElement paragraph in HF.GetProcessedReading(paragraphs))
             {
@@ -32,9 +33,9 @@ namespace WorksshetGenerator
                 newBody?.Add(paragraph);
             }
 
-            Console.WriteLine(newBody);
+            // Console.WriteLine(newDoc);
 
-            // newDoc.Save(filePath);
+            newDoc.Save(filePath);
         }
     }
 }
