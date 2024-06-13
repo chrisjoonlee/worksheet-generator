@@ -82,6 +82,11 @@ namespace WorksheetGenerator.Utilities
             }
         }
 
+        public static bool StartsWith(XElement element, string str)
+        {
+            return ((string)element).Trim().ToLower().StartsWith(str.ToLower());
+        }
+
         public static List<XElement> GetParagraphsByIdentifier(IEnumerable<XElement> paragraphs, string identifierName)
         {
             bool isBetweenIdentifiers = false;
@@ -104,7 +109,7 @@ namespace WorksheetGenerator.Utilities
                 }
                 else if (isBetweenIdentifiers)
                 {
-                    if (!((string)paragraph).ToLower().StartsWith("chatgpt:"))
+                    if (!StartsWith(paragraph, "chatgpt:"))
                     {
                         result.Add(paragraph);
                     }
@@ -114,13 +119,78 @@ namespace WorksheetGenerator.Utilities
             return result;
         }
 
-        public static void ProcessReading(IEnumerable<XElement> allParagraphs)
+        public static bool IsImage(XElement element)
+        {
+            foreach (XElement child in element.Elements())
+            {
+                // Check if the child element is a drawing or picture
+                if (child.Name == w + "drawing" || child.Name == w + "pict")
+                    return true;
+
+                // Check if the child element is a run element containing drawing or picture
+                if (child.Name == w + "r")
+                    foreach (XElement runChild in child.Elements())
+                    {
+                        if (runChild.Name == w + "drawing" || runChild.Name == w + "pict")
+                            return true;
+                    }
+            }
+
+            return false;
+        }
+
+        public static XElement? GetTitleElement(IEnumerable<XElement> elements)
+        {
+            foreach (XElement element in elements)
+            {
+                if (StartsWith(element, "title:"))
+                    return element;
+            }
+
+            return null;
+        }
+
+        public static void AddTitleStyles(XElement element)
+        {
+            element.Add(new XElement(w + "pPr",
+                new XElement(w + "jc",
+                    new XAttribute(w + "val", "center")
+                ),
+                new XElement(w + "rPr",
+                    new XElement(w + "b"),
+                    new XElement(w + "bCs"),
+                    new XElement(w + "sz",
+                        new XAttribute(w + "val", "36")
+                    ),
+                    new XElement(w + "szCs",
+                        new XAttribute(w + "val", "36")
+                    ),
+                    new XElement(w + "lang",
+                        new XAttribute(w + "val", "en-US")
+                    )
+                )
+            ));
+        }
+
+        public static List<XElement> GetProcessedReading(IEnumerable<XElement> allParagraphs)
         {
             List<XElement> paragraphs = GetParagraphsByIdentifier(allParagraphs, "READING");
-            foreach (XElement paragraph in paragraphs)
+            List<XElement> result = new List<XElement>();
+            XElement? origTitleElement = GetTitleElement(paragraphs);
+
+            // Format title
+            if (origTitleElement != null)
             {
-                Console.WriteLine((string)paragraph);
+                XElement? newTitleElement = GetElementOnly(origTitleElement);
+                if (newTitleElement != null)
+                {
+                    AddTitleStyles(newTitleElement);
+                    newTitleElement.Value = origTitleElement.Value.ToUpper();
+                    result.Add(newTitleElement);
+                }
             }
+
+            return result;
         }
     }
 }

@@ -17,15 +17,24 @@ namespace WorksshetGenerator
             // Load document
             string filePath = $"docs/{args[0]}/word/document.xml";
             XDocument originalDoc = XDocument.Load(filePath);
+            IEnumerable<XElement> paragraphs = originalDoc.Descendants(HF.w + "p");
+
+            // Create new document
             XDocument newDoc = new XDocument(
                 HF.GetDocumentAndBodyOnly(originalDoc)
             );
 
-            // Get all paragraphs
-            IEnumerable<XElement> paragraphs = originalDoc.Descendants(HF.w + "p");
+            XElement? newBody = newDoc.Descendants(HF.w + "body").FirstOrDefault();
 
-            // Process reading
-            HF.ProcessReading(paragraphs);
+            foreach (XElement paragraph in HF.GetProcessedReading(paragraphs))
+            {
+                Console.WriteLine("Paragraph:", paragraph);
+                newBody?.Add(paragraph);
+            }
+
+            Console.WriteLine(newBody);
+
+            // newDoc.Save(filePath);
         }
     }
 }

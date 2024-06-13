@@ -15,18 +15,27 @@ if [ ! -f "$FILENAME" ]; then
   exit 1
 fi
 
-# Create directory name
-DIRNAME="${FILENAME%.*}"
+# Get the base directory name without extension
+BASE_DIR="${FILENAME%.*}_new"
+
+# Function to find the next available directory name
+get_next_dir_name() {
+  local dir_name="$1"
+  local i=1
+  while [ -d "$dir_name$i" ]; do
+    ((i++))
+  done
+  echo "$dir_name$i"
+}
 
 # Check if the directory already exists
-if [ -d "$DIRNAME" ]; then
-  echo "Directory already exists: $DIRNAME"
-  exit 1
+if [ -d "$BASE_DIR" ]; then
+  BASE_DIR=$(get_next_dir_name "$BASE_DIR")
 fi
 
 # Create the new directory
-mkdir "$DIRNAME"
-cd "$DIRNAME"
+mkdir "$BASE_DIR"
+cd "$BASE_DIR"
 
 # Unzip the file
 unzip ../../"$FILENAME"
