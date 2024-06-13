@@ -6,6 +6,8 @@ namespace WorksheetGenerator.Elements
     public static class El
     {
         public static XNamespace w = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
+        public static XNamespace wp = "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing";
+        public static XNamespace a = "http://schemas.openxmlformats.org/drawingml/2006/main";
 
         public static XElement titleRunProperty =
             new XElement(w + "rPr",

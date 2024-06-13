@@ -149,6 +149,64 @@ namespace WorksheetGenerator.Utilities
             return false;
         }
 
+        public static double GetWidth(double width, double height, double desiredHeight)
+        {
+            return desiredHeight / height * width;
+        }
+
+        public static void FormatImage(XElement element, double desiredHeight = 1640000)
+        {
+            // Add elements to <w:pPr>
+            XElement? paragraphProperty = element.Element(El.w + "pPr");
+            paragraphProperty?.AddFirst(new XElement(El.w + "jc",
+                new XAttribute(El.w + "val", "center")
+            ));
+            paragraphProperty?.AddFirst(new XElement(El.w + "spacing",
+                new XAttribute(El.w + "before", 240),
+                new XAttribute(El.w + "line", 400),
+                new XAttribute(El.w + "lineRule", "auto")
+            ));
+
+            // Add elements to <w:rPr>
+            XElement? runProperty = paragraphProperty?.Element(El.w + "rPr");
+            runProperty?.AddFirst(new XElement(El.w + "szCs",
+                new XAttribute(El.w + "val", 36)
+            ));
+            runProperty?.AddFirst(new XElement(El.w + "sz",
+                new XAttribute(El.w + "val", 36)
+            ));
+            runProperty?.AddFirst(new XElement(El.w + "bCs"));
+            runProperty?.AddFirst(new XElement(El.w + "b"));
+
+            // Edit <wp:extent> (Resizing)
+            XElement? extentElement = element.Descendants(El.wp + "extent").FirstOrDefault();
+            XAttribute? cx = extentElement?.Attribute("cx");
+            XAttribute? cy = extentElement?.Attribute("cy");
+            if (cx != null && cy != null)
+            {
+                bool validCx = double.TryParse(cx.Value, out double origWidth);
+                bool validCy = double.TryParse(cy.Value, out double origHeight);
+
+                if (validCx && validCy)
+                {
+                    double desiredWidth = GetWidth(origWidth, origHeight, desiredHeight);
+                    extentElement?.SetAttributeValue("cx", desiredWidth);
+                    extentElement?.SetAttributeValue("cy", desiredHeight);
+
+                    // Edit <a:xfrm><a:ext> (Resizing)
+                    XElement? transformElement = element.Descendants(El.a + "xfrm").FirstOrDefault();
+                    XElement? extElement = transformElement?.Element(El.a + "ext");
+
+                    extElement?.SetAttributeValue("cx", desiredWidth);
+                    extElement?.SetAttributeValue("cy", desiredHeight);
+                }
+            }
+
+            // Edit <a:prstGeom> (Rounded corners)
+            XElement? geometryElement = element.Descendants(El.a + "prstGeom").FirstOrDefault();
+            geometryElement?.SetAttributeValue("prst", "roundRect");
+        }
+
         public static XElement? GetTitleElement(IEnumerable<XElement> elements)
         {
             foreach (XElement element in elements)
@@ -203,6 +261,10 @@ namespace WorksheetGenerator.Utilities
             {
                 if (!StartsWith(paragraph, "title:"))
                 {
+                    // Format any images
+                    if (IsImage(paragraph))
+                        FormatImage(paragraph);
+
                     passageParagraphs.Add(paragraph);
                 }
             }
