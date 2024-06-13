@@ -76,6 +76,18 @@ namespace WorksheetGenerator.Utilities
             }
         }
 
+        public static bool IsWhiteSpaceOnly(XElement element)
+        {
+            // Get the text within the <w:p> element
+            string? text = element.Descendants()
+                                .Where(e => e.Name.LocalName == "t")
+                                .Select(e => e.Value)
+                                .FirstOrDefault();
+
+            // Check if the text is null or consists only of whitespace characters
+            return string.IsNullOrWhiteSpace(text);
+        }
+
         public static bool StartsWith(XElement element, string str)
         {
             return ((string)element).Trim().ToLower().StartsWith(str.ToLower());
@@ -149,9 +161,10 @@ namespace WorksheetGenerator.Utilities
             return false;
         }
 
-        public static double GetWidth(double width, double height, double desiredHeight)
+        public static ulong GetWidth(double width, double height, double desiredHeight)
         {
-            return desiredHeight / height * width;
+            // Console.WriteLine(Math.Round(desiredHeight / height * width));
+            return (ulong)Math.Round((double)(desiredHeight / height * width));
         }
 
         public static void FormatImage(XElement element, double desiredHeight = 1640000)
@@ -236,7 +249,7 @@ namespace WorksheetGenerator.Utilities
             List<XElement> result = [];
             XElement? origTitleElement = GetTitleElement(paragraphs);
 
-            // Format title
+            // Format & add title
             if (origTitleElement != null)
             {
                 XElement? newTitleElement = GetElementOnly(origTitleElement);
@@ -257,6 +270,8 @@ namespace WorksheetGenerator.Utilities
 
             // Get main passage paragraphs
             List<XElement> passageParagraphs = [];
+            List<XElement> previewImages = [];
+            bool isBeforePassage = true;
             foreach (XElement paragraph in paragraphs)
             {
                 if (!StartsWith(paragraph, "title:"))
@@ -264,12 +279,22 @@ namespace WorksheetGenerator.Utilities
                     // Format any images
                     if (IsImage(paragraph))
                         FormatImage(paragraph);
-
-                    passageParagraphs.Add(paragraph);
+                    else if (isBeforePassage)
+                        isBeforePassage = false;
+                    if (isBeforePassage)
+                        previewImages.Add(paragraph);
+                    else if (!IsWhiteSpaceOnly(paragraph) || IsImage(paragraph))
+                        passageParagraphs.Add(paragraph);
                 }
             }
 
-            // Create table for main passage
+            // Add preview images
+            foreach (XElement element in previewImages)
+            {
+                result.Add(element);
+            }
+
+            // Create table for main passage & add passage paragraphs
             XElement tableElement = El.TableElement(2, [6374, 2976], [passageParagraphs, null]);
             result.Add(tableElement);
 
