@@ -1,0 +1,1276 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas"
+  xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex"
+  xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex"
+  xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex"
+  xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex"
+  xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex"
+  xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex"
+  xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex"
+  xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex"
+  xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink"
+  xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:oel="http://schemas.microsoft.com/office/2019/extlst"
+  xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+  xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"
+  xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing"
+  xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
+  xmlns:w10="urn:schemas-microsoft-com:office:word"
+  xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+  xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
+  xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
+  xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex"
+  xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid"
+  xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml"
+  xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash"
+  xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex"
+  xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"
+  xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk"
+  xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml"
+  xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh wp14">
+  <w:body>
+    <w:p w14:paraId="75554FF1" w14:textId="45628216" w:rsidR="00D0739F" w:rsidRDefault="00D0739F">
+      <w:pPr>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>VOCAB</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="539A427A" w14:textId="4986691C" w:rsidR="00D0739F" w:rsidRDefault="00D0739F">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="55E8272D" w14:textId="77777777" w:rsidR="00D0739F" w:rsidRPr="00D0739F" w:rsidRDefault="00D0739F">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="535FC8F9" w14:textId="64E8D758" w:rsidR="00ED7032" w:rsidRDefault="00ED7032">
+      <w:pPr>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>READING</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="334EA24A" w14:textId="22A2ED24" w:rsidR="003C3B35" w:rsidRPr="003C3B35" w:rsidRDefault="003C3B35">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">ChatGPT: </w:t>
+      </w:r>
+      <w:r w:rsidRPr="003C3B35">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>Summarize this passage at an elementary school reading level. Whenever an example is given, provide a different one instead:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="21A1E00E" w14:textId="0CB4387A" w:rsidR="007009A6" w:rsidRPr="007009A6" w:rsidRDefault="007009A6" w:rsidP="003C3B35">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>Introduction to Economics</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="1F8FF3BA" w14:textId="7085E2A9" w:rsidR="00EF0C86" w:rsidRDefault="00EF0C86" w:rsidP="007009A6">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:fldChar w:fldCharType="begin"/>
+      </w:r>
+      <w:r>
+        <w:instrText xml:space="preserve"> INCLUDEPICTURE "/Users/kristian/Library/Group Containers/UBF8T346G9.ms/WebArchiveCopyPasteTempFiles/com.microsoft.Word/economics.jpg" \* MERGEFORMATINET </w:instrText>
+      </w:r>
+      <w:r>
+        <w:fldChar w:fldCharType="separate"/>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:noProof/>
+        </w:rPr>
+        <w:drawing>
+          <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="5B556128" wp14:editId="3AB61857">
+            <wp:extent cx="2840736" cy="1893824"/>
+            <wp:effectExtent l="0" t="0" r="4445" b="0"/>
+            <wp:docPr id="727857410" name="Picture 2" descr="A calculator and a clipboard with money&#xA;&#xA;Description automatically generated"/>
+            <wp:cNvGraphicFramePr>
+              <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
+            </wp:cNvGraphicFramePr>
+            <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+              <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                  <pic:nvPicPr>
+                    <pic:cNvPr id="727857410" name="Picture 2" descr="A calculator and a clipboard with money&#xA;&#xA;Description automatically generated"/>
+                    <pic:cNvPicPr>
+                      <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
+                    </pic:cNvPicPr>
+                  </pic:nvPicPr>
+                  <pic:blipFill>
+                    <a:blip r:embed="rId4" cstate="print">
+                      <a:extLst>
+                        <a:ext uri="{28A0092B-C50C-407E-A947-70E740481C1C}">
+                          <a14:useLocalDpi xmlns:a14="http://schemas.microsoft.com/office/drawing/2010/main" val="0"/>
+                        </a:ext>
+                      </a:extLst>
+                    </a:blip>
+                    <a:srcRect/>
+                    <a:stretch>
+                      <a:fillRect/>
+                    </a:stretch>
+                  </pic:blipFill>
+                  <pic:spPr bwMode="auto">
+                    <a:xfrm>
+                      <a:off x="0" y="0"/>
+                      <a:ext cx="2848881" cy="1899254"/>
+                    </a:xfrm>
+                    <a:prstGeom prst="rect">
+                      <a:avLst/>
+                    </a:prstGeom>
+                    <a:noFill/>
+                    <a:ln>
+                      <a:noFill/>
+                    </a:ln>
+                  </pic:spPr>
+                </pic:pic>
+              </a:graphicData>
+            </a:graphic>
+          </wp:inline>
+        </w:drawing>
+      </w:r>
+      <w:r>
+        <w:fldChar w:fldCharType="end"/>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="3404AB22" w14:textId="4924B065" w:rsidR="007009A6" w:rsidRDefault="003C3B35" w:rsidP="007009A6">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">What is </w:t>
+      </w:r>
+      <w:r w:rsidRPr="002B51C9">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>economics</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">? Economics is about more than just money and financial </w:t>
+      </w:r>
+      <w:r w:rsidRPr="003C3B35">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>transactions</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>. More accurately, e</w:t>
+      </w:r>
+      <w:r w:rsidRPr="003C3B35">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">conomics </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">is a study that </w:t>
+      </w:r>
+      <w:r w:rsidRPr="003C3B35">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">helps us understand how people make choices </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">in the face of </w:t>
+      </w:r>
+      <w:r w:rsidRPr="003C3B35">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>scarcity</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">. "Scarcity" means that there are not enough resources for people who want them. Such resources are </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>finite</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">, meaning they have </w:t>
+      </w:r>
+      <w:r w:rsidR="00803166">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">a </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">limit, and include money, land, labor, and materials. Time is considered the </w:t>
+      </w:r>
+      <w:r w:rsidRPr="003C3B35">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>ultimate</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> finite resource, as every person has the same number of hours in a day.</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="0BFD5E92" w14:textId="024D09D2" w:rsidR="007009A6" w:rsidRPr="002B51C9" w:rsidRDefault="003C3B35" w:rsidP="007009A6">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">When resources are limited, people must make certain decisions. What should I buy? What can I sell? What should I </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>invest</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> my time into? </w:t>
+      </w:r>
+      <w:r w:rsidRPr="003C3B35">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">These </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">decisions can be made by individuals, families, or businesses. Governments and societies are also faced with these decisions. </w:t>
+      </w:r>
+      <w:r w:rsidR="002B51C9">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">When certain people don't have access to food, </w:t>
+      </w:r>
+      <w:r w:rsidR="002B51C9" w:rsidRPr="002B51C9">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>shelter</w:t>
+      </w:r>
+      <w:r w:rsidR="002B51C9">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">, or healthcare, this is a result of the scarcity of resources. Just as people have to choose whether to spend their money on a car or a vacation, governments must also decide how to divide their </w:t>
+      </w:r>
+      <w:r w:rsidR="002B51C9" w:rsidRPr="002B51C9">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>budget</w:t>
+      </w:r>
+      <w:r w:rsidR="002B51C9">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> between schools, emergency services, and other </w:t>
+      </w:r>
+      <w:r w:rsidR="002B51C9" w:rsidRPr="002B51C9">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>infrastructure</w:t>
+      </w:r>
+      <w:r w:rsidR="002B51C9">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>. Meanwhile, countries must choose how much to fund the military as opposed to protecting the environment. These decisions are not always easy to make.</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="719EE783" w14:textId="5E52C506" w:rsidR="007009A6" w:rsidRDefault="002B51C9" w:rsidP="00EF0C86">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">One of the most important people in the history of economics is Adam Smith, an </w:t>
+      </w:r>
+      <w:r w:rsidRPr="002B51C9">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>economist</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> and philosopher from the 18th century. He explained how producing </w:t>
+      </w:r>
+      <w:r w:rsidRPr="002B51C9">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>goods</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> can be made more efficient by dividing the work into smaller tasks. This is known as the </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:lastRenderedPageBreak/>
+        <w:t xml:space="preserve">"division of labor." For example, running a bakery involves many different tasks, including buying ingredients, mixing the dough, baking it, selling the bread, and managing the store. It would be difficult for one person to become an expert in all these different tasks. Instead, it would be smarter to have different people </w:t>
+      </w:r>
+      <w:r w:rsidRPr="002B51C9">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>specialize</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">, or become experts in, different tasks. This way, people could carry out </w:t>
+      </w:r>
+      <w:r w:rsidR="00803166">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>tasks more quickly, and the bakery would be able to sell more bread. This is an example of the power and efficiency of the division of labor.</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="610929F4" w14:textId="4BB4F134" w:rsidR="00EF0C86" w:rsidRDefault="003C3B35" w:rsidP="00EF0C86">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r w:rsidRPr="003C3B35">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">Specialization allows workers to become really good at one task, which makes production faster and better. </w:t>
+      </w:r>
+      <w:r w:rsidR="00803166">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This is true not just for bakeries but for many different kinds of businesses. Oftentimes, it is a better decision for a business to focus on specializing in a few products than many different ones. This is one area that economists have been interested in, but economics is not limited to just that. Economics also </w:t>
+      </w:r>
+      <w:r w:rsidRPr="003C3B35">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">helps us understand and solve </w:t>
+      </w:r>
+      <w:r w:rsidR="00803166">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">issues </w:t>
+      </w:r>
+      <w:r w:rsidRPr="003C3B35">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">like </w:t>
+      </w:r>
+      <w:r w:rsidRPr="00803166">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>poverty</w:t>
+      </w:r>
+      <w:r w:rsidRPr="003C3B35">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">, education, and </w:t>
+      </w:r>
+      <w:r w:rsidR="00803166">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>climate change</w:t>
+      </w:r>
+      <w:r w:rsidRPr="003C3B35">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">. Learning economics </w:t>
+      </w:r>
+      <w:r w:rsidR="00803166">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">can help you become a better decision-maker in your personal life, as well as a more </w:t>
+      </w:r>
+      <w:r w:rsidR="00803166" w:rsidRPr="00803166">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>critical</w:t>
+      </w:r>
+      <w:r w:rsidR="00803166">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> thinker about current events and politics.</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="573DE7DB" w14:textId="5FBF7DDE" w:rsidR="007009A6" w:rsidRDefault="00EF0C86" w:rsidP="007009A6">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:lastRenderedPageBreak/>
+        <w:fldChar w:fldCharType="begin"/>
+      </w:r>
+      <w:r>
+        <w:instrText xml:space="preserve"> INCLUDEPICTURE "/Users/kristian/Library/Group Containers/UBF8T346G9.ms/WebArchiveCopyPasteTempFiles/com.microsoft.Word/Adam_Smith_D8.jpg" \* MERGEFORMATINET </w:instrText>
+      </w:r>
+      <w:r>
+        <w:fldChar w:fldCharType="separate"/>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:noProof/>
+        </w:rPr>
+        <w:drawing>
+          <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="504C85FD" wp14:editId="664327A1">
+            <wp:extent cx="5943600" cy="7697470"/>
+            <wp:effectExtent l="0" t="0" r="0" b="0"/>
+            <wp:docPr id="352229523" name="Picture 3" descr="A profile of a person&#xA;&#xA;Description automatically generated"/>
+            <wp:cNvGraphicFramePr>
+              <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
+            </wp:cNvGraphicFramePr>
+            <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+              <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                  <pic:nvPicPr>
+                    <pic:cNvPr id="352229523" name="Picture 3" descr="A profile of a person&#xA;&#xA;Description automatically generated"/>
+                    <pic:cNvPicPr>
+                      <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
+                    </pic:cNvPicPr>
+                  </pic:nvPicPr>
+                  <pic:blipFill>
+                    <a:blip r:embed="rId5" cstate="print">
+                      <a:extLst>
+                        <a:ext uri="{28A0092B-C50C-407E-A947-70E740481C1C}">
+                          <a14:useLocalDpi xmlns:a14="http://schemas.microsoft.com/office/drawing/2010/main" val="0"/>
+                        </a:ext>
+                      </a:extLst>
+                    </a:blip>
+                    <a:srcRect/>
+                    <a:stretch>
+                      <a:fillRect/>
+                    </a:stretch>
+                  </pic:blipFill>
+                  <pic:spPr bwMode="auto">
+                    <a:xfrm>
+                      <a:off x="0" y="0"/>
+                      <a:ext cx="5943600" cy="7697470"/>
+                    </a:xfrm>
+                    <a:prstGeom prst="rect">
+                      <a:avLst/>
+                    </a:prstGeom>
+                    <a:noFill/>
+                    <a:ln>
+                      <a:noFill/>
+                    </a:ln>
+                  </pic:spPr>
+                </pic:pic>
+              </a:graphicData>
+            </a:graphic>
+          </wp:inline>
+        </w:drawing>
+      </w:r>
+      <w:r>
+        <w:fldChar w:fldCharType="end"/>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="43C37FC1" w14:textId="77777777" w:rsidR="00482531" w:rsidRDefault="00482531">
+      <w:pPr>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:sz w:val="36"/>
+          <w:szCs w:val="36"/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:sz w:val="36"/>
+          <w:szCs w:val="36"/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:br w:type="page"/>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="0F1D4C55" w14:textId="77C1F0E3" w:rsidR="007009A6" w:rsidRDefault="007009A6" w:rsidP="00482531">
+      <w:pPr>
+        <w:jc w:val="center"/>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:sz w:val="36"/>
+          <w:szCs w:val="36"/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:sz w:val="36"/>
+          <w:szCs w:val="36"/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:lastRenderedPageBreak/>
+        <w:t>INTRODUCTION</w:t>
+      </w:r>
+      <w:r w:rsidR="00482531">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:sz w:val="36"/>
+          <w:szCs w:val="36"/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:sz w:val="36"/>
+          <w:szCs w:val="36"/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t>TO ECONOMICS</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="47AECD08" w14:textId="3332A7C4" w:rsidR="00EF0C86" w:rsidRPr="00EF0C86" w:rsidRDefault="00EF0C86" w:rsidP="00EF0C86">
+      <w:pPr>
+        <w:spacing w:before="240" w:line="480" w:lineRule="auto"/>
+        <w:jc w:val="center"/>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+          <w:sz w:val="36"/>
+          <w:szCs w:val="36"/>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:fldChar w:fldCharType="begin"/>
+      </w:r>
+      <w:r>
+        <w:instrText xml:space="preserve"> INCLUDEPICTURE "/Users/kristian/Library/Group Containers/UBF8T346G9.ms/WebArchiveCopyPasteTempFiles/com.microsoft.Word/economics.jpg" \* MERGEFORMATINET </w:instrText>
+      </w:r>
+      <w:r>
+        <w:fldChar w:fldCharType="separate"/>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:noProof/>
+        </w:rPr>
+        <w:drawing>
+          <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="395AD655" wp14:editId="17FA94CF">
+            <wp:extent cx="2450123" cy="1633415"/>
+            <wp:effectExtent l="0" t="0" r="1270" b="5080"/>
+            <wp:docPr id="1736791527" name="Picture 2" descr="A calculator and a clipboard with money&#xA;&#xA;Description automatically generated"/>
+            <wp:cNvGraphicFramePr>
+              <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
+            </wp:cNvGraphicFramePr>
+            <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+              <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                  <pic:nvPicPr>
+                    <pic:cNvPr id="727857410" name="Picture 2" descr="A calculator and a clipboard with money&#xA;&#xA;Description automatically generated"/>
+                    <pic:cNvPicPr>
+                      <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
+                    </pic:cNvPicPr>
+                  </pic:nvPicPr>
+                  <pic:blipFill>
+                    <a:blip r:embed="rId6" cstate="print">
+                      <a:extLst>
+                        <a:ext uri="{28A0092B-C50C-407E-A947-70E740481C1C}">
+                          <a14:useLocalDpi xmlns:a14="http://schemas.microsoft.com/office/drawing/2010/main" val="0"/>
+                        </a:ext>
+                      </a:extLst>
+                    </a:blip>
+                    <a:srcRect/>
+                    <a:stretch>
+                      <a:fillRect/>
+                    </a:stretch>
+                  </pic:blipFill>
+                  <pic:spPr bwMode="auto">
+                    <a:xfrm>
+                      <a:off x="0" y="0"/>
+                      <a:ext cx="2459811" cy="1639874"/>
+                    </a:xfrm>
+                    <a:prstGeom prst="roundRect">
+                      <a:avLst/>
+                    </a:prstGeom>
+                    <a:noFill/>
+                    <a:ln>
+                      <a:noFill/>
+                    </a:ln>
+                  </pic:spPr>
+                </pic:pic>
+              </a:graphicData>
+            </a:graphic>
+          </wp:inline>
+        </w:drawing>
+      </w:r>
+      <w:r>
+        <w:fldChar w:fldCharType="end"/>
+      </w:r>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblBorders>
+          <w:top w:val="none" w:sz="0" w:space="0" w:color="auto"/>
+          <w:left w:val="none" w:sz="0" w:space="0" w:color="auto"/>
+          <w:bottom w:val="none" w:sz="0" w:space="0" w:color="auto"/>
+          <w:right w:val="none" w:sz="0" w:space="0" w:color="auto"/>
+          <w:insideH w:val="none" w:sz="0" w:space="0" w:color="auto"/>
+          <w:insideV w:val="none" w:sz="0" w:space="0" w:color="auto"/>
+        </w:tblBorders>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="6374"/>
+        <w:gridCol w:w="2976"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="007009A6" w14:paraId="5FB378DA" w14:textId="77777777" w:rsidTr="007009A6">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="6374" w:type="dxa"/>
+          </w:tcPr>
+          <w:p w14:paraId="37FA35B5" w14:textId="0CD4A1FA" w:rsidR="007009A6" w:rsidRDefault="007009A6" w:rsidP="007009A6">
+            <w:pPr>
+              <w:spacing w:line="276" w:lineRule="auto"/>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">What is </w:t>
+            </w:r>
+            <w:r w:rsidRPr="002B51C9">
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>economics</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">? Economics is about more than just money and financial </w:t>
+            </w:r>
+            <w:r w:rsidRPr="003C3B35">
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>transactions</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>. More accurately, e</w:t>
+            </w:r>
+            <w:r w:rsidRPr="003C3B35">
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">conomics </w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">is a study that </w:t>
+            </w:r>
+            <w:r w:rsidRPr="003C3B35">
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">helps us understand how people make choices </w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">in the face of </w:t>
+            </w:r>
+            <w:r w:rsidRPr="003C3B35">
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>scarcity</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">. "Scarcity" means that there are not enough resources for people who want them. Such resources are </w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>finite</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">, meaning they have a limit, and include money, land, labor, and materials. Time is considered the </w:t>
+            </w:r>
+            <w:r w:rsidRPr="003C3B35">
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>ultimate</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve"> finite resource, as every person has the same number of hours in a day.</w:t>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="70445DA9" w14:textId="77777777" w:rsidR="007009A6" w:rsidRDefault="007009A6" w:rsidP="007009A6">
+            <w:pPr>
+              <w:spacing w:line="276" w:lineRule="auto"/>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+          </w:p>
+          <w:p w14:paraId="5B5C7070" w14:textId="25A3D0AB" w:rsidR="007009A6" w:rsidRPr="002B51C9" w:rsidRDefault="007009A6" w:rsidP="007009A6">
+            <w:pPr>
+              <w:spacing w:line="276" w:lineRule="auto"/>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">When resources are limited, people must make certain decisions. What should I buy? What can I sell? What should I </w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>invest</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve"> my time into? </w:t>
+            </w:r>
+            <w:r w:rsidRPr="003C3B35">
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">These </w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">decisions can be made by individuals, families, or businesses. Governments and societies are also faced with these decisions. When certain people don't have access to food, </w:t>
+            </w:r>
+            <w:r w:rsidRPr="002B51C9">
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>shelter</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">, or healthcare, this is a result of the scarcity of resources. Just as people have to choose whether to spend their money on a car or a vacation, governments must also decide how to divide their </w:t>
+            </w:r>
+            <w:r w:rsidRPr="002B51C9">
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>budget</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve"> between schools, emergency services, and other </w:t>
+            </w:r>
+            <w:r w:rsidRPr="002B51C9">
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>infrastructure</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>. Meanwhile, countries must choose how much to fund the military as opposed to protecting the environment. These decisions are not always easy to make.</w:t>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="1736A584" w14:textId="77777777" w:rsidR="007009A6" w:rsidRDefault="007009A6" w:rsidP="007009A6">
+            <w:pPr>
+              <w:spacing w:line="276" w:lineRule="auto"/>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+          </w:p>
+          <w:p w14:paraId="24A409CD" w14:textId="12C37187" w:rsidR="007009A6" w:rsidRDefault="007009A6" w:rsidP="007009A6">
+            <w:pPr>
+              <w:spacing w:line="276" w:lineRule="auto"/>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">One of the most important people in the history of economics is Adam Smith, an </w:t>
+            </w:r>
+            <w:r w:rsidRPr="002B51C9">
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>economist</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve"> and philosopher from the 18th century. He explained how producing </w:t>
+            </w:r>
+            <w:r w:rsidRPr="002B51C9">
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:lastRenderedPageBreak/>
+              <w:t>goods</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">can be made more efficient by dividing the work into smaller tasks. This is known as the "division of labor." For example, running a bakery involves many different tasks, including buying ingredients, mixing the dough, baking it, selling the bread, and managing the store. It would be difficult for one person to become an expert in all these different tasks. Instead, it would be smarter to have different people </w:t>
+            </w:r>
+            <w:r w:rsidRPr="002B51C9">
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>specialize</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>, or become experts in, different tasks. This way, people could carry out tasks more quickly, and the bakery would be able to sell more bread. This is an example of the power and efficiency of the division of labor.</w:t>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="050C4C24" w14:textId="716F033A" w:rsidR="007009A6" w:rsidRDefault="007009A6" w:rsidP="007009A6">
+            <w:pPr>
+              <w:spacing w:line="276" w:lineRule="auto"/>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+          </w:p>
+          <w:p w14:paraId="4B79F809" w14:textId="77777777" w:rsidR="007009A6" w:rsidRDefault="007009A6" w:rsidP="007009A6">
+            <w:pPr>
+              <w:spacing w:line="276" w:lineRule="auto"/>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="003C3B35">
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">Specialization allows workers to become really good at one task, which makes production faster and better. </w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">This is true not just for bakeries but for many different kinds of businesses. Oftentimes, it is a better decision for a business to focus on specializing in a few products than many different ones. This is one area that economists have been interested in, but economics is not limited to just that. Economics also </w:t>
+            </w:r>
+            <w:r w:rsidRPr="003C3B35">
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">helps us understand and solve </w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">issues </w:t>
+            </w:r>
+            <w:r w:rsidRPr="003C3B35">
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">like </w:t>
+            </w:r>
+            <w:r w:rsidRPr="00803166">
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>poverty</w:t>
+            </w:r>
+            <w:r w:rsidRPr="003C3B35">
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">, education, and </w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>climate change</w:t>
+            </w:r>
+            <w:r w:rsidRPr="003C3B35">
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">. Learning economics </w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve">can help you become a better decision-maker in your personal life, as well as a more </w:t>
+            </w:r>
+            <w:r w:rsidRPr="00803166">
+              <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t>critical</w:t>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+              <w:t xml:space="preserve"> thinker about current events and politics.</w:t>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="5E9E3548" w14:textId="77777777" w:rsidR="00EF0C86" w:rsidRDefault="00EF0C86" w:rsidP="007009A6">
+            <w:pPr>
+              <w:spacing w:line="276" w:lineRule="auto"/>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+          </w:p>
+          <w:p w14:paraId="59FCCE48" w14:textId="44039686" w:rsidR="00EF0C86" w:rsidRDefault="00EF0C86" w:rsidP="00EF0C86">
+            <w:pPr>
+              <w:spacing w:line="276" w:lineRule="auto"/>
+              <w:jc w:val="center"/>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:fldChar w:fldCharType="begin"/>
+            </w:r>
+            <w:r>
+              <w:instrText xml:space="preserve"> INCLUDEPICTURE "/Users/kristian/Library/Group Containers/UBF8T346G9.ms/WebArchiveCopyPasteTempFiles/com.microsoft.Word/Adam_Smith_D8.jpg" \* MERGEFORMATINET </w:instrText>
+            </w:r>
+            <w:r>
+              <w:fldChar w:fldCharType="separate"/>
+            </w:r>
+            <w:r>
+              <w:rPr>
+                <w:noProof/>
+              </w:rPr>
+              <w:drawing>
+                <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="58B2773B" wp14:editId="766EE957">
+                  <wp:extent cx="1722268" cy="2230483"/>
+                  <wp:effectExtent l="0" t="0" r="5080" b="5080"/>
+                  <wp:docPr id="119977183" name="Picture 3" descr="A profile of a person&#xA;&#xA;Description automatically generated"/>
+                  <wp:cNvGraphicFramePr>
+                    <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
+                  </wp:cNvGraphicFramePr>
+                  <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                      <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                        <pic:nvPicPr>
+                          <pic:cNvPr id="352229523" name="Picture 3" descr="A profile of a person&#xA;&#xA;Description automatically generated"/>
+                          <pic:cNvPicPr>
+                            <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
+                          </pic:cNvPicPr>
+                        </pic:nvPicPr>
+                        <pic:blipFill>
+                          <a:blip r:embed="rId7" cstate="print">
+                            <a:extLst>
+                              <a:ext uri="{28A0092B-C50C-407E-A947-70E740481C1C}">
+                                <a14:useLocalDpi xmlns:a14="http://schemas.microsoft.com/office/drawing/2010/main" val="0"/>
+                              </a:ext>
+                            </a:extLst>
+                          </a:blip>
+                          <a:srcRect/>
+                          <a:stretch>
+                            <a:fillRect/>
+                          </a:stretch>
+                        </pic:blipFill>
+                        <pic:spPr bwMode="auto">
+                          <a:xfrm>
+                            <a:off x="0" y="0"/>
+                            <a:ext cx="1737445" cy="2250138"/>
+                          </a:xfrm>
+                          <a:prstGeom prst="rect">
+                            <a:avLst/>
+                          </a:prstGeom>
+                          <a:noFill/>
+                          <a:ln>
+                            <a:noFill/>
+                          </a:ln>
+                        </pic:spPr>
+                      </pic:pic>
+                    </a:graphicData>
+                  </a:graphic>
+                </wp:inline>
+              </w:drawing>
+            </w:r>
+            <w:r>
+              <w:fldChar w:fldCharType="end"/>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="2E3C8A1A" w14:textId="77777777" w:rsidR="00EF0C86" w:rsidRDefault="00EF0C86" w:rsidP="007009A6">
+            <w:pPr>
+              <w:spacing w:line="276" w:lineRule="auto"/>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+          </w:p>
+          <w:p w14:paraId="73C709C2" w14:textId="67F0680D" w:rsidR="00EF0C86" w:rsidRDefault="00EF0C86" w:rsidP="00EF0C86">
+            <w:pPr>
+              <w:spacing w:line="276" w:lineRule="auto"/>
+              <w:jc w:val="center"/>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+          </w:p>
+          <w:p w14:paraId="4CAE01B7" w14:textId="226D338F" w:rsidR="00EF0C86" w:rsidRDefault="00EF0C86" w:rsidP="007009A6">
+            <w:pPr>
+              <w:spacing w:line="276" w:lineRule="auto"/>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="2976" w:type="dxa"/>
+          </w:tcPr>
+          <w:p w14:paraId="4A84B228" w14:textId="77777777" w:rsidR="007009A6" w:rsidRDefault="007009A6" w:rsidP="00803166">
+            <w:pPr>
+              <w:rPr>
+                <w:lang w:val="en-US"/>
+              </w:rPr>
+            </w:pPr>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="451C0454" w14:textId="6206B490" w:rsidR="00E77800" w:rsidRPr="00E77800" w:rsidRDefault="00E77800" w:rsidP="00803166">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:sectPr w:rsidR="00E77800" w:rsidRPr="00E77800">
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0"/>
+      <w:cols w:space="708"/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>
