@@ -12,7 +12,7 @@ namespace WorksheetGenerator.Utilities
             Console.WriteLine("test");
         }
 
-        public static XElement? ElementOnly(XElement? element)
+        public static XElement? GetElementOnly(XElement? element)
         {
             if (element != null)
             {
@@ -32,13 +32,13 @@ namespace WorksheetGenerator.Utilities
             }
         }
 
-        public static XElement? DocumentAndBodyOnly(XDocument doc)
+        public static XElement? GetDocumentAndBodyOnly(XDocument doc)
         {
             XElement? originalDocElement = doc.Element(w + "document");
-            XElement? docElement = ElementOnly(doc.Element(w + "document"));
+            XElement? docElement = GetElementOnly(doc.Element(w + "document"));
             if (docElement != null && originalDocElement != null)
             {
-                XElement? body = ElementOnly(originalDocElement.Element(w + "body"));
+                XElement? body = GetElementOnly(originalDocElement.Element(w + "body"));
                 if (body != null)
                 {
                     docElement.Add(body);
@@ -79,6 +79,47 @@ namespace WorksheetGenerator.Utilities
             else
             {
                 return false;
+            }
+        }
+
+        public static List<XElement> GetParagraphsByIdentifier(IEnumerable<XElement> paragraphs, string identifierName)
+        {
+            bool isBetweenIdentifiers = false;
+            List<XElement> result = new List<XElement>();
+
+            foreach (XElement paragraph in paragraphs)
+            {
+                if (IsIdentifier(paragraph))
+                {
+                    if (isBetweenIdentifiers)
+                    {
+                        break;
+                    }
+
+                    if (((string)paragraph).Trim().StartsWith(identifierName))
+                    {
+                        isBetweenIdentifiers = true;
+                        result.Clear();
+                    }
+                }
+                else if (isBetweenIdentifiers)
+                {
+                    if (!((string)paragraph).ToLower().StartsWith("chatgpt:"))
+                    {
+                        result.Add(paragraph);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static void ProcessReading(IEnumerable<XElement> allParagraphs)
+        {
+            List<XElement> paragraphs = GetParagraphsByIdentifier(allParagraphs, "READING");
+            foreach (XElement paragraph in paragraphs)
+            {
+                Console.WriteLine((string)paragraph);
             }
         }
     }
