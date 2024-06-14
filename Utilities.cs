@@ -12,18 +12,12 @@ namespace WorksheetGenerator.Utilities
             {
                 // Create a new element with the same name and attributes
                 XElement newElement = new XElement(element.Name);
-
                 foreach (XAttribute attribute in element.Attributes())
-                {
                     newElement.Add(new XAttribute(attribute));
-                }
-
                 return newElement;
             }
             else
-            {
                 return null;
-            }
         }
 
         public static XElement? GetDocumentAndBodyOnly(XDocument doc)
@@ -39,14 +33,10 @@ namespace WorksheetGenerator.Utilities
                     return docElement;
                 }
                 else
-                {
                     return null;
-                }
             }
             else
-            {
                 return null;
-            }
         }
 
         public static bool IsIdentifier(XElement element)
@@ -66,14 +56,10 @@ namespace WorksheetGenerator.Utilities
                     return isBold && isUpperCase;
                 }
                 else
-                {
                     return false;
-                }
             }
             else
-            {
                 return false;
-            }
         }
 
         public static bool IsWhiteSpaceOnly(XElement element)
@@ -119,9 +105,7 @@ namespace WorksheetGenerator.Utilities
                 if (IsIdentifier(paragraph))
                 {
                     if (isBetweenIdentifiers)
-                    {
                         break;
-                    }
 
                     if (((string)paragraph).Trim().StartsWith(identifierName))
                     {
@@ -130,12 +114,8 @@ namespace WorksheetGenerator.Utilities
                     }
                 }
                 else if (isBetweenIdentifiers)
-                {
                     if (!StartsWith(paragraph, "chatgpt:"))
-                    {
                         result.Add(paragraph);
-                    }
-                }
             }
 
             return result;
@@ -152,10 +132,8 @@ namespace WorksheetGenerator.Utilities
                 // Check if the child element is a run element containing drawing or picture
                 if (child.Name == El.w + "r")
                     foreach (XElement runChild in child.Elements())
-                    {
                         if (runChild.Name == El.w + "drawing" || runChild.Name == El.w + "pict")
                             return true;
-                    }
             }
 
             return false;
@@ -163,7 +141,6 @@ namespace WorksheetGenerator.Utilities
 
         public static ulong GetWidth(double width, double height, double desiredHeight)
         {
-            // Console.WriteLine(Math.Round(desiredHeight / height * width));
             return (ulong)Math.Round((double)(desiredHeight / height * width));
         }
 
@@ -223,24 +200,10 @@ namespace WorksheetGenerator.Utilities
         public static XElement? GetTitleElement(IEnumerable<XElement> elements)
         {
             foreach (XElement element in elements)
-            {
                 if (StartsWith(element, "title:"))
                     return element;
-            }
 
             return null;
-        }
-
-        public static void AddTitleStyles(XElement element)
-        {
-            element.Add(
-                new XElement(El.w + "pPr",
-                    new XElement(El.w + "jc",
-                        new XAttribute(El.w + "val", "center")
-                    ),
-                    El.titleRunProperty
-                )
-            );
         }
 
         public static List<XElement> GetProcessedReading(IEnumerable<XElement> allParagraphs)
@@ -252,18 +215,11 @@ namespace WorksheetGenerator.Utilities
             // Format & add title
             if (origTitleElement != null)
             {
-                XElement? newTitleElement = GetElementOnly(origTitleElement);
+                string text = RemovePrefix((string)origTitleElement).ToUpper();
+                XElement newTitleElement = El.ParagraphElement(text);
                 if (newTitleElement != null)
                 {
-                    AddTitleStyles(newTitleElement);
-
-                    newTitleElement.Add(
-                        new XElement(El.w + "r",
-                            El.titleRunProperty,
-                            new XElement(El.w + "t", RemovePrefix((string)origTitleElement).ToUpper())
-                        )
-                    );
-
+                    El.AddTitleStyles(newTitleElement);
                     result.Add(newTitleElement);
                 }
             }
@@ -290,9 +246,7 @@ namespace WorksheetGenerator.Utilities
 
             // Add preview images
             foreach (XElement element in previewImages)
-            {
                 result.Add(element);
-            }
 
             // Create table for main passage & add passage paragraphs
             XElement tableElement = El.TableElement(2, [6374, 2976], [passageParagraphs, null]);
