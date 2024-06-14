@@ -254,9 +254,47 @@ namespace WorksheetGenerator.Utilities
             Dictionary<string, string> vocab = [];
 
             foreach (var paragraph in paragraphs)
-                Console.WriteLine((string)paragraph);
+            {
+                string text = ((string)paragraph).Trim();
+
+                int colonIndex = text.IndexOf(':');
+                if (colonIndex != -1 && colonIndex < text.Length - 1)
+                {
+                    string word = text.Substring(0, colonIndex);
+                    string definition = text.Substring(colonIndex + 1).TrimStart();
+                    // Remove any final periods
+                    if (definition[definition.Length - 1] == '.')
+                        definition = definition.Substring(0, definition.Length - 1);
+                    vocab.Add(word, definition);
+                }
+            }
 
             return vocab;
+        }
+
+        public static XElement VocabBox(ICollection<string> words)
+        {
+            int gap = 480;
+            int padding = 440;
+
+            string formattedWords = string.Join("        ", words);
+            XElement paragraph = El.Paragraph(formattedWords);
+            El.SetParagraphSize(paragraph, 28);
+            El.AddBoldToParagraph(paragraph);
+            El.CenterParagraph(paragraph);
+            El.SetParagraphSpacing(paragraph, gap);
+            List<List<XElement>> content = [[paragraph]];
+
+            XElement box = El.Table(
+                1,
+                [11169],
+                El.TableBorderAttributes("single", 24, 0, "0F9ED5", "accent4"),
+                content
+            );
+
+            El.AddTableCellMargin(box, padding, padding, 0, padding);
+
+            return box;
         }
 
         public static List<XElement> GetProcessedVocab(IEnumerable<XElement> allParagraphs, int sectionNo = -1)
@@ -268,8 +306,12 @@ namespace WorksheetGenerator.Utilities
             XElement titleElement = GetFormattedSectionTitleElement("Vocabulary", sectionNo);
             result.Add(titleElement);
 
-            // Vocab box
+            // Get vocab
             Dictionary<string, string> vocab = GetVocab(paragraphs);
+
+            // Vocab box
+            XElement vocabBox = VocabBox(vocab.Keys);
+            result.Add(vocabBox);
 
             return result;
         }
@@ -315,8 +357,13 @@ namespace WorksheetGenerator.Utilities
                 result.Add(element);
 
             // Create table for main passage & add passage paragraphs
-            XElement tableElement = El.TableElement(2, [6374, 2976], [passageParagraphs, null]);
-            result.Add(tableElement);
+            XElement table = El.Table(
+                2,
+                [6374, 2976],
+                El.TableBorderAttributes("none", 0, 0, "auto"),
+                [passageParagraphs, null]
+            );
+            result.Add(table);
 
             return result;
         }
