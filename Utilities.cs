@@ -297,6 +297,27 @@ namespace WorksheetGenerator.Utilities
             return box;
         }
 
+        public static XElement VocabBlanksAndDefinitions(Dictionary<string, string> vocab)
+        {
+            List<XElement> blankParagraphs = [];
+            List<XElement> definitionParagraphs = [];
+
+            foreach (string word in vocab.Keys)
+            {
+                blankParagraphs.Add(El.NumberListItem("__________________"));
+            }
+
+            // Add contents to table
+            XElement table = El.Table(
+                2,
+                [3261, 7938],
+                El.TableBorderAttributes("none", 0, 0, "auto"),
+                [blankParagraphs, definitionParagraphs]
+            );
+
+            return table;
+        }
+
         public static List<XElement> GetProcessedVocab(IEnumerable<XElement> allParagraphs, int sectionNo = -1)
         {
             List<XElement> paragraphs = GetParagraphsByIdentifier(allParagraphs, "VOCAB");
@@ -310,8 +331,11 @@ namespace WorksheetGenerator.Utilities
             Dictionary<string, string> vocab = GetVocab(paragraphs);
 
             // Vocab box
-            XElement vocabBox = VocabBox(vocab.Keys);
-            result.Add(vocabBox);
+            result.Add(VocabBox(vocab.Keys));
+            result.Add(El.Paragraph());
+
+            // Blanks and definitions
+            result.Add(VocabBlanksAndDefinitions(vocab));
 
             return result;
         }

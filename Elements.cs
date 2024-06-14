@@ -41,8 +41,12 @@ namespace WorksheetGenerator.Elements
                             new XAttribute(w + "val", "en-US")
                         )
                     )
-                ),
-                text == null ? null : new XElement(w + "r",
+                )
+            );
+
+            if (text != null)
+            {
+                paragraph.Add(new XElement(w + "r",
                     new XElement(w + "rPr",
                         new XElement(w + "lang",
                             new XAttribute(w + "val", "en-US")
@@ -52,11 +56,12 @@ namespace WorksheetGenerator.Elements
                         new XAttribute(XNamespace.Xml + "space", "preserve"),
                         text
                     )
-                )
-            );
+                ));
+            }
 
             SetParagraphFont(paragraph, "Aptos");
             SetParagraphColor(paragraph, "262626", "text1", "D9");
+            SetParagraphSize(paragraph, 28);
 
             return paragraph;
         }
@@ -69,7 +74,7 @@ namespace WorksheetGenerator.Elements
             )
         {
             widths ??= [11169];
-            paragraphs ??= [[]];
+            paragraphs ??= [];
 
             // Create columns
             List<XElement> columnElements = [];
@@ -84,7 +89,7 @@ namespace WorksheetGenerator.Elements
                             )
                         ),
                         // Ignore ID attributes for now
-                        paragraphs[i] == null ? Paragraph() : paragraphs[i]
+                        paragraphs[i]?.Count == 0 ? Paragraph() : paragraphs[i]
                     )
                 );
             }
@@ -129,6 +134,31 @@ namespace WorksheetGenerator.Elements
                     columnElements
                 )
             );
+        }
+
+        public static XElement NumberListItem(string text, int left = 458, int hanging = 425)
+        {
+            XElement paragraph = Paragraph(text);
+            SetParagraphPropertyStyle(paragraph, w + "pStyle", [
+                new XAttribute(w + "val", "ListParagraph")
+            ]);
+
+            XElement? pPr = paragraph.Element(w + "pPr");
+            pPr?.Add(new XElement(w + "numPr",
+                new XElement(w + "ilvl",
+                    new XAttribute(w + "val", 0)
+                ),
+                new XElement(w + "numId",
+                    new XAttribute(w + "val", 2)
+                )
+            ));
+
+            SetParagraphPropertyStyle(paragraph, w + "ind", [
+                new XAttribute(w + "left", left),
+                new XAttribute(w + "hanging", 425)
+            ]);
+
+            return paragraph;
         }
 
 
