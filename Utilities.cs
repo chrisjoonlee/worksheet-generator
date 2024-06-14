@@ -103,7 +103,7 @@ namespace WorksheetGenerator.Utilities
                 {
                     string title = RemovePrefix((string)paragraph).ToUpper();
                     XElement worksheetTitleElement = El.Paragraph(title);
-                    El.AddWorksheetTitleStyles(worksheetTitleElement);
+                    AddWorksheetTitleStyles(worksheetTitleElement);
                     return worksheetTitleElement;
                 }
             }
@@ -212,6 +212,21 @@ namespace WorksheetGenerator.Utilities
             geometryElement?.SetAttributeValue("prst", "roundRect");
         }
 
+        public static void AddSectionTitleStyles(XElement paragraph)
+        {
+            El.CenterParagraph(paragraph);
+            El.SetParagraphSize(paragraph, 36);
+            El.AddBoldToParagraph(paragraph);
+            El.SetParagraphColor(paragraph, "0F9ED5", "accent4");
+        }
+
+        public static void AddWorksheetTitleStyles(XElement paragraph)
+        {
+            El.CenterParagraph(paragraph);
+            El.SetParagraphSize(paragraph, 48);
+            El.AddBoldToParagraph(paragraph);
+        }
+
         public static XElement? GetSectionTitleElement(IEnumerable<XElement> elements)
         {
             foreach (XElement element in elements)
@@ -230,8 +245,33 @@ namespace WorksheetGenerator.Utilities
                 formattedTitle = title.Trim();
 
             XElement titleElement = El.Paragraph(formattedTitle);
-            El.AddSectionTitleStyles(titleElement);
+            AddSectionTitleStyles(titleElement);
             return titleElement;
+        }
+
+        public static Dictionary<string, string> GetVocab(List<XElement> paragraphs)
+        {
+            Dictionary<string, string> vocab = [];
+
+            foreach (var paragraph in paragraphs)
+                Console.WriteLine((string)paragraph);
+
+            return vocab;
+        }
+
+        public static List<XElement> GetProcessedVocab(IEnumerable<XElement> allParagraphs, int sectionNo = -1)
+        {
+            List<XElement> paragraphs = GetParagraphsByIdentifier(allParagraphs, "VOCAB");
+            List<XElement> result = [];
+
+            // Format & add title
+            XElement titleElement = GetFormattedSectionTitleElement("Vocabulary", sectionNo);
+            result.Add(titleElement);
+
+            // Vocab box
+            Dictionary<string, string> vocab = GetVocab(paragraphs);
+
+            return result;
         }
 
         public static List<XElement> GetProcessedReading(IEnumerable<XElement> allParagraphs, int sectionNo = -1)
@@ -277,18 +317,6 @@ namespace WorksheetGenerator.Utilities
             // Create table for main passage & add passage paragraphs
             XElement tableElement = El.TableElement(2, [6374, 2976], [passageParagraphs, null]);
             result.Add(tableElement);
-
-            return result;
-        }
-
-        public static List<XElement> GetProcessedVocab(IEnumerable<XElement> allParagraphs, int sectionNo = -1)
-        {
-            List<XElement> paragraphs = GetParagraphsByIdentifier(allParagraphs, "VOCAB");
-            List<XElement> result = [];
-
-            // Format & add title
-            XElement titleElement = GetFormattedSectionTitleElement("Vocabulary", sectionNo);
-            result.Add(titleElement);
 
             return result;
         }

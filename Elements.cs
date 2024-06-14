@@ -119,21 +119,6 @@ namespace WorksheetGenerator.Elements
                 jc?.SetAttributeValue(w + "val", "center");
         }
 
-        public static void AddSectionTitleStyles(XElement paragraph)
-        {
-            CenterParagraph(paragraph);
-            SetParagraphSize(paragraph, 36);
-            AddBoldToParagraph(paragraph);
-            SetParagraphColor(paragraph, "0F9ED5", "accent4");
-        }
-
-        public static void AddWorksheetTitleStyles(XElement paragraph)
-        {
-            CenterParagraph(paragraph);
-            SetParagraphSize(paragraph, 48);
-            AddBoldToParagraph(paragraph);
-        }
-
         public static List<XAttribute> TableBorderAttributes(string val, int size, int space, string color)
         {
             return [
