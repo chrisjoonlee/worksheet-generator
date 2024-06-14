@@ -24,16 +24,33 @@ namespace WorksshetGenerator
             XDocument newDoc = new XDocument(
                 HF.GetDocumentAndBodyOnly(originalDoc)
             );
-
             XElement? newBody = newDoc.Descendants(El.w + "body").FirstOrDefault();
 
-            foreach (XElement paragraph in HF.GetProcessedReading(paragraphs))
+            // Worksheet title
+            XElement? worksheetTitleElement = HF.GetWorksheetTitleElement(paragraphs);
+            if (worksheetTitleElement != null)
+                newBody?.Add(worksheetTitleElement);
+
+            // Keep track of section numbers
+            int sectionNo = 1;
+
+            // Vocab section
+            List<XElement> vocabParagraphs = HF.GetProcessedVocab(paragraphs, sectionNo);
+            if (vocabParagraphs.Count > 0)
             {
-                Console.WriteLine("Paragraph:", paragraph);
-                newBody?.Add(paragraph);
+                sectionNo++;
+                foreach (XElement paragraph in vocabParagraphs)
+                    newBody?.Add(paragraph);
             }
 
-            // Console.WriteLine(newDoc);
+            // Reading section
+            List<XElement> readingParagraphs = HF.GetProcessedReading(paragraphs, sectionNo);
+            if (readingParagraphs.Count > 0)
+            {
+                sectionNo++;
+                foreach (XElement paragraph in readingParagraphs)
+                    newBody?.Add(paragraph);
+            }
 
             newDoc.Save(filePath);
         }

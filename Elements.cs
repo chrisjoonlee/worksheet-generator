@@ -9,9 +9,9 @@ namespace WorksheetGenerator.Elements
         public static XNamespace wp = "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing";
         public static XNamespace a = "http://schemas.openxmlformats.org/drawingml/2006/main";
 
-        public static XElement ParagraphElement(string? text = null)
+        public static XElement Paragraph(string? text = null)
         {
-            return new XElement(w + "p",
+            XElement paragraph = new XElement(w + "p",
                 new XElement(w + "pPr",
                     new XElement(w + "rPr",
                         new XElement(w + "lang",
@@ -31,6 +31,10 @@ namespace WorksheetGenerator.Elements
                     )
                 )
             );
+
+            SetParagraphColor(paragraph, "262626", "text1", "D9");
+
+            return paragraph;
         }
 
         public static void SetOrAddAttribute(XElement element, XName attrName, object attrVal)
@@ -42,74 +46,61 @@ namespace WorksheetGenerator.Elements
                 element.SetAttributeValue(attrName, attrVal);
         }
 
-        public static void SetParagraphSize(XElement paragraph, int size)
+        public static void SetParagraphStyle(XElement paragraph, XName styleElementName, List<XAttribute>? attributes = null)
         {
+            attributes ??= [];
+
             // Edit <w:pPr><w:rPr>
             XElement? pPr = paragraph.Element(w + "pPr");
             XElement? pPr_rPr = pPr?.Element(w + "rPr");
-            XElement? szCs = pPr_rPr?.Element(w + "szCs");
-            if (szCs == null)
-                pPr_rPr?.AddFirst(new XElement(w + "szCs",
-                    new XAttribute(w + "val", size)
-                ));
+            XElement? styleElement = pPr_rPr?.Element(styleElementName);
+            if (styleElement == null)
+                pPr_rPr?.AddFirst(new XElement(styleElementName, attributes));
             else
-                SetOrAddAttribute(szCs, w + "val", size);
-
-            XElement? sz = pPr_rPr?.Element(w + "sz");
-            if (sz == null)
-                pPr_rPr?.AddFirst(new XElement(w + "sz",
-                    new XAttribute(w + "val", size)
-                ));
-            else
-                SetOrAddAttribute(sz, w + "val", size);
+                foreach (XAttribute attribute in attributes)
+                    SetOrAddAttribute(styleElement, attribute.Name, attribute.Value);
 
             // Edit all <w:r><w:rPr>
             IEnumerable<XElement> runs = paragraph.Elements(w + "r");
             foreach (XElement run in runs)
             {
                 XElement? r_rPr = run.Element(w + "rPr");
-                XElement? r_rPr_szCs = pPr_rPr?.Element(w + "szCs");
-                if (r_rPr_szCs == null)
-                    r_rPr?.AddFirst(new XElement(w + "szCs",
-                        new XAttribute(w + "val", size)
-                    ));
+                XElement? r_styleElement = r_rPr?.Element(styleElementName);
+                if (r_styleElement == null)
+                    r_rPr?.AddFirst(new XElement(styleElementName, attributes));
                 else
-                    SetOrAddAttribute(r_rPr_szCs, w + "val", size);
-
-                XElement? r_rPr_sz = r_rPr?.Element(w + "sz");
-                if (r_rPr_sz == null)
-                    r_rPr?.AddFirst(new XElement(w + "sz",
-                        new XAttribute(w + "val", size)
-                    ));
-                else
-                    SetOrAddAttribute(r_rPr_sz, w + "val", size);
+                    foreach (XAttribute attribute in attributes)
+                        SetOrAddAttribute(r_styleElement, attribute.Name, attribute.Value);
             }
         }
 
-        public static void AddBoldToRunProperty(XElement runProperty)
+        public static void SetParagraphColor(XElement paragraph, string val, string themeColor, string? themeTint = null)
         {
-            XElement? bCs = runProperty?.Element(w + "bCs");
-            if (bCs == null)
-                runProperty?.AddFirst(new XElement(w + "bCs"));
-            XElement? b = runProperty?.Element(w + "b");
-            if (b == null)
-                runProperty?.AddFirst(new XElement(w + "b"));
+            List<XAttribute> attributes = [
+                new XAttribute(w + "val", val),
+                new XAttribute(w + "themeColor", themeColor)
+            ];
+            if (themeTint != null)
+                attributes.Add(new XAttribute(w + "themeTint", themeTint));
+
+            SetParagraphStyle(paragraph, w + "color", attributes);
+        }
+
+        public static void SetParagraphSize(XElement paragraph, int size)
+        {
+            SetParagraphStyle(paragraph, w + "szCs", [
+                new XAttribute(w + "val", size)
+            ]);
+
+            SetParagraphStyle(paragraph, w + "sz", [
+                new XAttribute(w + "val", size)
+            ]);
         }
 
         public static void AddBoldToParagraph(XElement paragraph)
         {
-            XElement? pPr = paragraph.Element(w + "pPr");
-            XElement? pPr_rPr = pPr?.Element(w + "rPr");
-            if (pPr_rPr != null)
-                AddBoldToRunProperty(pPr_rPr);
-
-            IEnumerable<XElement> runs = paragraph.Elements(w + "r");
-            foreach (XElement run in runs)
-            {
-                XElement? r_rPr = run.Element(w + "rPr");
-                if (r_rPr != null)
-                    AddBoldToRunProperty(r_rPr);
-            }
+            SetParagraphStyle(paragraph, w + "bCs");
+            SetParagraphStyle(paragraph, w + "b");
         }
 
         public static void CenterParagraph(XElement paragraph)
@@ -128,12 +119,19 @@ namespace WorksheetGenerator.Elements
                 jc?.SetAttributeValue(w + "val", "center");
         }
 
-        public static void AddTitleStyles(XElement paragraph)
+        public static void AddSectionTitleStyles(XElement paragraph)
         {
             CenterParagraph(paragraph);
             SetParagraphSize(paragraph, 36);
             AddBoldToParagraph(paragraph);
-            Console.WriteLine(paragraph);
+            SetParagraphColor(paragraph, "0F9ED5", "accent4");
+        }
+
+        public static void AddWorksheetTitleStyles(XElement paragraph)
+        {
+            CenterParagraph(paragraph);
+            SetParagraphSize(paragraph, 48);
+            AddBoldToParagraph(paragraph);
         }
 
         public static List<XAttribute> TableBorderAttributes(string val, int size, int space, string color)
@@ -167,7 +165,7 @@ namespace WorksheetGenerator.Elements
                             )
                         ),
                         // Ignore ID attributes for now
-                        paragraphs[i] != null ? paragraphs[i] : ParagraphElement()
+                        paragraphs[i] == null ? Paragraph() : paragraphs[i]
                     )
                 );
             }

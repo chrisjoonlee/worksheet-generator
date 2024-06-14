@@ -95,6 +95,21 @@ namespace WorksheetGenerator.Utilities
             return text;
         }
 
+        public static XElement? GetWorksheetTitleElement(IEnumerable<XElement> paragraphs)
+        {
+            foreach (XElement paragraph in paragraphs)
+            {
+                if (StartsWith(paragraph, "title:"))
+                {
+                    string title = RemovePrefix((string)paragraph).ToUpper();
+                    XElement worksheetTitleElement = El.Paragraph(title);
+                    El.AddWorksheetTitleStyles(worksheetTitleElement);
+                    return worksheetTitleElement;
+                }
+            }
+            return null;
+        }
+
         public static List<XElement> GetParagraphsByIdentifier(IEnumerable<XElement> paragraphs, string identifierName)
         {
             bool isBetweenIdentifiers = false;
@@ -197,7 +212,7 @@ namespace WorksheetGenerator.Utilities
             geometryElement?.SetAttributeValue("prst", "roundRect");
         }
 
-        public static XElement? GetTitleElement(IEnumerable<XElement> elements)
+        public static XElement? GetSectionTitleElement(IEnumerable<XElement> elements)
         {
             foreach (XElement element in elements)
                 if (StartsWith(element, "title:"))
@@ -206,22 +221,33 @@ namespace WorksheetGenerator.Utilities
             return null;
         }
 
-        public static List<XElement> GetProcessedReading(IEnumerable<XElement> allParagraphs)
+        public static XElement GetFormattedSectionTitleElement(string title, int sectionNo = -1)
+        {
+            string formattedTitle;
+            if (sectionNo >= 0)
+                formattedTitle = sectionNo + ". " + title.Trim();
+            else
+                formattedTitle = title.Trim();
+
+            XElement titleElement = El.Paragraph(formattedTitle);
+            El.AddSectionTitleStyles(titleElement);
+            return titleElement;
+        }
+
+        public static List<XElement> GetProcessedReading(IEnumerable<XElement> allParagraphs, int sectionNo = -1)
         {
             List<XElement> paragraphs = GetParagraphsByIdentifier(allParagraphs, "READING");
             List<XElement> result = [];
-            XElement? origTitleElement = GetTitleElement(paragraphs);
+            XElement? origTitleElement = GetSectionTitleElement(paragraphs);
 
             // Format & add title
             if (origTitleElement != null)
             {
-                string text = RemovePrefix((string)origTitleElement).ToUpper();
-                XElement newTitleElement = El.ParagraphElement(text);
-                if (newTitleElement != null)
-                {
-                    El.AddTitleStyles(newTitleElement);
-                    result.Add(newTitleElement);
-                }
+                XElement newTitleElement = GetFormattedSectionTitleElement(
+                    RemovePrefix((string)origTitleElement),
+                    sectionNo
+                );
+                result.Add(newTitleElement);
             }
 
             // Get main passage paragraphs
@@ -251,6 +277,18 @@ namespace WorksheetGenerator.Utilities
             // Create table for main passage & add passage paragraphs
             XElement tableElement = El.TableElement(2, [6374, 2976], [passageParagraphs, null]);
             result.Add(tableElement);
+
+            return result;
+        }
+
+        public static List<XElement> GetProcessedVocab(IEnumerable<XElement> allParagraphs, int sectionNo = -1)
+        {
+            List<XElement> paragraphs = GetParagraphsByIdentifier(allParagraphs, "VOCAB");
+            List<XElement> result = [];
+
+            // Format & add title
+            XElement titleElement = GetFormattedSectionTitleElement("Vocabulary", sectionNo);
+            result.Add(titleElement);
 
             return result;
         }
