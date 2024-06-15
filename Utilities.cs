@@ -302,9 +302,20 @@ namespace WorksheetGenerator.Utilities
             List<XElement> blankParagraphs = [];
             List<XElement> definitionParagraphs = [];
 
+            // Add blanks
             foreach (string word in vocab.Keys)
             {
-                blankParagraphs.Add(El.NumberListItem("__________________"));
+                XElement item = El.NumberListItem("__________________");
+                item.Add(El.InlineBreak());
+                blankParagraphs.Add(item);
+            }
+
+            // Add definitions
+            foreach (string definition in vocab.Values)
+            {
+                XElement item = El.Paragraph(definition);
+                item.Add(El.InlineBreak());
+                definitionParagraphs.Add(item);
             }
 
             // Add contents to table

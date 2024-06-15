@@ -29,6 +29,28 @@ namespace WorksheetGenerator.Elements
             return attributes;
         }
 
+        public static XElement InlineBreak(string font = "Aptos", int size = 28)
+        {
+            return new XElement(w + "r",
+                new XElement(w + "rPr",
+                    new XElement(w + "rFonts",
+                        new XAttribute(w + "ascii", font),
+                        new XAttribute(w + "hAnsi", font)
+                    ),
+                    new XElement(w + "sz",
+                        new XAttribute(w + "val", size)
+                    ),
+                    new XElement(w + "szCs",
+                        new XAttribute(w + "val", size)
+                    ),
+                    new XElement(w + "lang",
+                        new XAttribute(w + "val", "en-US")
+                    )
+                ),
+                new XElement(w + "br")
+            );
+        }
+
 
         // GENERATOR FUNCTIONS
 
@@ -89,7 +111,7 @@ namespace WorksheetGenerator.Elements
                             )
                         ),
                         // Ignore ID attributes for now
-                        paragraphs[i]?.Count == 0 ? Paragraph() : paragraphs[i]
+                        paragraphs[i] == null || paragraphs[i]?.Count == 0 ? Paragraph() : paragraphs[i]
                     )
                 );
             }
@@ -217,6 +239,32 @@ namespace WorksheetGenerator.Elements
 
         // STYLING FUNCTIONS
 
+
+        public static void SetPageMargins(XElement body, int top, int right = -1, int bottom = -1, int left = -1)
+        {
+            if (right < 0) right = top;
+            if (bottom < 0) bottom = top;
+            if (left < 0) left = top;
+
+            XElement? sectionPr = body.Element(w + "sectPr");
+            XElement? pgMar = sectionPr?.Element(w + "pgMar");
+            if (pgMar != null)
+            {
+                SetOrAddAttribute(pgMar, w + "top", top);
+                SetOrAddAttribute(pgMar, w + "right", right);
+                SetOrAddAttribute(pgMar, w + "bottom", bottom);
+                SetOrAddAttribute(pgMar, w + "left", left);
+            }
+            else
+            {
+                pgMar?.Add(new XElement(w + "pgMar",
+                    new XAttribute(w + "top", top),
+                    new XAttribute(w + "right", right),
+                    new XAttribute(w + "bottom", bottom),
+                    new XAttribute(w + "left", left)
+                ));
+            }
+        }
         public static void SetParagraphFont(XElement paragraph, string fontName)
         {
             SetParagraphStyle(paragraph, w + "rFonts", [

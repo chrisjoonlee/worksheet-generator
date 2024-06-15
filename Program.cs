@@ -24,35 +24,47 @@ namespace WorksshetGenerator
             XDocument newDoc = new XDocument(
                 HF.GetDocumentAndBodyOnly(originalDoc)
             );
+
+            // Get body
             XElement? newBody = newDoc.Descendants(El.w + "body").FirstOrDefault();
-
-            // Worksheet title
-            XElement? worksheetTitleElement = HF.GetWorksheetTitleElement(paragraphs);
-            if (worksheetTitleElement != null)
-                newBody?.Add(worksheetTitleElement);
-
-            // Keep track of section numbers
-            int sectionNo = 1;
-
-            // Vocab section
-            List<XElement> vocabParagraphs = HF.GetProcessedVocab(paragraphs, sectionNo);
-            if (vocabParagraphs.Count > 0)
+            if (newBody != null)
             {
-                sectionNo++;
-                foreach (XElement paragraph in vocabParagraphs)
-                    newBody?.Add(paragraph);
-            }
+                // Copy section properties
+                XElement? sectionPr = originalDoc.Descendants(El.w + "sectPr").FirstOrDefault();
+                if (sectionPr != null)
+                    newBody.Add(sectionPr);
 
-            // Reading section
-            List<XElement> readingParagraphs = HF.GetProcessedReading(paragraphs, sectionNo);
-            if (readingParagraphs.Count > 0)
-            {
-                sectionNo++;
-                foreach (XElement paragraph in readingParagraphs)
-                    newBody?.Add(paragraph);
-            }
+                // Set page margins
+                El.SetPageMargins(newBody, 539);
 
-            newDoc.Save(filePath);
+                // Worksheet title
+                XElement? worksheetTitleElement = HF.GetWorksheetTitleElement(paragraphs);
+                if (worksheetTitleElement != null)
+                    newBody.Add(worksheetTitleElement);
+
+                // Keep track of section numbers
+                int sectionNo = 1;
+
+                // Vocab section
+                List<XElement> vocabParagraphs = HF.GetProcessedVocab(paragraphs, sectionNo);
+                if (vocabParagraphs.Count > 0)
+                {
+                    sectionNo++;
+                    foreach (XElement paragraph in vocabParagraphs)
+                        newBody.Add(paragraph);
+                }
+
+                // Reading section
+                List<XElement> readingParagraphs = HF.GetProcessedReading(paragraphs, sectionNo);
+                if (readingParagraphs.Count > 0)
+                {
+                    sectionNo++;
+                    foreach (XElement paragraph in readingParagraphs)
+                        newBody.Add(paragraph);
+                }
+
+                newDoc.Save(filePath);
+            }
         }
     }
 }
