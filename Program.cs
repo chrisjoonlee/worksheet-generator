@@ -46,7 +46,7 @@ namespace WorksshetGenerator
                 int sectionNo = 1;
 
                 // Vocab section
-                List<XElement> vocabParagraphs = HF.GetProcessedVocab(paragraphs, sectionNo);
+                (List<XElement> vocabParagraphs, List<XElement> vocabAnswerKey) = HF.GetProcessedVocab(paragraphs, sectionNo);
                 if (vocabParagraphs.Count > 0)
                 {
                     sectionNo++;
@@ -62,6 +62,10 @@ namespace WorksshetGenerator
                     foreach (XElement paragraph in readingParagraphs)
                         newBody.Add(paragraph);
                 }
+
+                // Answer key
+                newBody.Add(HF.AnswerKeyTitleElement());
+                newBody.Add(vocabAnswerKey);
 
                 newDoc.Save(filePath);
             }

@@ -249,6 +249,19 @@ namespace WorksheetGenerator.Utilities
             return titleElement;
         }
 
+        public static XElement GetFormattedAnswerKeySectionTitleElement(string title, int sectionNo = -1)
+        {
+            string formattedTitle;
+            if (sectionNo >= 0)
+                formattedTitle = sectionNo + ". " + title.Trim().ToUpper();
+            else
+                formattedTitle = title.Trim().ToUpper();
+
+            XElement titleElement = El.Paragraph(formattedTitle);
+            El.AddBoldToParagraph(titleElement);
+            return titleElement;
+        }
+
         public static Dictionary<string, string> GetVocab(List<XElement> paragraphs)
         {
             Dictionary<string, string> vocab = [];
@@ -308,33 +321,37 @@ namespace WorksheetGenerator.Utilities
             {
                 n--;
                 int k = random.Next(n + 1);
-                KeyValuePair<TKey, TValue> value = keyValuePairs[k];
-                keyValuePairs[k] = keyValuePairs[n];
-                keyValuePairs[n] = value;
+                (keyValuePairs[n], keyValuePairs[k]) = (keyValuePairs[k], keyValuePairs[n]);
             }
 
             // Create a new dictionary from the shuffled list
             return keyValuePairs.ToDictionary(pair => pair.Key, pair => pair.Value);
         }
 
-        public static XElement VocabBlanksAndDefinitions(Dictionary<string, string> vocab)
+        public static (XElement, List<XElement>) VocabBlanksAndDefinitions(Dictionary<string, string> vocab)
         {
             int[] tableColWidths = [3261, 7938];
 
             // Create table
-            XElement table = El.Table(
+            XElement mainTable = El.Table(
                 tableColWidths,
                 El.TableBorderAttributes("none", 0, 0, "auto")
             );
 
+            // Create answer list
+            List<XElement> answerList = [];
+
             // Shuffle words
             Dictionary<string, string> shuffledVocab = ShuffledDictionary(vocab);
 
+            // Blanks
+            string[] blanks = new string[1];
+            blanks[0] = "__________________";
+            List<XElement> blankList = El.NumberList(blanks);
+
+
             foreach (string word in shuffledVocab.Keys)
             {
-                // Blank
-                XElement wordParagraph = El.NumberListItem("__________________");
-
                 // Definition
                 XElement definitionParagraph = El.Paragraph(vocab[word]);
                 El.SetParagraphSpacing(definitionParagraph, 0, 0);
@@ -342,35 +359,50 @@ namespace WorksheetGenerator.Utilities
 
                 // Add table row
                 List<List<XElement>> content = [
-                    [wordParagraph],
+                    blankList,
                     [definitionParagraph]
                 ];
-                table.Add(El.TableRow(tableColWidths, content));
+                mainTable.Add(El.TableRow(tableColWidths, content));
             }
 
-            return table;
+            // Answer list
+            foreach (XElement item in El.NumberList(shuffledVocab.Keys))
+                answerList.Add(item);
+
+            return (mainTable, answerList);
         }
 
-        public static List<XElement> GetProcessedVocab(IEnumerable<XElement> allParagraphs, int sectionNo = -1)
+        public static (List<XElement>, List<XElement>) GetProcessedVocab(IEnumerable<XElement> allParagraphs, int sectionNo = -1)
         {
             List<XElement> paragraphs = GetParagraphsByIdentifier(allParagraphs, "VOCAB");
-            List<XElement> result = [];
+            List<XElement> mainActivity = [];
+            List<XElement> answerKey = [];
 
             // Format & add title
-            XElement titleElement = GetFormattedSectionTitleElement("Vocabulary", sectionNo);
-            result.Add(titleElement);
+            mainActivity.Add(GetFormattedSectionTitleElement("Vocabulary", sectionNo));
 
             // Get vocab
             Dictionary<string, string> vocab = GetVocab(paragraphs);
 
             // Vocab box
-            result.Add(VocabBox(vocab.Keys));
-            result.Add(El.Paragraph());
+            mainActivity.Add(VocabBox(vocab.Keys));
+            mainActivity.Add(El.Paragraph());
 
             // Blanks and definitions
-            result.Add(VocabBlanksAndDefinitions(vocab));
+            (XElement blanksAndDefinitions, List<XElement> answerList) = VocabBlanksAndDefinitions(vocab);
+            mainActivity.Add(blanksAndDefinitions);
 
-            return result;
+            // Page break
+            mainActivity.Add(El.PageBreak());
+
+            // Answer key
+            answerKey.Add(GetFormattedAnswerKeySectionTitleElement("Vocabulary", sectionNo));
+            foreach (XElement paragraph in answerList)
+            {
+                answerKey.Add(paragraph);
+            }
+
+            return (mainActivity, answerKey);
         }
 
         public static List<XElement> GetProcessedReading(IEnumerable<XElement> allParagraphs, int sectionNo = -1)
@@ -389,40 +421,41 @@ namespace WorksheetGenerator.Utilities
                 result.Add(newTitleElement);
             }
 
-            // Get main passage paragraphs
-            List<XElement> passageParagraphs = [];
-            List<XElement> previewImages = [];
-            bool isBeforePassage = true;
+            // Filter paragraphs
             foreach (XElement paragraph in paragraphs)
             {
                 if (!StartsWith(paragraph, "title:"))
                 {
-                    // Format any images
+                    // Add styling
                     if (IsImage(paragraph))
                         FormatImage(paragraph);
-                    else if (isBeforePassage)
-                        isBeforePassage = false;
-                    if (isBeforePassage)
-                        previewImages.Add(paragraph);
-                    else if (!IsWhiteSpaceOnly(paragraph) || IsImage(paragraph))
-                        passageParagraphs.Add(paragraph);
+                    else
+                    {
+                        El.SetDefaultParagraphStyles(paragraph);
+                        El.SetParagraphLine(paragraph, 276);
+                    }
+
+                    if (!IsWhiteSpaceOnly(paragraph) || IsImage(paragraph))
+                        result.Add(paragraph);
                 }
             }
 
-            // Add preview images
-            foreach (XElement element in previewImages)
-                result.Add(element);
-
-            // Create table for main passage & add passage paragraphs
-            int[] tableColumnWidths = [6374, 2976];
-            XElement table = El.Table(
-                tableColumnWidths,
-                El.TableBorderAttributes("none", 0, 0, "auto")
-            );
-            table.Add(El.TableRow(tableColumnWidths, [passageParagraphs, null]));
-            result.Add(table);
+            // Page break
+            result.Add(El.PageBreak());
 
             return result;
+        }
+
+        public static XElement AnswerKeyTitleElement()
+        {
+            XElement titleElement = El.Paragraph("ANSWER KEY");
+
+            El.AddBoldToParagraph(titleElement);
+            El.CenterParagraph(titleElement);
+            El.SetParagraphSize(titleElement, 40);
+            El.SetParagraphSpacing(titleElement, 0, 200);
+
+            return titleElement;
         }
     }
 }

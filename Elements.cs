@@ -81,10 +81,7 @@ namespace WorksheetGenerator.Elements
                 ));
             }
 
-            SetParagraphLine(paragraph, 240);
-            SetParagraphFont(paragraph, "Aptos");
-            SetParagraphColor(paragraph, "262626", "text1", "D9");
-            SetParagraphSize(paragraph, 28);
+            SetDefaultParagraphStyles(paragraph);
 
             return paragraph;
         }
@@ -96,32 +93,6 @@ namespace WorksheetGenerator.Elements
             )
         {
             widths ??= [11169];
-            // if (paragraphs == null)
-            // {
-            //     paragraphs = [];
-            //     for (int i = 0; i < widths.Length; i++)
-            //     {
-            //         paragraphs.Add([Paragraph()]);
-            //     }
-            // }
-
-            // Create columns
-            // List<XElement> columnElements = [];
-            // for (int i = 0; i < widths.Length; i++)
-            // {
-            //     columnElements.Add(
-            //         new XElement(w + "tc",
-            //             new XElement(w + "tcPr",
-            //                 new XElement(w + "tcW",
-            //                     new XAttribute(w + "w", widths[i]),
-            //                     new XAttribute(w + "type", "dxa")
-            //                 )
-            //             ),
-            //             // Ignore ID attributes for now
-            //             paragraphs[i]
-            //         )
-            //     );
-            // }
 
             // Create table
             return new XElement(w + "tbl",
@@ -191,7 +162,7 @@ namespace WorksheetGenerator.Elements
             );
         }
 
-        public static XElement NumberListItem(string text, int left = 458, int hanging = 425)
+        public static XElement NumberListItem(int numId, string text, int left = 458, int hanging = 425)
         {
             XElement paragraph = Paragraph(text);
             SetParagraphPropertyStyle(paragraph, w + "pStyle", [
@@ -204,7 +175,7 @@ namespace WorksheetGenerator.Elements
                     new XAttribute(w + "val", 0)
                 ),
                 new XElement(w + "numId",
-                    new XAttribute(w + "val", 2)
+                    new XAttribute(w + "val", numId)
                 )
             ));
 
@@ -213,6 +184,36 @@ namespace WorksheetGenerator.Elements
                 new XAttribute(w + "hanging", 425)
             ]);
 
+            return paragraph;
+        }
+
+        private static int numberListCount = 1;
+
+        public static List<XElement> NumberList(IEnumerable<string> texts, int left = 458, int hanging = 425)
+        {
+            List<XElement> result = [];
+
+            foreach (string text in texts)
+            {
+                result.Add(NumberListItem(numberListCount, text, left, hanging));
+            }
+
+            numberListCount++;
+            return result;
+        }
+
+        public static XElement PageBreak()
+        {
+            XElement paragraph = Paragraph();
+            paragraph.Add(new XElement(w + "r",
+                new XElement(w + "rPr",
+                    new XElement(w + "lang",
+                        new XAttribute(w + "val", "en-US")
+                    )
+                ),
+                new XElement(w + "br",
+                    new XAttribute(w + "type", "page"))
+            ));
             return paragraph;
         }
 
@@ -355,6 +356,14 @@ namespace WorksheetGenerator.Elements
                 new XAttribute(w + "line", line),
                 new XAttribute(w + "lineRule", "auto"),
             ]);
+        }
+
+        public static void SetDefaultParagraphStyles(XElement paragraph)
+        {
+            SetParagraphLine(paragraph, 240);
+            SetParagraphFont(paragraph, "Aptos");
+            SetParagraphColor(paragraph, "262626", "text1", "D9");
+            SetParagraphSize(paragraph, 28);
         }
 
         public static void AddTableCellMargin(XElement table, int topSize, int rightSize, int bottomSize, int leftSize)
