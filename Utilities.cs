@@ -274,57 +274,79 @@ namespace WorksheetGenerator.Utilities
 
         public static XElement VocabBox(ICollection<string> words)
         {
-            int gap = 480;
-            int padding = 440;
-
             string formattedWords = string.Join("        ", words);
             XElement paragraph = El.Paragraph(formattedWords);
             El.SetParagraphSize(paragraph, 28);
             El.AddBoldToParagraph(paragraph);
             El.CenterParagraph(paragraph);
-            El.SetParagraphSpacing(paragraph, gap);
+            El.SetParagraphLine(paragraph, 440);
+            El.SetParagraphSpacing(paragraph, 0, 200);
             List<List<XElement>> content = [[paragraph]];
 
+            int[] tableColumnWidths = [11169];
             XElement box = El.Table(
-                1,
-                [11169],
-                El.TableBorderAttributes("single", 24, 0, "0F9ED5", "accent4"),
-                content
+                tableColumnWidths,
+                El.TableBorderAttributes("single", 24, 0, "0F9ED5", "accent4")
             );
+            box.Add(El.TableRow(tableColumnWidths, content));
 
-            El.AddTableCellMargin(box, padding, padding, 0, padding);
+            El.AddTableCellMargin(box, 440, 440, 0, 440);
 
             return box;
         }
 
+        public static Dictionary<TKey, TValue> ShuffledDictionary<TKey, TValue>(Dictionary<TKey, TValue> dict) where TKey : notnull
+        {
+            Random random = new();
+
+            // Convert the dictionary to a list of key-value pairs
+            List<KeyValuePair<TKey, TValue>> keyValuePairs = dict.ToList();
+
+            // Shuffle the list using the Fisher-Yates algorithm
+            int n = keyValuePairs.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+                KeyValuePair<TKey, TValue> value = keyValuePairs[k];
+                keyValuePairs[k] = keyValuePairs[n];
+                keyValuePairs[n] = value;
+            }
+
+            // Create a new dictionary from the shuffled list
+            return keyValuePairs.ToDictionary(pair => pair.Key, pair => pair.Value);
+        }
+
         public static XElement VocabBlanksAndDefinitions(Dictionary<string, string> vocab)
         {
-            List<XElement> blankParagraphs = [];
-            List<XElement> definitionParagraphs = [];
+            int[] tableColWidths = [3261, 7938];
 
-            // Add blanks
-            foreach (string word in vocab.Keys)
-            {
-                XElement item = El.NumberListItem("__________________");
-                item.Add(El.InlineBreak());
-                blankParagraphs.Add(item);
-            }
-
-            // Add definitions
-            foreach (string definition in vocab.Values)
-            {
-                XElement item = El.Paragraph(definition);
-                item.Add(El.InlineBreak());
-                definitionParagraphs.Add(item);
-            }
-
-            // Add contents to table
+            // Create table
             XElement table = El.Table(
-                2,
-                [3261, 7938],
-                El.TableBorderAttributes("none", 0, 0, "auto"),
-                [blankParagraphs, definitionParagraphs]
+                tableColWidths,
+                El.TableBorderAttributes("none", 0, 0, "auto")
             );
+
+            // Shuffle words
+            Dictionary<string, string> shuffledVocab = ShuffledDictionary(vocab);
+
+            foreach (string word in shuffledVocab.Keys)
+            {
+                // Blank
+                XElement wordParagraph = El.NumberListItem("__________________");
+
+                // Definition
+                XElement definitionParagraph = El.Paragraph(vocab[word]);
+                El.SetParagraphSpacing(definitionParagraph, 0, 0);
+                definitionParagraph.Add(El.InlineBreak());
+
+                // Add table row
+                List<List<XElement>> content = [
+                    [wordParagraph],
+                    [definitionParagraph]
+                ];
+                table.Add(El.TableRow(tableColWidths, content));
+            }
 
             return table;
         }
@@ -392,12 +414,12 @@ namespace WorksheetGenerator.Utilities
                 result.Add(element);
 
             // Create table for main passage & add passage paragraphs
+            int[] tableColumnWidths = [6374, 2976];
             XElement table = El.Table(
-                2,
-                [6374, 2976],
-                El.TableBorderAttributes("none", 0, 0, "auto"),
-                [passageParagraphs, null]
+                tableColumnWidths,
+                El.TableBorderAttributes("none", 0, 0, "auto")
             );
+            table.Add(El.TableRow(tableColumnWidths, [passageParagraphs, null]));
             result.Add(table);
 
             return result;

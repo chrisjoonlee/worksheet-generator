@@ -81,6 +81,7 @@ namespace WorksheetGenerator.Elements
                 ));
             }
 
+            SetParagraphLine(paragraph, 240);
             SetParagraphFont(paragraph, "Aptos");
             SetParagraphColor(paragraph, "262626", "text1", "D9");
             SetParagraphSize(paragraph, 28);
@@ -89,32 +90,38 @@ namespace WorksheetGenerator.Elements
         }
 
         public static XElement Table(
-                int num_cols,
                 int[] widths,
-                List<XAttribute> tableBorderAttributes,
-                List<List<XElement>>? paragraphs = null
+                List<XAttribute> tableBorderAttributes
+            // List<List<XElement>>? paragraphs = null
             )
         {
             widths ??= [11169];
-            paragraphs ??= [];
+            // if (paragraphs == null)
+            // {
+            //     paragraphs = [];
+            //     for (int i = 0; i < widths.Length; i++)
+            //     {
+            //         paragraphs.Add([Paragraph()]);
+            //     }
+            // }
 
             // Create columns
-            List<XElement> columnElements = [];
-            for (int i = 0; i < num_cols; i++)
-            {
-                columnElements.Add(
-                    new XElement(w + "tc",
-                        new XElement(w + "tcPr",
-                            new XElement(w + "tcW",
-                                new XAttribute(w + "w", widths[i]),
-                                new XAttribute(w + "type", "dxa")
-                            )
-                        ),
-                        // Ignore ID attributes for now
-                        paragraphs[i] == null || paragraphs[i]?.Count == 0 ? Paragraph() : paragraphs[i]
-                    )
-                );
-            }
+            // List<XElement> columnElements = [];
+            // for (int i = 0; i < widths.Length; i++)
+            // {
+            //     columnElements.Add(
+            //         new XElement(w + "tc",
+            //             new XElement(w + "tcPr",
+            //                 new XElement(w + "tcW",
+            //                     new XAttribute(w + "w", widths[i]),
+            //                     new XAttribute(w + "type", "dxa")
+            //                 )
+            //             ),
+            //             // Ignore ID attributes for now
+            //             paragraphs[i]
+            //         )
+            //     );
+            // }
 
             // Create table
             return new XElement(w + "tbl",
@@ -151,10 +158,36 @@ namespace WorksheetGenerator.Elements
                     new XElement(w + "gridCol",
                         new XAttribute(w + "w", "2976")
                     )
-                ),
-                new XElement(w + "tr", // Ignoring ID attributes for now
-                    columnElements
                 )
+            // TableRow(widths, paragraphs)
+            );
+        }
+
+        public static XElement TableRow(int[] widths, List<List<XElement>>? paragraphs = null)
+        {
+            widths ??= [11169];
+            paragraphs ??= [];
+
+            // Create columns
+            List<XElement> columns = [];
+            for (int i = 0; i < widths.Count(); i++)
+            {
+                columns.Add(
+                    new XElement(w + "tc",
+                        new XElement(w + "tcPr",
+                            new XElement(w + "tcW",
+                                new XAttribute(w + "w", widths[i]),
+                                new XAttribute(w + "type", "dxa")
+                            )
+                        ),
+                        // Ignore ID attributes for now
+                        paragraphs[i] == null || paragraphs[i]?.Count == 0 ? Paragraph() : paragraphs[i]
+                    )
+                );
+            }
+
+            return new XElement(w + "tr",
+                columns
             );
         }
 
@@ -239,7 +272,6 @@ namespace WorksheetGenerator.Elements
 
         // STYLING FUNCTIONS
 
-
         public static void SetPageMargins(XElement body, int top, int right = -1, int bottom = -1, int left = -1)
         {
             if (right < 0) right = top;
@@ -309,11 +341,19 @@ namespace WorksheetGenerator.Elements
             ]);
         }
 
-        public static void SetParagraphSpacing(XElement paragraph, int line)
+        public static void SetParagraphSpacing(XElement paragraph, int before, int after)
+        {
+            SetParagraphPropertyStyle(paragraph, w + "spacing", [
+                new XAttribute(w + "before", before),
+                new XAttribute(w + "after", after),
+            ]);
+        }
+
+        public static void SetParagraphLine(XElement paragraph, int line)
         {
             SetParagraphPropertyStyle(paragraph, w + "spacing", [
                 new XAttribute(w + "line", line),
-                new XAttribute(w + "lineRule", "auto")
+                new XAttribute(w + "lineRule", "auto"),
             ]);
         }
 
