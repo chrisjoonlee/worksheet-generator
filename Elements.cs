@@ -1,5 +1,14 @@
 using System;
 using System.Xml.Linq;
+using WorksheetGenerator.Utilities;
+using WorksheetGenerator.Elements;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using System.IO;
+using System.Text;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System.Xml;
+using DocumentFormat.OpenXml.Office2010.Excel;
 
 namespace WorksheetGenerator.Elements
 {
@@ -53,6 +62,41 @@ namespace WorksheetGenerator.Elements
 
 
         // GENERATOR FUNCTIONS
+
+        public static Style Style(
+            string id,
+            string name,
+            ParagraphProperties? pPr = null,
+            StyleRunProperties? rPr = null
+        )
+        {
+            Style style = new(
+                new AutoRedefine() { Val = OnOffOnlyValues.Off },
+                new BasedOn() { Val = "Normal" },
+                new LinkedStyle() { Val = "OverdueAmountChar" },
+                new Locked() { Val = OnOffOnlyValues.Off },
+                new PrimaryStyle() { Val = OnOffOnlyValues.On },
+                new StyleHidden() { Val = OnOffOnlyValues.Off },
+                new SemiHidden() { Val = OnOffOnlyValues.Off },
+                new StyleName() { Val = name },
+                new NextParagraphStyle() { Val = "Normal" },
+                new UIPriority() { Val = 1 },
+                new UnhideWhenUsed() { Val = OnOffOnlyValues.On }
+            )
+            {
+                Type = StyleValues.Paragraph,
+                StyleId = id,
+                CustomStyle = true,
+                Default = false
+            };
+
+            if (pPr != null)
+                style.Append(pPr);
+            if (rPr != null)
+                style.Append(rPr);
+
+            return style;
+        }
 
         public static XElement Paragraph(string? text = null)
         {
