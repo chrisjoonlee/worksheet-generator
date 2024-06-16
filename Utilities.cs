@@ -130,10 +130,10 @@ namespace WorksheetGenerator.Utilities
             return !string.IsNullOrWhiteSpace(GetParagraphText(element));
         }
 
-        public static OpenXmlElementList GetParagraphsByIdentifier(OpenXmlElementList elements, string identifierName)
+        public static List<OpenXmlElement> GetParagraphsByIdentifier(OpenXmlElementList elements, string identifierName)
         {
             bool isBetweenIdentifiers = false;
-            OpenXmlElementList result = [];
+            List<OpenXmlElement> result = [];
 
             foreach (OpenXmlElement element in elements)
             {
@@ -150,7 +150,7 @@ namespace WorksheetGenerator.Utilities
                 }
                 else if (isBetweenIdentifiers)
                     if (!ElementTextStartsWith(element, "chatgpt:") && HasText(element))
-                        result.Append(element);
+                        result.Add(element);
             }
 
             return result;
@@ -256,7 +256,7 @@ namespace WorksheetGenerator.Utilities
         //     return null;
         // }
 
-        public static OpenXmlElement GetFormattedSectionTitleElement(string title, int sectionNo = -1)
+        public static Paragraph GetFormattedSectionTitleElement(string title, int sectionNo = -1)
         {
             string formattedTitle;
             if (sectionNo >= 0)
@@ -264,12 +264,14 @@ namespace WorksheetGenerator.Utilities
             else
                 formattedTitle = title.Trim();
 
-            OpenXmlElement titleElement = new Paragraph(
+            Paragraph titleElement = new Paragraph(
+                new ParagraphProperties(
+                    new ParagraphStyleId() { Val = "SectionTitle" }
+                ),
                 new Run(
                     new Text(formattedTitle)
                 )
             );
-            // AddSectionTitleStyles(titleElement);
             return titleElement;
         }
 
@@ -286,7 +288,7 @@ namespace WorksheetGenerator.Utilities
         //     return titleElement;
         // }
 
-        public static Dictionary<string, string> GetVocab(OpenXmlElementList elements)
+        public static Dictionary<string, string> GetVocab(List<OpenXmlElement> elements)
         {
             Dictionary<string, string> vocab = [];
 
@@ -309,10 +311,10 @@ namespace WorksheetGenerator.Utilities
             return vocab;
         }
 
-        public static OpenXmlElement? VocabBox(ICollection<string> words)
+        public static OpenXmlElement VocabBox(ICollection<string> words)
         {
             string formattedWords = string.Join("        ", words);
-            OpenXmlElement paragraph = new Paragraph(
+            Paragraph formattedWordsPara = new(
                 new ParagraphProperties(
                     new Justification() { Val = JustificationValues.Center }
                 ),
@@ -327,7 +329,7 @@ namespace WorksheetGenerator.Utilities
             );
             // El.SetParagraphLine(paragraph, 440);
             // El.SetParagraphSpacing(paragraph, 0, 200);
-            List<List<OpenXmlElement>> content = [[paragraph]];
+            List<List<OpenXmlElement>> content = [[formattedWordsPara]];
 
             int[] tableColumnWidths = [11169];
             // XElement box = El.Table(
@@ -339,7 +341,7 @@ namespace WorksheetGenerator.Utilities
             // El.AddTableCellMargin(box, 440, 440, 0, 440);
 
             // return box;
-            return null;
+            return formattedWordsPara;
         }
 
         // public static Dictionary<TKey, TValue> ShuffledDictionary<TKey, TValue>(Dictionary<TKey, TValue> dict) where TKey : notnull
@@ -406,21 +408,23 @@ namespace WorksheetGenerator.Utilities
         //     return (mainTable, answerList);
         // }
 
-        public static (OpenXmlElementList, OpenXmlElementList) GetProcessedVocab(OpenXmlElementList allElements, int sectionNo = -1)
+        public static (List<OpenXmlElement>, List<OpenXmlElement>) GetProcessedVocab(OpenXmlElementList allElements, int sectionNo = -1)
         {
-            OpenXmlElementList elements = GetParagraphsByIdentifier(allElements, "VOCAB");
-            OpenXmlElementList mainActivity = [];
-            OpenXmlElementList answerKey = [];
+            List<OpenXmlElement> elements = GetParagraphsByIdentifier(allElements, "VOCAB");
+            foreach (OpenXmlElement element in elements)
+                Console.WriteLine(element.OuterXml);
+            List<OpenXmlElement> mainActivity = [];
+            List<OpenXmlElement> answerKey = [];
 
             // Format & add title
-            mainActivity.Append(GetFormattedSectionTitleElement("Vocabulary", sectionNo));
+            mainActivity.Add(GetFormattedSectionTitleElement("Vocabulary", sectionNo));
 
             // Get vocab
             Dictionary<string, string> vocab = GetVocab(elements);
 
             // Vocab box
-            mainActivity.Append(VocabBox(vocab.Keys));
-            mainActivity.Append(new Paragraph());
+            mainActivity.Add(VocabBox(vocab.Keys));
+            mainActivity.Add(new Paragraph());
 
             // Blanks and definitions
             // (XElement blanksAndDefinitions, List<XElement> answerList) = VocabBlanksAndDefinitions(vocab);

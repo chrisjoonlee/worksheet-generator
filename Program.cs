@@ -67,6 +67,21 @@ namespace WorksshetGenerator
                             new FontSize() { Val = "48" },
                             new FontSizeComplexScript() { Val = "48" }
                         )
+                    ),
+                    El.Style(
+                        "SectionTitle",
+                        "Section Title",
+                        new ParagraphProperties(
+                            new Justification() { Val = JustificationValues.Center }
+                        ),
+                        new StyleRunProperties(
+                            new Bold(),
+                            new BoldComplexScript(),
+                            new Color() { Val = "0F9ED5", ThemeColor = ThemeColorValues.Accent4 },
+                            new RunFonts() { Ascii = "Aptos" },
+                            new FontSize() { Val = "36" },
+                            new FontSizeComplexScript() { Val = "36" }
+                        )
                     )
                 );
                 styles.Save(stylePart);
@@ -80,13 +95,13 @@ namespace WorksshetGenerator
                 int sectionNo = 1;
 
                 // Vocab section
-                (OpenXmlElementList vocabParagraphs, OpenXmlElementList vocabAnswerKey) = HF.GetProcessedVocab(origElementList, sectionNo);
-                // if (vocabParagraphs.Count > 0)
-                // {
-                //     sectionNo++;
-                //     foreach (OpenXmlElement paragraph in vocabParagraphs)
-                //         body.Append(paragraph);
-                // }
+                (List<OpenXmlElement> vocabParagraphs, List<OpenXmlElement> vocabAnswerKey) = HF.GetProcessedVocab(origElementList, sectionNo);
+                if (vocabParagraphs.Count > 0)
+                {
+                    sectionNo++;
+                    foreach (OpenXmlElement paragraph in vocabParagraphs)
+                        body.Append(paragraph);
+                }
 
                 // origPackage.Dispose();
             }
