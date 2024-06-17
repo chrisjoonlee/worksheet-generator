@@ -67,7 +67,8 @@ namespace WorksheetGenerator.Elements
             string id,
             string name,
             ParagraphProperties? pPr = null,
-            StyleRunProperties? rPr = null
+            StyleRunProperties? rPr = null,
+            TableProperties? tblPr = null
         )
         {
             Style style = new(
@@ -84,7 +85,7 @@ namespace WorksheetGenerator.Elements
                 new UnhideWhenUsed() { Val = OnOffOnlyValues.On }
             )
             {
-                Type = StyleValues.Paragraph,
+                Type = tblPr != null ? StyleValues.Table : StyleValues.Paragraph,
                 StyleId = id,
                 CustomStyle = true,
                 Default = false
@@ -94,8 +95,52 @@ namespace WorksheetGenerator.Elements
                 style.Append(pPr);
             if (rPr != null)
                 style.Append(rPr);
+            if (tblPr != null)
+                style.Append(tblPr);
 
             return style;
+        }
+
+        public static TableBorders TableBorders(UInt32Value size, EnumValue<ThemeColorValues> color)
+        {
+            return new TableBorders(
+                new TopBorder()
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Size = size,
+                    ThemeColor = color
+                },
+                new BottomBorder()
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Size = size,
+                    ThemeColor = color
+                },
+                new LeftBorder()
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Size = size,
+                    ThemeColor = color
+                },
+                new RightBorder()
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Size = size,
+                    ThemeColor = color
+                },
+                new InsideHorizontalBorder()
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Size = size,
+                    ThemeColor = color
+                },
+                new InsideVerticalBorder()
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Size = size,
+                    ThemeColor = color
+                }
+            );
         }
 
         public static XElement Paragraph(string? text = null)

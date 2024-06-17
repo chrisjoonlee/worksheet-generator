@@ -3,6 +3,7 @@ using System.Xml.Linq;
 using WorksheetGenerator.Elements;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Wordprocessing;
+// using DocumentFormat.OpenXml.Drawing;
 
 namespace WorksheetGenerator.Utilities
 {
@@ -316,7 +317,14 @@ namespace WorksheetGenerator.Utilities
             string formattedWords = string.Join("        ", words);
             Paragraph formattedWordsPara = new(
                 new ParagraphProperties(
-                    new Justification() { Val = JustificationValues.Center }
+                    new Justification() { Val = JustificationValues.Center },
+                    new SpacingBetweenLines()
+                    {
+                        Line = "440",
+                        LineRule = LineSpacingRuleValues.Auto,
+                        Before = "0",
+                        After = "220"
+                    }
                 ),
                 new Run(
                     new RunProperties(
@@ -327,21 +335,48 @@ namespace WorksheetGenerator.Utilities
                     new Text(formattedWords)
                 )
             );
-            // El.SetParagraphLine(paragraph, 440);
-            // El.SetParagraphSpacing(paragraph, 0, 200);
-            List<List<OpenXmlElement>> content = [[formattedWordsPara]];
 
-            int[] tableColumnWidths = [11169];
-            // XElement box = El.Table(
-            //     tableColumnWidths,
-            //     El.TableBorderAttributes("single", 24, 0, "0F9ED5", "accent4")
-            // );
-            // box.Add(El.TableRow(tableColumnWidths, content));
+            Table box = new(
+                new TableProperties(
+                    new TableStyle() { Val = "Box" }
+                ),
+                new TableRow(
+                    new TableCell(
+                        new TableCellProperties(
+                            new TableCellMargin(
+                                new TopMargin()
+                                {
+                                    Width = "440",
+                                    Type = TableWidthUnitValues.Dxa
+                                },
+                                new RightMargin()
+                                {
+                                    Width = "440",
+                                    Type = TableWidthUnitValues.Dxa
+                                },
+                                new BottomMargin()
+                                {
+                                    Width = "0",
+                                    Type = TableWidthUnitValues.Dxa
+                                },
+                                new LeftMargin()
+                                {
+                                    Width = "440",
+                                    Type = TableWidthUnitValues.Dxa
+                                }
+                            ),
+                            new TableCellWidth()
+                            {
+                                Width = "11169",
+                                Type = TableWidthUnitValues.Dxa
+                            }
+                        ),
+                        formattedWordsPara
+                    )
+                )
+            );
 
-            // El.AddTableCellMargin(box, 440, 440, 0, 440);
-
-            // return box;
-            return formattedWordsPara;
+            return box;
         }
 
         // public static Dictionary<TKey, TValue> ShuffledDictionary<TKey, TValue>(Dictionary<TKey, TValue> dict) where TKey : notnull
@@ -411,8 +446,8 @@ namespace WorksheetGenerator.Utilities
         public static (List<OpenXmlElement>, List<OpenXmlElement>) GetProcessedVocab(OpenXmlElementList allElements, int sectionNo = -1)
         {
             List<OpenXmlElement> elements = GetParagraphsByIdentifier(allElements, "VOCAB");
-            foreach (OpenXmlElement element in elements)
-                Console.WriteLine(element.OuterXml);
+            // foreach (OpenXmlElement element in elements)
+            //     Console.WriteLine(element.OuterXml);
             List<OpenXmlElement> mainActivity = [];
             List<OpenXmlElement> answerKey = [];
 

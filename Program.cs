@@ -42,11 +42,13 @@ namespace WorksshetGenerator
 
                 // Add section properties & set page margins
                 SectionProperties sectionProperties = new();
-                PageMargin pageMargin = new();
-                pageMargin.Top = 539;
-                pageMargin.Right = 539;
-                pageMargin.Bottom = 539;
-                pageMargin.Left = 539;
+                PageMargin pageMargin = new()
+                {
+                    Top = 539,
+                    Right = 539,
+                    Bottom = 539,
+                    Left = 539
+                };
                 sectionProperties.Append(pageMargin);
                 body.Append(sectionProperties);
 
@@ -81,6 +83,20 @@ namespace WorksshetGenerator
                             new RunFonts() { Ascii = "Aptos" },
                             new FontSize() { Val = "36" },
                             new FontSizeComplexScript() { Val = "36" }
+                        )
+                    ),
+                    El.Style(
+                        "Box",
+                        "Box",
+                        null,
+                        null,
+                        new TableProperties(
+                            new TableWidth()
+                            {
+                                Width = "5000",
+                                Type = TableWidthUnitValues.Pct
+                            },
+                            El.TableBorders(24, ThemeColorValues.Accent4)
                         )
                     )
                 );
