@@ -14,6 +14,106 @@ namespace WorksshetGenerator
 {
     class WorksheetGenerator
     {
+        public static Styles Styles = new(
+            El.Style(
+                "Text",
+                "Text",
+                new ParagraphProperties(
+                    new SpacingBetweenLines()
+                    {
+                        Line = "240",
+                        LineRule = LineSpacingRuleValues.Auto,
+                        Before = "0",
+                        After = "0"
+                    }
+
+                ),
+                new StyleRunProperties(
+                    new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1, ThemeShade = "15" },
+                    new RunFonts() { Ascii = "Aptos" },
+                    new FontSize() { Val = "28" },
+                    new FontSizeComplexScript() { Val = "48" }
+                )
+            ),
+            El.Style(
+                "WorksheetTitle",
+                "Worksheet Title",
+                new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center }
+                ),
+                new StyleRunProperties(
+                    new Bold(),
+                    new BoldComplexScript(),
+                    new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1, ThemeShade = "15" },
+                    new RunFonts() { Ascii = "Aptos" },
+                    new FontSize() { Val = "48" },
+                    new FontSizeComplexScript() { Val = "48" }
+                )
+            ),
+            El.Style(
+                "SectionTitle",
+                "Section Title",
+                new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center }
+                ),
+                new StyleRunProperties(
+                    new Bold(),
+                    new BoldComplexScript(),
+                    new Color() { Val = "0F9ED5", ThemeColor = ThemeColorValues.Accent4 },
+                    new RunFonts() { Ascii = "Aptos" },
+                    new FontSize() { Val = "36" },
+                    new FontSizeComplexScript() { Val = "36" }
+                )
+            ),
+            El.Style(
+                "NoBorderTable",
+                "No Border Table",
+                null,
+                null,
+                new TableProperties(
+                    new TableWidth()
+                    {
+                        Width = "5000",
+                        Type = TableWidthUnitValues.Pct
+                    },
+                    El.TableBorders(BorderValues.Nil, 0, ThemeColorValues.Background1)
+                )
+            ),
+            El.Style(
+                "Box",
+                "Box",
+                null,
+                null,
+                new TableProperties(
+                    new TableWidth()
+                    {
+                        Width = "5000",
+                        Type = TableWidthUnitValues.Pct
+                    },
+                    El.TableBorders(BorderValues.Single, 24, ThemeColorValues.Accent4)
+                )
+            ),
+            El.Style(
+                "VocabBox",
+                "Vocab Box",
+                new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center },
+                    new SpacingBetweenLines()
+                    {
+                        Line = "440",
+                        LineRule = LineSpacingRuleValues.Auto,
+                        Before = "0",
+                        After = "220"
+                    }
+                ),
+                new StyleRunProperties(
+                    new FontSize() { Val = "28" },
+                    new FontSizeComplexScript() { Val = "28" },
+                    new Bold()
+                )
+            )
+        );
+
         static void Main(string[] args)
         {
             if (args.Length < 2)
@@ -59,7 +159,10 @@ namespace WorksshetGenerator
                         new Level(
                             new NumberingFormat() { Val = NumberFormatValues.Decimal },
                             new LevelText() { Val = "%1." },
-                            new StartNumberingValue() { Val = 1 }
+                            new StartNumberingValue() { Val = 1 },
+                            new ParagraphProperties(
+                                new Indentation() { Left = "450", Hanging = "450" }
+                            )
                         )
                     )
                     { AbstractNumberId = 1 },
@@ -72,66 +175,7 @@ namespace WorksshetGenerator
 
                 // Define styles
                 StyleDefinitionsPart stylePart = mainPart.AddNewPart<StyleDefinitionsPart>();
-                Styles styles = new(
-                    El.Style(
-                        "WorksheetTitle",
-                        "Worksheet Title",
-                        new ParagraphProperties(
-                            new Justification() { Val = JustificationValues.Center }
-                        ),
-                        new StyleRunProperties(
-                            new Bold(),
-                            new BoldComplexScript(),
-                            new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1, ThemeShade = "15" },
-                            new RunFonts() { Ascii = "Aptos" },
-                            new FontSize() { Val = "48" },
-                            new FontSizeComplexScript() { Val = "48" }
-                        )
-                    ),
-                    El.Style(
-                        "SectionTitle",
-                        "Section Title",
-                        new ParagraphProperties(
-                            new Justification() { Val = JustificationValues.Center }
-                        ),
-                        new StyleRunProperties(
-                            new Bold(),
-                            new BoldComplexScript(),
-                            new Color() { Val = "0F9ED5", ThemeColor = ThemeColorValues.Accent4 },
-                            new RunFonts() { Ascii = "Aptos" },
-                            new FontSize() { Val = "36" },
-                            new FontSizeComplexScript() { Val = "36" }
-                        )
-                    ),
-                    El.Style(
-                        "NoBorderTable",
-                        "No Border Table",
-                        null,
-                        null,
-                        new TableProperties(
-                            new TableWidth()
-                            {
-                                Width = "5000",
-                                Type = TableWidthUnitValues.Pct
-                            },
-                            El.TableBorders(BorderValues.Nil, 0, ThemeColorValues.Background1)
-                        )
-                    ),
-                    El.Style(
-                        "Box",
-                        "Box",
-                        null,
-                        null,
-                        new TableProperties(
-                            new TableWidth()
-                            {
-                                Width = "5000",
-                                Type = TableWidthUnitValues.Pct
-                            },
-                            El.TableBorders(BorderValues.Single, 24, ThemeColorValues.Accent4)
-                        )
-                    )
-                );
+                Styles styles = Styles;
                 styles.Save(stylePart);
 
                 // Worksheet title
@@ -151,6 +195,11 @@ namespace WorksshetGenerator
                         body.Append(paragraph);
                 }
 
+                // Answer key
+                // body.Add(HF.AnswerKeyTitleElement());
+                body.Append(vocabAnswerKey);
+
+
                 // origPackage.Dispose();
             }
 
@@ -166,10 +215,6 @@ namespace WorksshetGenerator
 
             //     // Comprehension questions section
             //     (List<XElement> compQParagaphs, List<XElement> compQAnswerKey) = HF.GetProcessedCompQs(paragraphs, sectionNo);
-
-            //     // Answer key
-            //     newBody.Add(HF.AnswerKeyTitleElement());
-            //     newBody.Add(vocabAnswerKey);
 
             //     newDoc.Save(filePath);
             // }

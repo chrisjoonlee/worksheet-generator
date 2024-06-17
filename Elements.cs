@@ -101,6 +101,21 @@ namespace WorksheetGenerator.Elements
             return style;
         }
 
+
+        public static ParagraphProperties ParagraphStyle(string styleId)
+        {
+            return new ParagraphProperties(
+                new ParagraphStyleId() { Val = styleId }
+            );
+        }
+
+        public static TableProperties TableStyle(string styleId)
+        {
+            return new TableProperties(
+                new TableStyle() { Val = styleId }
+            );
+        }
+
         public static TableBorders TableBorders(EnumValue<BorderValues> val, UInt32Value size, EnumValue<ThemeColorValues> color)
         {
             return new TableBorders(
@@ -141,6 +156,41 @@ namespace WorksheetGenerator.Elements
                     ThemeColor = color
                 }
             );
+        }
+
+        public static TableCellMargin TableCellMargin(int top, int right, int bottom, int left)
+        {
+            return new TableCellMargin(
+                new TopMargin()
+                {
+                    Width = $"{top}",
+                    Type = TableWidthUnitValues.Dxa
+                },
+                new RightMargin()
+                {
+                    Width = $"{right}",
+                    Type = TableWidthUnitValues.Dxa
+                },
+                new BottomMargin()
+                {
+                    Width = $"{bottom}",
+                    Type = TableWidthUnitValues.Dxa
+                },
+                new LeftMargin()
+                {
+                    Width = $"{left}",
+                    Type = TableWidthUnitValues.Dxa
+                }
+            );
+        }
+
+        public static TableCellWidth TableCellWidth(int width)
+        {
+            return new TableCellWidth()
+            {
+                Width = $"{width}",
+                Type = TableWidthUnitValues.Dxa
+            };
         }
 
         public static XElement Paragraph(string? text = null)

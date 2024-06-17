@@ -89,32 +89,18 @@ namespace WorksheetGenerator.Utilities
         public static Paragraph? GetWorksheetTitleElement(OpenXmlElementList origElementList)
         {
             foreach (OpenXmlElement element in origElementList)
-            {
                 if (ElementTextStartsWith(element, "title:"))
                 {
                     string title = RemovePrefix(GetParagraphText(element)).ToUpper();
+
                     Paragraph worksheetTitlePara = new(
-                        new ParagraphProperties(
-                            new ParagraphStyleId() { Val = "WorksheetTitle" }
-                            // new Justification() { Val = JustificationValues.Center }
-                        ),
-                        new Run(
-                            new RunProperties(
-                            // new FontSize() { Val = "48" },
-                            // new FontSizeComplexScript() { Val = "48" },
-                            // new Bold(),
-                            // new BoldComplexScript(),
-                            // new RunFonts() { Ascii = "Aptos" },
-                            // new Color() { Val = "262626" }
-                            ),
-                            new Text(title)
-                        )
+                        El.ParagraphStyle("WorksheetTitle"),
+                        new Run(new Text(title))
                     );
 
-                    // AddWorksheetTitleStyles(worksheetTitlePara);
                     return worksheetTitlePara;
                 }
-            }
+
             return null;
         }
 
@@ -265,14 +251,11 @@ namespace WorksheetGenerator.Utilities
             else
                 formattedTitle = title.Trim();
 
-            Paragraph titleElement = new Paragraph(
-                new ParagraphProperties(
-                    new ParagraphStyleId() { Val = "SectionTitle" }
-                ),
-                new Run(
-                    new Text(formattedTitle)
-                )
+            Paragraph titleElement = new(
+                El.ParagraphStyle("SectionTitle"),
+                new Run(new Text(formattedTitle))
             );
+
             return titleElement;
         }
 
@@ -303,8 +286,8 @@ namespace WorksheetGenerator.Utilities
                     string word = text.Substring(0, colonIndex);
                     string definition = text.Substring(colonIndex + 1).TrimStart();
                     // Remove any final periods
-                    if (definition[definition.Length - 1] == '.')
-                        definition = definition.Substring(0, definition.Length - 1);
+                    if (definition[^1] == '.')
+                        definition = definition[..^1];
                     vocab.Add(word, definition);
                 }
             }
@@ -316,60 +299,17 @@ namespace WorksheetGenerator.Utilities
         {
             string formattedWords = string.Join("        ", words);
             Paragraph formattedWordsPara = new(
-                new ParagraphProperties(
-                    new Justification() { Val = JustificationValues.Center },
-                    new SpacingBetweenLines()
-                    {
-                        Line = "440",
-                        LineRule = LineSpacingRuleValues.Auto,
-                        Before = "0",
-                        After = "220"
-                    }
-                ),
-                new Run(
-                    new RunProperties(
-                    new FontSize() { Val = "28" },
-                    new FontSizeComplexScript() { Val = "28" },
-                    new Bold()
-                ),
-                    new Text(formattedWords)
-                )
+                El.ParagraphStyle("VocabBox"),
+                new Run(new Text(formattedWords))
             );
 
             Table box = new(
-                new TableProperties(
-                    new TableStyle() { Val = "Box" }
-                ),
+                El.TableStyle("Box"),
                 new TableRow(
                     new TableCell(
                         new TableCellProperties(
-                            new TableCellMargin(
-                                new TopMargin()
-                                {
-                                    Width = "440",
-                                    Type = TableWidthUnitValues.Dxa
-                                },
-                                new RightMargin()
-                                {
-                                    Width = "440",
-                                    Type = TableWidthUnitValues.Dxa
-                                },
-                                new BottomMargin()
-                                {
-                                    Width = "0",
-                                    Type = TableWidthUnitValues.Dxa
-                                },
-                                new LeftMargin()
-                                {
-                                    Width = "440",
-                                    Type = TableWidthUnitValues.Dxa
-                                }
-                            ),
-                            new TableCellWidth()
-                            {
-                                Width = "11169",
-                                Type = TableWidthUnitValues.Dxa
-                            }
+                            El.TableCellMargin(440, 440, 0, 440),
+                            El.TableCellWidth(11169)
                         ),
                         formattedWordsPara
                     )
@@ -384,7 +324,7 @@ namespace WorksheetGenerator.Utilities
             Random random = new();
 
             // Convert the dictionary to a list of key-value pairs
-            List<KeyValuePair<TKey, TValue>> keyValuePairs = dict.ToList();
+            List<KeyValuePair<TKey, TValue>> keyValuePairs = [.. dict];
 
             // Shuffle the list using the Fisher-Yates algorithm
             int n = keyValuePairs.Count;
@@ -407,11 +347,7 @@ namespace WorksheetGenerator.Utilities
             Dictionary<string, string> shuffledVocab = ShuffledDictionary(vocab);
 
             // Create main table
-            Table mainTable = new(
-                new TableProperties(
-                    new TableStyle() { Val = "NoBorderTable" }
-                )
-            );
+            Table mainTable = new(El.TableStyle("NoBorderTable"));
 
             // Add table rows
             string blank = "__________________";
@@ -422,34 +358,27 @@ namespace WorksheetGenerator.Utilities
                         // Blank
                         new TableCell(
                             new TableCellProperties(
-                                new TableCellWidth()
-                                {
-                                    Width = "3261",
-                                    Type = TableWidthUnitValues.Dxa
-                                }
+                                El.TableCellWidth(3261)
                             ),
                             new Paragraph(
+                                El.ParagraphStyle("Text"),
                                 new NumberingProperties(
                                     new NumberingLevelReference() { Val = 0 },
                                     new NumberingId() { Val = 1 }
                                 ),
-                                new Run(
-                                    new Text(blank)
-                                )
-                             )
+                                new Run(new Text(blank))
+                            )
                         ),
                         new TableCell(
                             new TableCellProperties(
-                                new TableCellWidth()
-                                {
-                                    Width = "7938",
-                                    Type = TableWidthUnitValues.Dxa
-                                }
+                                El.TableCellWidth(7938)
                             ),
                             new Paragraph(
-                                new Run(
-                                    new Text(vocab[word])
-                                )
+                                El.ParagraphStyle("Text"),
+                                new Run(new Text(vocab[word]))
+                            ),
+                            new Paragraph(
+                                El.ParagraphStyle("Text")
                             )
                         )
                     )
@@ -459,24 +388,29 @@ namespace WorksheetGenerator.Utilities
             // Create answer list
             List<Paragraph> answerList = [];
 
-            // foreach (string word in shuffledVocab.Keys)
-            // {
-            //     // Definition
-            //     XElement definitionParagraph = El.Paragraph();
-            //     El.SetParagraphSpacing(definitionParagraph, 0, 0);
-            //     definitionParagraph.Add(El.InlineBreak());
-
-            //     // Add table row
-            //     List<List<XElement>> content = [
-            //         blankList,
-            //         [definitionParagraph]
-            //     ];
-            //     mainTable.Add(El.TableRow(tableColWidths, content));
-            // }
-
-            // // Answer list
-            // foreach (XElement item in El.NumberList(shuffledVocab.Keys))
-            //     answerList.Add(item);
+            // Answer list
+            foreach (string word in shuffledVocab.Keys)
+            {
+                answerList.Add(new Paragraph(
+                    new ParagraphProperties(
+                        new ParagraphStyleId() { Val = "Text" }
+                        // new SpacingBetweenLines()
+                        // {
+                        //     Line = "240",
+                        //     LineRule = LineSpacingRuleValues.Auto,
+                        //     Before = "0",
+                        //     After = "0"
+                        // }
+                    ),
+                    new NumberingProperties(
+                        new NumberingLevelReference() { Val = 0 },
+                        new NumberingId() { Val = 2 }
+                    ),
+                    new Run(
+                        new Text(word)
+                    )
+                ));
+            }
 
             return (mainTable, answerList);
         }
@@ -505,9 +439,9 @@ namespace WorksheetGenerator.Utilities
             // mainActivity.Add(El.PageBreak());
 
             // Answer key
-            // answerKey.Append(GetFormattedAnswerKeySectionTitleElement("Vocabulary", sectionNo));
-            // foreach (XElement paragraph in answerList)
-            //     answerKey.Append(paragraph);
+            // answerKey.Add(GetFormattedAnswerKeySectionTitleElement("Vocabulary", sectionNo));
+            foreach (Paragraph paragraph in answerList)
+                answerKey.Add(paragraph);
 
             return (mainActivity, answerKey);
         }
