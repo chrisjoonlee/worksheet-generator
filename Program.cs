@@ -52,6 +52,24 @@ namespace WorksshetGenerator
                 sectionProperties.Append(pageMargin);
                 body.Append(sectionProperties);
 
+                // Numbering definitions
+                NumberingDefinitionsPart numberingPart = mainPart.AddNewPart<NumberingDefinitionsPart>("NumberingDefinitionsPart");
+                numberingPart.Numbering = new(
+                    new AbstractNum(
+                        new Level(
+                            new NumberingFormat() { Val = NumberFormatValues.Decimal },
+                            new LevelText() { Val = "%1." },
+                            new StartNumberingValue() { Val = 1 }
+                        )
+                    )
+                    { AbstractNumberId = 1 },
+                    new NumberingInstance(
+                        new AbstractNumId() { Val = 1 }
+                    )
+                    { NumberID = 1 }
+                );
+
+
                 // Define styles
                 StyleDefinitionsPart stylePart = mainPart.AddNewPart<StyleDefinitionsPart>();
                 Styles styles = new(
@@ -86,6 +104,20 @@ namespace WorksshetGenerator
                         )
                     ),
                     El.Style(
+                        "NoBorderTable",
+                        "No Border Table",
+                        null,
+                        null,
+                        new TableProperties(
+                            new TableWidth()
+                            {
+                                Width = "5000",
+                                Type = TableWidthUnitValues.Pct
+                            },
+                            El.TableBorders(BorderValues.Nil, 0, ThemeColorValues.Background1)
+                        )
+                    ),
+                    El.Style(
                         "Box",
                         "Box",
                         null,
@@ -96,7 +128,7 @@ namespace WorksshetGenerator
                                 Width = "5000",
                                 Type = TableWidthUnitValues.Pct
                             },
-                            El.TableBorders(24, ThemeColorValues.Accent4)
+                            El.TableBorders(BorderValues.Single, 24, ThemeColorValues.Accent4)
                         )
                     )
                 );

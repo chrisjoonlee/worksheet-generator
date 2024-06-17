@@ -379,75 +379,111 @@ namespace WorksheetGenerator.Utilities
             return box;
         }
 
-        // public static Dictionary<TKey, TValue> ShuffledDictionary<TKey, TValue>(Dictionary<TKey, TValue> dict) where TKey : notnull
-        // {
-        //     Random random = new();
+        public static Dictionary<TKey, TValue> ShuffledDictionary<TKey, TValue>(Dictionary<TKey, TValue> dict) where TKey : notnull
+        {
+            Random random = new();
 
-        //     // Convert the dictionary to a list of key-value pairs
-        //     List<KeyValuePair<TKey, TValue>> keyValuePairs = dict.ToList();
+            // Convert the dictionary to a list of key-value pairs
+            List<KeyValuePair<TKey, TValue>> keyValuePairs = dict.ToList();
 
-        //     // Shuffle the list using the Fisher-Yates algorithm
-        //     int n = keyValuePairs.Count;
-        //     while (n > 1)
-        //     {
-        //         n--;
-        //         int k = random.Next(n + 1);
-        //         (keyValuePairs[n], keyValuePairs[k]) = (keyValuePairs[k], keyValuePairs[n]);
-        //     }
+            // Shuffle the list using the Fisher-Yates algorithm
+            int n = keyValuePairs.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+                (keyValuePairs[n], keyValuePairs[k]) = (keyValuePairs[k], keyValuePairs[n]);
+            }
 
-        //     // Create a new dictionary from the shuffled list
-        //     return keyValuePairs.ToDictionary(pair => pair.Key, pair => pair.Value);
-        // }
+            // Create a new dictionary from the shuffled list
+            return keyValuePairs.ToDictionary(pair => pair.Key, pair => pair.Value);
+        }
 
-        // public static (XElement, List<XElement>) VocabBlanksAndDefinitions(Dictionary<string, string> vocab)
-        // {
-        //     int[] tableColWidths = [3261, 7938];
+        public static (Table, List<Paragraph>) VocabBlanksAndDefinitions(Dictionary<string, string> vocab)
+        {
+            int[] tableColWidths = [3261, 7938];
 
-        //     // Create table
-        //     XElement mainTable = El.Table(
-        //         tableColWidths,
-        //         El.TableBorderAttributes("none", 0, 0, "auto")
-        //     );
+            // Shuffle words
+            Dictionary<string, string> shuffledVocab = ShuffledDictionary(vocab);
 
-        //     // Create answer list
-        //     List<XElement> answerList = [];
+            // Create main table
+            Table mainTable = new(
+                new TableProperties(
+                    new TableStyle() { Val = "NoBorderTable" }
+                )
+            );
 
-        //     // Shuffle words
-        //     Dictionary<string, string> shuffledVocab = ShuffledDictionary(vocab);
+            // Add table rows
+            string blank = "__________________";
+            foreach (string word in shuffledVocab.Keys)
+            {
+                mainTable.AppendChild(
+                    new TableRow(
+                        // Blank
+                        new TableCell(
+                            new TableCellProperties(
+                                new TableCellWidth()
+                                {
+                                    Width = "3261",
+                                    Type = TableWidthUnitValues.Dxa
+                                }
+                            ),
+                            new Paragraph(
+                                new NumberingProperties(
+                                    new NumberingLevelReference() { Val = 0 },
+                                    new NumberingId() { Val = 1 }
+                                ),
+                                new Run(
+                                    new Text(blank)
+                                )
+                             )
+                        ),
+                        new TableCell(
+                            new TableCellProperties(
+                                new TableCellWidth()
+                                {
+                                    Width = "7938",
+                                    Type = TableWidthUnitValues.Dxa
+                                }
+                            ),
+                            new Paragraph(
+                                new Run(
+                                    new Text(vocab[word])
+                                )
+                            )
+                        )
+                    )
+                );
+            }
 
-        //     // Blanks
-        //     string[] blanks = new string[1];
-        //     blanks[0] = "__________________";
-        //     List<XElement> blankList = El.NumberList(blanks);
+            // Create answer list
+            List<Paragraph> answerList = [];
 
+            // foreach (string word in shuffledVocab.Keys)
+            // {
+            //     // Definition
+            //     XElement definitionParagraph = El.Paragraph();
+            //     El.SetParagraphSpacing(definitionParagraph, 0, 0);
+            //     definitionParagraph.Add(El.InlineBreak());
 
-        //     foreach (string word in shuffledVocab.Keys)
-        //     {
-        //         // Definition
-        //         XElement definitionParagraph = El.Paragraph(vocab[word]);
-        //         El.SetParagraphSpacing(definitionParagraph, 0, 0);
-        //         definitionParagraph.Add(El.InlineBreak());
+            //     // Add table row
+            //     List<List<XElement>> content = [
+            //         blankList,
+            //         [definitionParagraph]
+            //     ];
+            //     mainTable.Add(El.TableRow(tableColWidths, content));
+            // }
 
-        //         // Add table row
-        //         List<List<XElement>> content = [
-        //             blankList,
-        //             [definitionParagraph]
-        //         ];
-        //         mainTable.Add(El.TableRow(tableColWidths, content));
-        //     }
+            // // Answer list
+            // foreach (XElement item in El.NumberList(shuffledVocab.Keys))
+            //     answerList.Add(item);
 
-        //     // Answer list
-        //     foreach (XElement item in El.NumberList(shuffledVocab.Keys))
-        //         answerList.Add(item);
-
-        //     return (mainTable, answerList);
-        // }
+            return (mainTable, answerList);
+        }
 
         public static (List<OpenXmlElement>, List<OpenXmlElement>) GetProcessedVocab(OpenXmlElementList allElements, int sectionNo = -1)
         {
             List<OpenXmlElement> elements = GetParagraphsByIdentifier(allElements, "VOCAB");
-            // foreach (OpenXmlElement element in elements)
-            //     Console.WriteLine(element.OuterXml);
             List<OpenXmlElement> mainActivity = [];
             List<OpenXmlElement> answerKey = [];
 
@@ -462,11 +498,11 @@ namespace WorksheetGenerator.Utilities
             mainActivity.Add(new Paragraph());
 
             // Blanks and definitions
-            // (XElement blanksAndDefinitions, List<XElement> answerList) = VocabBlanksAndDefinitions(vocab);
-            // mainActivity.Append(blanksAndDefinitions);
+            (Table blanksAndDefinitions, List<Paragraph> answerList) = VocabBlanksAndDefinitions(vocab);
+            mainActivity.Add(blanksAndDefinitions);
 
             // Page break
-            // mainActivity.Append(El.PageBreak());
+            // mainActivity.Add(El.PageBreak());
 
             // Answer key
             // answerKey.Append(GetFormattedAnswerKeySectionTitleElement("Vocabulary", sectionNo));

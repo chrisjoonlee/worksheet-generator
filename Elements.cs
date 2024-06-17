@@ -101,42 +101,42 @@ namespace WorksheetGenerator.Elements
             return style;
         }
 
-        public static TableBorders TableBorders(UInt32Value size, EnumValue<ThemeColorValues> color)
+        public static TableBorders TableBorders(EnumValue<BorderValues> val, UInt32Value size, EnumValue<ThemeColorValues> color)
         {
             return new TableBorders(
                 new TopBorder()
                 {
-                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Val = new EnumValue<BorderValues>(val),
                     Size = size,
                     ThemeColor = color
                 },
                 new BottomBorder()
                 {
-                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Val = new EnumValue<BorderValues>(val),
                     Size = size,
                     ThemeColor = color
                 },
                 new LeftBorder()
                 {
-                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Val = new EnumValue<BorderValues>(val),
                     Size = size,
                     ThemeColor = color
                 },
                 new RightBorder()
                 {
-                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Val = new EnumValue<BorderValues>(val),
                     Size = size,
                     ThemeColor = color
                 },
                 new InsideHorizontalBorder()
                 {
-                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Val = new EnumValue<BorderValues>(val),
                     Size = size,
                     ThemeColor = color
                 },
                 new InsideVerticalBorder()
                 {
-                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Val = new EnumValue<BorderValues>(val),
                     Size = size,
                     ThemeColor = color
                 }
