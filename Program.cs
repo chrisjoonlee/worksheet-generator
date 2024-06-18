@@ -8,9 +8,13 @@ using System.IO;
 using System.Text;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System.Xml;
+using DocumentFormat.OpenXml.ExtendedProperties;
+using D = DocumentFormat.OpenXml.Drawing;
+using DW = DocumentFormat.OpenXml.Drawing.Wordprocessing;
+using DP = DocumentFormat.OpenXml.Drawing.Pictures;
 
 
-namespace WorksshetGenerator
+namespace WorksheetGenerator
 {
     class WorksheetGenerator
     {
@@ -18,10 +22,11 @@ namespace WorksshetGenerator
             El.Style(
                 "Text",
                 "Text",
+                null,
                 new ParagraphProperties(
                     new SpacingBetweenLines()
                     {
-                        Line = "240",
+                        Line = "276",
                         LineRule = LineSpacingRuleValues.Auto,
                         Before = "0",
                         After = "0"
@@ -36,8 +41,17 @@ namespace WorksshetGenerator
                 )
             ),
             El.Style(
+                "Paragraph",
+                "Paragraph",
+                "Text",
+                new ParagraphProperties(
+                    new SpacingBetweenLines() { After = "280" }
+                )
+            ),
+            El.Style(
                 "WorksheetTitle",
                 "Worksheet Title",
+                null,
                 new ParagraphProperties(
                     new Justification() { Val = JustificationValues.Center }
                 ),
@@ -53,6 +67,7 @@ namespace WorksshetGenerator
             El.Style(
                 "SectionTitle",
                 "Section Title",
+                null,
                 new ParagraphProperties(
                     new Justification() { Val = JustificationValues.Center }
                 ),
@@ -66,8 +81,31 @@ namespace WorksshetGenerator
                 )
             ),
             El.Style(
+                "AnswerKeySectionTitle",
+                "Answer Key Section Title",
+                "Text",
+                null,
+                new StyleRunProperties(
+                    new Bold(),
+                    new BoldComplexScript()
+                )
+            ),
+            El.Style(
+                "ListActivity",
+                "List Activity",
+                "Text",
+                new ParagraphProperties(
+                    new SpacingBetweenLines()
+                    {
+                        After = "280"
+                    }
+
+                )
+            ),
+            El.Style(
                 "NoBorderTable",
                 "No Border Table",
+                null,
                 null,
                 null,
                 new TableProperties(
@@ -84,6 +122,7 @@ namespace WorksshetGenerator
                 "Box",
                 null,
                 null,
+                null,
                 new TableProperties(
                     new TableWidth()
                     {
@@ -96,6 +135,7 @@ namespace WorksshetGenerator
             El.Style(
                 "VocabBox",
                 "Vocab Box",
+                "Text",
                 new ParagraphProperties(
                     new Justification() { Val = JustificationValues.Center },
                     new SpacingBetweenLines()
@@ -107,9 +147,21 @@ namespace WorksshetGenerator
                     }
                 ),
                 new StyleRunProperties(
-                    new FontSize() { Val = "28" },
-                    new FontSizeComplexScript() { Val = "28" },
-                    new Bold()
+                    new Bold(),
+                    new BoldComplexScript()
+                )
+            ),
+            El.Style(
+                "InlineImage",
+                "Inline Image",
+                null,
+                new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center },
+                    new SpacingBetweenLines()
+                    {
+                        Before = "240",
+                        After = "400"
+                    }
                 )
             )
         );
@@ -172,11 +224,27 @@ namespace WorksshetGenerator
                     { NumberID = 1 }
                 );
 
-
-                // Define styles
+                // Styles
                 StyleDefinitionsPart stylePart = mainPart.AddNewPart<StyleDefinitionsPart>();
                 Styles styles = Styles;
                 styles.Save(stylePart);
+
+                // Copy all images
+                Dictionary<string, string> imageRelIds = []; // <old, new>
+                foreach (ImagePart origImagePart in origMainPart.ImageParts)
+                {
+                    ImagePart newImagePart = mainPart.AddImagePart(origImagePart.ContentType);
+
+                    // Copy image data
+                    using Stream sourceStream = origImagePart.GetStream();
+                    using Stream destStream = newImagePart.GetStream(FileMode.Create);
+                    sourceStream.CopyTo(destStream);
+
+                    // Keep track of image part relationship IDs
+                    imageRelIds.Add(origMainPart.GetIdOfPart(origImagePart), mainPart.GetIdOfPart(newImagePart));
+
+                    mainPart.Document.Save();
+                }
 
                 // Worksheet title
                 Paragraph? worksheetTitleElement = HF.GetWorksheetTitleElement(origElementList);
@@ -187,12 +255,19 @@ namespace WorksshetGenerator
                 int sectionNo = 1;
 
                 // Vocab section
-                (List<OpenXmlElement> vocabParagraphs, List<OpenXmlElement> vocabAnswerKey) = HF.GetProcessedVocab(origElementList, sectionNo);
+                (List<OpenXmlElement> vocabParagraphs, List<Paragraph> vocabAnswerKey) = HF.GetProcessedVocab(origElementList, sectionNo);
                 if (vocabParagraphs.Count > 0)
                 {
                     sectionNo++;
-                    foreach (OpenXmlElement paragraph in vocabParagraphs)
-                        body.Append(paragraph);
+                    body.Append(vocabParagraphs);
+                }
+
+                // Reading section
+                List<Paragraph> readingParagraphs = HF.GetProcessedReading(origElementList, imageRelIds, sectionNo);
+                if (readingParagraphs.Count > 0)
+                {
+                    sectionNo++;
+                    body.Append(readingParagraphs);
                 }
 
                 // Answer key
@@ -202,22 +277,10 @@ namespace WorksshetGenerator
 
                 // origPackage.Dispose();
             }
+            // Comprehension questions section
+            // (List<XElement> compQParagaphs, List<XElement> compQAnswerKey) = HF.GetProcessedCompQs(paragraphs, sectionNo);
 
-
-            //     // Reading section
-            //     List<XElement> readingParagraphs = HF.GetProcessedReading(paragraphs, sectionNo);
-            //     if (readingParagraphs.Count > 0)
-            //     {
-            //         sectionNo++;
-            //         foreach (XElement paragraph in readingParagraphs)
-            //             newBody.Add(paragraph);
-            //     }
-
-            //     // Comprehension questions section
-            //     (List<XElement> compQParagaphs, List<XElement> compQAnswerKey) = HF.GetProcessedCompQs(paragraphs, sectionNo);
-
-            //     newDoc.Save(filePath);
-            // }
+            // newDoc.Save(filePath);
         }
     }
 }

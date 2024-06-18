@@ -3,7 +3,8 @@ using System.Xml.Linq;
 using WorksheetGenerator.Elements;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Wordprocessing;
-// using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.ExtendedProperties;
+using D = DocumentFormat.OpenXml.Drawing;
 
 namespace WorksheetGenerator.Utilities
 {
@@ -117,10 +118,21 @@ namespace WorksheetGenerator.Utilities
             return !string.IsNullOrWhiteSpace(GetParagraphText(element));
         }
 
-        public static List<OpenXmlElement> GetParagraphsByIdentifier(OpenXmlElementList elements, string identifierName)
+        public static bool IsImage(OpenXmlElement element)
         {
+            return element.Descendants<D.Blip>().Any();
+        }
+
+        public static List<Paragraph> GetParagraphsByIdentifier(OpenXmlElementList elements, string identifierName)
+        {
+            // foreach (var element in elements)
+            // {
+            //     if (IsImage(element))
+            //         Console.WriteLine(element.OuterXml);
+            // }
+
             bool isBetweenIdentifiers = false;
-            List<OpenXmlElement> result = [];
+            List<Paragraph> result = [];
 
             foreach (OpenXmlElement element in elements)
             {
@@ -136,88 +148,74 @@ namespace WorksheetGenerator.Utilities
                     }
                 }
                 else if (isBetweenIdentifiers)
-                    if (!ElementTextStartsWith(element, "chatgpt:") && HasText(element))
-                        result.Add(element);
+                    if (!ElementTextStartsWith(element, "chatgpt:") && (HasText(element) || IsImage(element)))
+                        result.Add((Paragraph)element);
             }
 
             return result;
         }
-
-        // public static bool IsImage(XElement element)
-        // {
-        //     foreach (XElement child in element.Elements())
-        //     {
-        //         // Check if the child element is a drawing or picture
-        //         if (child.Name == El.w + "drawing" || child.Name == El.w + "pict")
-        //             return true;
-
-        //         // Check if the child element is a run element containing drawing or picture
-        //         if (child.Name == El.w + "r")
-        //             foreach (XElement runChild in child.Elements())
-        //                 if (runChild.Name == El.w + "drawing" || runChild.Name == El.w + "pict")
-        //                     return true;
-        //     }
-
-        //     return false;
-        // }
 
         // public static ulong GetWidth(double width, double height, double desiredHeight)
         // {
         //     return (ulong)Math.Round((double)(desiredHeight / height * width));
         // }
 
-        // public static void FormatImage(XElement element, double desiredHeight = 1640000)
-        // {
-        //     // Add elements to <w:pPr>
-        //     XElement? paragraphProperty = element.Element(El.w + "pPr");
-        //     paragraphProperty?.AddFirst(new XElement(El.w + "jc",
-        //         new XAttribute(El.w + "val", "center")
-        //     ));
-        //     paragraphProperty?.AddFirst(new XElement(El.w + "spacing",
-        //         new XAttribute(El.w + "before", 240),
-        //         new XAttribute(El.w + "line", 400),
-        //         new XAttribute(El.w + "lineRule", "auto")
-        //     ));
+        public static Paragraph FormattedImage(Paragraph element, double desiredHeight = 1640000)
+        {
+            Paragraph image = (Paragraph)element.CloneNode(true);
+            image.PrependChild(El.ParagraphStyle("InlineImage"));
+            return image;
 
-        //     // Add elements to <w:rPr>
-        //     XElement? runProperty = paragraphProperty?.Element(El.w + "rPr");
-        //     runProperty?.AddFirst(new XElement(El.w + "szCs",
-        //         new XAttribute(El.w + "val", 36)
-        //     ));
-        //     runProperty?.AddFirst(new XElement(El.w + "sz",
-        //         new XAttribute(El.w + "val", 36)
-        //     ));
-        //     runProperty?.AddFirst(new XElement(El.w + "bCs"));
-        //     runProperty?.AddFirst(new XElement(El.w + "b"));
+            // Add elements to <w:pPr>
+            // XElement? paragraphProperty = element.Element(El.w + "pPr");
+            // paragraphProperty?.AddFirst(new XElement(El.w + "jc",
+            //     new XAttribute(El.w + "val", "center")
+            // ));
+            // paragraphProperty?.AddFirst(new XElement(El.w + "spacing",
+            //     new XAttribute(El.w + "before", 240),
+            //     new XAttribute(El.w + "line", 400),
+            //     new XAttribute(El.w + "lineRule", "auto")
+            // ));
 
-        //     // Edit <wp:extent> (Resizing)
-        //     XElement? extentElement = element.Descendants(El.wp + "extent").FirstOrDefault();
-        //     XAttribute? cx = extentElement?.Attribute("cx");
-        //     XAttribute? cy = extentElement?.Attribute("cy");
-        //     if (cx != null && cy != null)
-        //     {
-        //         bool validCx = double.TryParse(cx.Value, out double origWidth);
-        //         bool validCy = double.TryParse(cy.Value, out double origHeight);
+            // // Add elements to <w:rPr>
+            // XElement? runProperty = paragraphProperty?.Element(El.w + "rPr");
+            // runProperty?.AddFirst(new XElement(El.w + "szCs",
+            //     new XAttribute(El.w + "val", 36)
+            // ));
+            // runProperty?.AddFirst(new XElement(El.w + "sz",
+            //     new XAttribute(El.w + "val", 36)
+            // ));
+            // runProperty?.AddFirst(new XElement(El.w + "bCs"));
+            // runProperty?.AddFirst(new XElement(El.w + "b"));
 
-        //         if (validCx && validCy)
-        //         {
-        //             double desiredWidth = GetWidth(origWidth, origHeight, desiredHeight);
-        //             extentElement?.SetAttributeValue("cx", desiredWidth);
-        //             extentElement?.SetAttributeValue("cy", desiredHeight);
+            // // Edit <wp:extent> (Resizing)
+            // XElement? extentElement = element.Descendants(El.wp + "extent").FirstOrDefault();
+            // XAttribute? cx = extentElement?.Attribute("cx");
+            // XAttribute? cy = extentElement?.Attribute("cy");
+            // if (cx != null && cy != null)
+            // {
+            //     bool validCx = double.TryParse(cx.Value, out double origWidth);
+            //     bool validCy = double.TryParse(cy.Value, out double origHeight);
 
-        //             // Edit <a:xfrm><a:ext> (Resizing)
-        //             XElement? transformElement = element.Descendants(El.a + "xfrm").FirstOrDefault();
-        //             XElement? extElement = transformElement?.Element(El.a + "ext");
+            //     if (validCx && validCy)
+            //     {
+            //         double desiredWidth = GetWidth(origWidth, origHeight, desiredHeight);
+            //         extentElement?.SetAttributeValue("cx", desiredWidth);
+            //         extentElement?.SetAttributeValue("cy", desiredHeight);
 
-        //             extElement?.SetAttributeValue("cx", desiredWidth);
-        //             extElement?.SetAttributeValue("cy", desiredHeight);
-        //         }
-        //     }
+            //         // Edit <a:xfrm><a:ext> (Resizing)
+            //         XElement? transformElement = element.Descendants(El.a + "xfrm").FirstOrDefault();
+            //         XElement? extElement = transformElement?.Element(El.a + "ext");
 
-        //     // Edit <a:prstGeom> (Rounded corners)
-        //     XElement? geometryElement = element.Descendants(El.a + "prstGeom").FirstOrDefault();
-        //     geometryElement?.SetAttributeValue("prst", "roundRect");
-        // }
+            //         extElement?.SetAttributeValue("cx", desiredWidth);
+            //         extElement?.SetAttributeValue("cy", desiredHeight);
+            //     }
+            // }
+
+            // // Edit <a:prstGeom> (Rounded corners)
+            // XElement? geometryElement = element.Descendants(El.a + "prstGeom").FirstOrDefault();
+            // geometryElement?.SetAttributeValue("prst", "roundRect");
+        }
 
         // public static void AddSectionTitleStyles(XElement paragraph)
         // {
@@ -234,14 +232,14 @@ namespace WorksheetGenerator.Utilities
         //     El.AddBoldToParagraph(paragraph);
         // }
 
-        // public static XElement? GetSectionTitleElement(IEnumerable<XElement> elements)
-        // {
-        //     foreach (XElement element in elements)
-        //         if (StartsWith(element, "title:"))
-        //             return element;
+        public static Paragraph? GetSectionTitleElement(List<Paragraph> paragraphs)
+        {
+            foreach (Paragraph paragraph in paragraphs)
+                if (ElementTextStartsWith(paragraph, "title:"))
+                    return paragraph;
 
-        //     return null;
-        // }
+            return null;
+        }
 
         public static Paragraph GetFormattedSectionTitleElement(string title, int sectionNo = -1)
         {
@@ -259,20 +257,21 @@ namespace WorksheetGenerator.Utilities
             return titleElement;
         }
 
-        // public static XElement GetFormattedAnswerKeySectionTitleElement(string title, int sectionNo = -1)
-        // {
-        //     string formattedTitle;
-        //     if (sectionNo >= 0)
-        //         formattedTitle = sectionNo + ". " + title.Trim().ToUpper();
-        //     else
-        //         formattedTitle = title.Trim().ToUpper();
+        public static Paragraph GetFormattedAnswerKeySectionTitleElement(string title, int sectionNo = -1)
+        {
+            string formattedTitle;
+            if (sectionNo >= 0)
+                formattedTitle = sectionNo + ". " + title.Trim().ToUpper();
+            else
+                formattedTitle = title.Trim().ToUpper();
 
-        //     XElement titleElement = El.Paragraph(formattedTitle);
-        //     El.AddBoldToParagraph(titleElement);
-        //     return titleElement;
-        // }
+            return new Paragraph(
+                El.ParagraphStyle("AnswerKeySectionTitle"),
+                new Run(new Text(formattedTitle))
+            );
+        }
 
-        public static Dictionary<string, string> GetVocab(List<OpenXmlElement> elements)
+        public static Dictionary<string, string> GetVocab(List<Paragraph> elements)
         {
             Dictionary<string, string> vocab = [];
 
@@ -295,7 +294,7 @@ namespace WorksheetGenerator.Utilities
             return vocab;
         }
 
-        public static OpenXmlElement VocabBox(ICollection<string> words)
+        public static Table VocabBox(ICollection<string> words)
         {
             string formattedWords = string.Join("        ", words);
             Paragraph formattedWordsPara = new(
@@ -349,8 +348,11 @@ namespace WorksheetGenerator.Utilities
             // Create main table
             Table mainTable = new(El.TableStyle("NoBorderTable"));
 
+            // Blanks
+            string[] blank = ["__________________"];
+            List<Paragraph> blankList = El.NumberList(blank);
+
             // Add table rows
-            string blank = "__________________";
             foreach (string word in shuffledVocab.Keys)
             {
                 mainTable.AppendChild(
@@ -360,25 +362,15 @@ namespace WorksheetGenerator.Utilities
                             new TableCellProperties(
                                 El.TableCellWidth(3261)
                             ),
-                            new Paragraph(
-                                El.ParagraphStyle("Text"),
-                                new NumberingProperties(
-                                    new NumberingLevelReference() { Val = 0 },
-                                    new NumberingId() { Val = 1 }
-                                ),
-                                new Run(new Text(blank))
-                            )
+                            blankList[0].CloneNode(true)
                         ),
                         new TableCell(
                             new TableCellProperties(
                                 El.TableCellWidth(7938)
                             ),
                             new Paragraph(
-                                El.ParagraphStyle("Text"),
+                                El.ParagraphStyle("ListActivity"),
                                 new Run(new Text(vocab[word]))
-                            ),
-                            new Paragraph(
-                                El.ParagraphStyle("Text")
                             )
                         )
                     )
@@ -386,46 +378,22 @@ namespace WorksheetGenerator.Utilities
             }
 
             // Create answer list
-            List<Paragraph> answerList = [];
-
-            // Answer list
-            foreach (string word in shuffledVocab.Keys)
-            {
-                answerList.Add(new Paragraph(
-                    new ParagraphProperties(
-                        new ParagraphStyleId() { Val = "Text" }
-                        // new SpacingBetweenLines()
-                        // {
-                        //     Line = "240",
-                        //     LineRule = LineSpacingRuleValues.Auto,
-                        //     Before = "0",
-                        //     After = "0"
-                        // }
-                    ),
-                    new NumberingProperties(
-                        new NumberingLevelReference() { Val = 0 },
-                        new NumberingId() { Val = 2 }
-                    ),
-                    new Run(
-                        new Text(word)
-                    )
-                ));
-            }
+            List<Paragraph> answerList = El.NumberList(shuffledVocab.Keys);
 
             return (mainTable, answerList);
         }
 
-        public static (List<OpenXmlElement>, List<OpenXmlElement>) GetProcessedVocab(OpenXmlElementList allElements, int sectionNo = -1)
+        public static (List<OpenXmlElement>, List<Paragraph>) GetProcessedVocab(OpenXmlElementList allElements, int sectionNo = -1)
         {
-            List<OpenXmlElement> elements = GetParagraphsByIdentifier(allElements, "VOCAB");
+            List<Paragraph> paragraphs = GetParagraphsByIdentifier(allElements, "VOCAB");
             List<OpenXmlElement> mainActivity = [];
-            List<OpenXmlElement> answerKey = [];
+            List<Paragraph> answerKey = [];
 
             // Format & add title
             mainActivity.Add(GetFormattedSectionTitleElement("Vocabulary", sectionNo));
 
             // Get vocab
-            Dictionary<string, string> vocab = GetVocab(elements);
+            Dictionary<string, string> vocab = GetVocab(paragraphs);
 
             // Vocab box
             mainActivity.Add(VocabBox(vocab.Keys));
@@ -439,52 +407,60 @@ namespace WorksheetGenerator.Utilities
             mainActivity.Add(El.PageBreak());
 
             // Answer key
-            // answerKey.Add(GetFormattedAnswerKeySectionTitleElement("Vocabulary", sectionNo));
+            answerKey.Add(GetFormattedAnswerKeySectionTitleElement("Vocabulary", sectionNo));
             foreach (Paragraph paragraph in answerList)
                 answerKey.Add(paragraph);
 
             return (mainActivity, answerKey);
         }
 
-        // public static List<XElement> GetProcessedReading(IEnumerable<XElement> allParagraphs, int sectionNo = -1)
-        // {
-        //     List<XElement> paragraphs = GetParagraphsByIdentifier(allParagraphs, "READING");
-        //     List<XElement> result = [];
-        //     XElement? origTitleElement = GetSectionTitleElement(paragraphs);
+        public static List<Paragraph> GetProcessedReading(OpenXmlElementList allElements, Dictionary<string, string> imageRelIds, int sectionNo = -1)
+        {
+            List<Paragraph> paragraphs = GetParagraphsByIdentifier(allElements, "READING");
+            // foreach (Paragraph paragraph in paragraphs)
+            //     Console.WriteLine(paragraph.OuterXml);
+            List<Paragraph> result = [];
 
-        //     // Format & add title
-        //     if (origTitleElement != null)
-        //     {
-        //         XElement newTitleElement = GetFormattedSectionTitleElement(
-        //             RemovePrefix((string)origTitleElement),
-        //             sectionNo
-        //         );
-        //         result.Add(newTitleElement);
-        //     }
+            // Format & add title
+            Paragraph? origTitleElement = GetSectionTitleElement(paragraphs);
+            if (origTitleElement != null)
+            {
+                Paragraph newTitleElement = GetFormattedSectionTitleElement(
+                    RemovePrefix(GetParagraphText(origTitleElement)),
+                    sectionNo
+                );
+                result.Add(newTitleElement);
+            }
 
-        //     // Filter paragraphs
-        //     foreach (XElement paragraph in paragraphs)
-        //     {
-        //         if (!StartsWith(paragraph, "title:"))
-        //         {
-        //             // Add styling
-        //             if (IsImage(paragraph))
-        //                 FormatImage(paragraph);
-        //             else
-        //             {
-        //                 El.SetDefaultParagraphStyles(paragraph);
-        //                 El.SetParagraphLine(paragraph, 276);
-        //             }
+            // Filter paragraphs
+            foreach (Paragraph paragraph in paragraphs)
+            {
+                if (!ElementTextStartsWith(paragraph, "title:"))
+                {
+                    // if (IsImage(paragraph))
+                    //     Console.WriteLine(paragraph.OuterXml);
 
-        //             result.Add(paragraph);
-        //         }
-        //     }
+                    // Format images
+                    if (IsImage(paragraph))
+                    {
+                        string? oldImageRelId = El.GetImageRelId(paragraph);
+                        if (oldImageRelId != null)
+                            result.Add(FormattedImage(El.Image(imageRelIds[oldImageRelId])));
+                    }
+                    else
+                        result.Add(new Paragraph(
+                            El.ParagraphStyle("Paragraph"),
+                            new Run(new Text(GetParagraphText(paragraph)))
+                        ));
+                    //     }
+                }
+            }
 
-        //     // Page break
-        //     result.Add(El.PageBreak());
+            // Page break
+            result.Add(El.PageBreak());
 
-        //     return result;
-        // }
+            return result;
+        }
 
         // public static (List<XElement>, List<XElement>) TrueOrFalseQs(List<XElement> paragraphs)
         // {
