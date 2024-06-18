@@ -193,6 +193,11 @@ namespace WorksheetGenerator.Elements
             };
         }
 
+        public static Paragraph PageBreak()
+        {
+            return new Paragraph(new Run(new Break() { Type = BreakValues.Page }));
+        }
+
         public static XElement Paragraph(string? text = null)
         {
             XElement paragraph = new XElement(w + "p",
@@ -341,20 +346,20 @@ namespace WorksheetGenerator.Elements
             return result;
         }
 
-        public static XElement PageBreak()
-        {
-            XElement paragraph = Paragraph();
-            paragraph.Add(new XElement(w + "r",
-                new XElement(w + "rPr",
-                    new XElement(w + "lang",
-                        new XAttribute(w + "val", "en-US")
-                    )
-                ),
-                new XElement(w + "br",
-                    new XAttribute(w + "type", "page"))
-            ));
-            return paragraph;
-        }
+        // public static XElement PageBreak()
+        // {
+        //     XElement paragraph = Paragraph();
+        //     paragraph.Add(new XElement(w + "r",
+        //         new XElement(w + "rPr",
+        //             new XElement(w + "lang",
+        //                 new XAttribute(w + "val", "en-US")
+        //             )
+        //         ),
+        //         new XElement(w + "br",
+        //             new XAttribute(w + "type", "page"))
+        //     ));
+        //     return paragraph;
+        // }
 
 
         // HELPER STYLING FUNCTIONS

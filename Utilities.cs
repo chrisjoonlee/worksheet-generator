@@ -436,7 +436,7 @@ namespace WorksheetGenerator.Utilities
             mainActivity.Add(blanksAndDefinitions);
 
             // Page break
-            // mainActivity.Add(El.PageBreak());
+            mainActivity.Add(El.PageBreak());
 
             // Answer key
             // answerKey.Add(GetFormattedAnswerKeySectionTitleElement("Vocabulary", sectionNo));
