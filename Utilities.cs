@@ -125,12 +125,6 @@ namespace WorksheetGenerator.Utilities
 
         public static List<Paragraph> GetParagraphsByIdentifier(OpenXmlElementList elements, string identifierName)
         {
-            // foreach (var element in elements)
-            // {
-            //     if (IsImage(element))
-            //         Console.WriteLine(element.OuterXml);
-            // }
-
             bool isBetweenIdentifiers = false;
             List<Paragraph> result = [];
 
@@ -155,66 +149,13 @@ namespace WorksheetGenerator.Utilities
             return result;
         }
 
-        // public static ulong GetWidth(double width, double height, double desiredHeight)
-        // {
-        //     return (ulong)Math.Round((double)(desiredHeight / height * width));
-        // }
-
-        public static Paragraph FormattedImage(Paragraph element, double desiredHeight = 1640000)
+        public static Int64Value GetWidth(Int64Value width, Int64Value height, Int64Value desiredHeight)
         {
-            Paragraph image = (Paragraph)element.CloneNode(true);
-            image.PrependChild(El.ParagraphStyle("InlineImage"));
-            return image;
+            double w = width;
+            double h = height;
+            double dH = desiredHeight;
 
-            // Add elements to <w:pPr>
-            // XElement? paragraphProperty = element.Element(El.w + "pPr");
-            // paragraphProperty?.AddFirst(new XElement(El.w + "jc",
-            //     new XAttribute(El.w + "val", "center")
-            // ));
-            // paragraphProperty?.AddFirst(new XElement(El.w + "spacing",
-            //     new XAttribute(El.w + "before", 240),
-            //     new XAttribute(El.w + "line", 400),
-            //     new XAttribute(El.w + "lineRule", "auto")
-            // ));
-
-            // // Add elements to <w:rPr>
-            // XElement? runProperty = paragraphProperty?.Element(El.w + "rPr");
-            // runProperty?.AddFirst(new XElement(El.w + "szCs",
-            //     new XAttribute(El.w + "val", 36)
-            // ));
-            // runProperty?.AddFirst(new XElement(El.w + "sz",
-            //     new XAttribute(El.w + "val", 36)
-            // ));
-            // runProperty?.AddFirst(new XElement(El.w + "bCs"));
-            // runProperty?.AddFirst(new XElement(El.w + "b"));
-
-            // // Edit <wp:extent> (Resizing)
-            // XElement? extentElement = element.Descendants(El.wp + "extent").FirstOrDefault();
-            // XAttribute? cx = extentElement?.Attribute("cx");
-            // XAttribute? cy = extentElement?.Attribute("cy");
-            // if (cx != null && cy != null)
-            // {
-            //     bool validCx = double.TryParse(cx.Value, out double origWidth);
-            //     bool validCy = double.TryParse(cy.Value, out double origHeight);
-
-            //     if (validCx && validCy)
-            //     {
-            //         double desiredWidth = GetWidth(origWidth, origHeight, desiredHeight);
-            //         extentElement?.SetAttributeValue("cx", desiredWidth);
-            //         extentElement?.SetAttributeValue("cy", desiredHeight);
-
-            //         // Edit <a:xfrm><a:ext> (Resizing)
-            //         XElement? transformElement = element.Descendants(El.a + "xfrm").FirstOrDefault();
-            //         XElement? extElement = transformElement?.Element(El.a + "ext");
-
-            //         extElement?.SetAttributeValue("cx", desiredWidth);
-            //         extElement?.SetAttributeValue("cy", desiredHeight);
-            //     }
-            // }
-
-            // // Edit <a:prstGeom> (Rounded corners)
-            // XElement? geometryElement = element.Descendants(El.a + "prstGeom").FirstOrDefault();
-            // geometryElement?.SetAttributeValue("prst", "roundRect");
+            return (Int64Value)Math.Round((double)(dH / h * w));
         }
 
         // public static void AddSectionTitleStyles(XElement paragraph)
@@ -437,15 +378,20 @@ namespace WorksheetGenerator.Utilities
             {
                 if (!ElementTextStartsWith(paragraph, "title:"))
                 {
-                    // if (IsImage(paragraph))
-                    //     Console.WriteLine(paragraph.OuterXml);
-
                     // Format images
                     if (IsImage(paragraph))
                     {
                         string? oldImageRelId = El.GetImageRelId(paragraph);
                         if (oldImageRelId != null)
-                            result.Add(FormattedImage(El.Image(imageRelIds[oldImageRelId])));
+                        {
+                            Paragraph? image = El.Image(paragraph, imageRelIds[oldImageRelId], 2230120L, "InlineImage");
+                            if (image != null)
+                                result.Add(image);
+                        }
+
+                        // // Edit <a:prstGeom> (Rounded corners)
+                        // XElement? geometryElement = element.Descendants(El.a + "prstGeom").FirstOrDefault();
+                        // geometryElement?.SetAttributeValue("prst", "roundRect");
                     }
                     else
                         result.Add(new Paragraph(

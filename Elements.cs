@@ -218,73 +218,117 @@ namespace WorksheetGenerator.Elements
             return new Paragraph(new Run(new Break() { Type = BreakValues.Page }));
         }
 
-        public static Paragraph Image(string relationshipId)
-        {
-            Drawing element =
-                new(
-                    new DW.Inline(
-                        new DW.Extent() { Cx = 990000L, Cy = 792000L },
-                        new DW.EffectExtent()
-                        {
-                            LeftEdge = 19050L,
-                            TopEdge = 0L,
-                            RightEdge = 9525L,
-                            BottomEdge = 0L
-                        },
-                        new DW.DocProperties()
-                        {
-                            Id = (UInt32Value)1U,
-                            Name = "Picture 1"
-                        },
-                        new DW.NonVisualGraphicFrameDrawingProperties(
-                            new D.GraphicFrameLocks() { NoChangeAspect = true }),
-                        new D.Graphic(
-                            new D.GraphicData(
-                                new DP.Picture(
-                                    new DP.NonVisualPictureProperties(
-                                        new DP.NonVisualDrawingProperties()
-                                        {
-                                            Id = (UInt32Value)0U,
-                                            Name = "New Bitmap Image.jpg"
-                                        },
-                                        new DP.NonVisualPictureDrawingProperties()),
-                                    new DP.BlipFill(
-                                        new D.Blip(
-                                            new D.BlipExtensionList(
-                                                new D.BlipExtension()
-                                                {
-                                                    Uri =
-                                                    "{28A0092B-C50C-407E-A947-70E740481C1C}"
-                                                })
-                                        )
-                                        {
-                                            Embed = relationshipId,
-                                            CompressionState =
-                                            D.BlipCompressionValues.Print
-                                        },
-                                        new D.Stretch(
-                                            new D.FillRectangle())),
-                                    new DP.ShapeProperties(
-                                        new D.Transform2D(
-                                            new D.Offset() { X = 0L, Y = 0L },
-                                            new D.Extents() { Cx = 990000L, Cy = 792000L }),
-                                        new D.PresetGeometry(
-                                            new D.AdjustValueList()
-                                        )
-                                        { Preset = D.ShapeTypeValues.Rectangle }))
-                            )
-                            { Uri = "http://schemas.openxmlformats.org/drawingml/2006/picture" })
-                    )
-                    {
-                        DistanceFromTop = (UInt32Value)0U,
-                        DistanceFromBottom = (UInt32Value)0U,
-                        DistanceFromLeft = (UInt32Value)0U,
-                        DistanceFromRight = (UInt32Value)0U,
-                        EditId = "50D07946"
-                    });
+        public static UInt32Value docPropertiesId = 0;
 
-            // Append the reference to the body. The element should be in a Run.
-            return new Paragraph(new Run(element));
+        public static Paragraph? Image(Paragraph origImage, string relationshipId, Int64Value desiredHeight, string? styleId = null)
+        {
+            docPropertiesId++;
+
+            // Get original image dimensions
+            DW.Extent? origExtent = origImage.Descendants<DW.Extent>().FirstOrDefault();
+            Int64Value? origCx = origExtent?.Cx;
+            Int64Value? origCy = origExtent?.Cy;
+
+            // Get new width
+            Int64Value desiredWidth;
+            if (origCx != null && origCy != null)
+            {
+                desiredWidth = HF.GetWidth(origCx, origCy, desiredHeight);
+
+                Drawing drawing =
+                    new(
+                        new DW.Inline(
+                            new DW.Extent() { Cx = desiredWidth, Cy = desiredHeight },
+                            new DW.EffectExtent()
+                            {
+                                LeftEdge = 19050L,
+                                TopEdge = 0L,
+                                RightEdge = 9525L,
+                                BottomEdge = 0L
+                            },
+                            new DW.DocProperties()
+                            {
+                                Id = docPropertiesId,
+                                Name = "Picture"
+                            },
+                            new DW.NonVisualGraphicFrameDrawingProperties(
+                                new D.GraphicFrameLocks() { NoChangeAspect = true }),
+                            new D.Graphic(
+                                new D.GraphicData(
+                                    new DP.Picture(
+                                        new DP.NonVisualPictureProperties(
+                                            new DP.NonVisualDrawingProperties()
+                                            {
+                                                Id = docPropertiesId,
+                                                Name = "Image.jpg"
+                                            },
+                                            new DP.NonVisualPictureDrawingProperties()),
+                                        new DP.BlipFill(
+                                            new D.Blip(
+                                                new D.BlipExtensionList(
+                                                    new D.BlipExtension()
+                                                    {
+                                                        Uri =
+                                                        "{28A0092B-C50C-407E-A947-70E740481C1C}"
+                                                    })
+                                            )
+                                            {
+                                                Embed = relationshipId,
+                                                CompressionState =
+                                                D.BlipCompressionValues.Print
+                                            },
+                                            new D.Stretch(
+                                                new D.FillRectangle())),
+                                        new DP.ShapeProperties(
+                                            new D.Transform2D(
+                                                new D.Offset() { X = 0L, Y = 0L },
+                                                new D.Extents() { Cx = desiredWidth, Cy = desiredHeight }),
+                                            new D.PresetGeometry(
+                                                new D.AdjustValueList()
+                                            )
+                                            { Preset = D.ShapeTypeValues.Rectangle }))
+                                )
+                                { Uri = "http://schemas.openxmlformats.org/drawingml/2006/picture" })
+                        )
+                        {
+                            DistanceFromTop = (UInt32Value)0U,
+                            DistanceFromBottom = (UInt32Value)0U,
+                            DistanceFromLeft = (UInt32Value)0U,
+                            DistanceFromRight = (UInt32Value)0U,
+                            EditId = RandomEditId()
+                        });
+
+                Paragraph paragraph = new(new Run(drawing));
+
+                if (styleId != null)
+                    paragraph.PrependChild(El.ParagraphStyle(styleId));
+
+                return paragraph;
+            }
+
+            return null;
+        }
+
+        public static string RandomEditId()
+        {
+            // Generate a random hexadecimal string
+            byte[] bytes = new byte[4];
+            new Random().NextBytes(bytes);
+
+            // Convert byte array to hexadecimal string
+            string randomHex = BitConverter.ToString(bytes).Replace("-", "");
+
+            // Ensure the string has exactly 8 characters
+            if (randomHex.Length < 8)
+            {
+                randomHex = randomHex.PadLeft(8, '0');
+            }
+            else if (randomHex.Length > 8)
+            {
+                randomHex = randomHex.Substring(0, 8);
+            }
+
+            return randomHex.ToUpper();
         }
 
 
