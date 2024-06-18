@@ -67,7 +67,6 @@ namespace WorksheetGenerator.Utilities
 
         public static bool ElementTextStartsWith(OpenXmlElement element, string str)
         {
-            // Console.WriteLine(GetParagraphText(element));
             return GetParagraphText(element).StartsWith(str, StringComparison.CurrentCultureIgnoreCase);
         }
 
@@ -358,8 +357,6 @@ namespace WorksheetGenerator.Utilities
         public static List<Paragraph> GetProcessedReading(OpenXmlElementList allElements, Dictionary<string, string> imageRelIds, int sectionNo = -1)
         {
             List<Paragraph> paragraphs = GetParagraphsByIdentifier(allElements, "READING");
-            // foreach (Paragraph paragraph in paragraphs)
-            //     Console.WriteLine(paragraph.OuterXml);
             List<Paragraph> result = [];
 
             // Format & add title
@@ -388,10 +385,6 @@ namespace WorksheetGenerator.Utilities
                             if (image != null)
                                 result.Add(image);
                         }
-
-                        // // Edit <a:prstGeom> (Rounded corners)
-                        // XElement? geometryElement = element.Descendants(El.a + "prstGeom").FirstOrDefault();
-                        // geometryElement?.SetAttributeValue("prst", "roundRect");
                     }
                     else
                         result.Add(new Paragraph(
@@ -487,16 +480,14 @@ namespace WorksheetGenerator.Utilities
         //     return (mainActivity, answerKey);
         // }
 
-        // public static XElement AnswerKeyTitleElement()
-        // {
-        //     XElement titleElement = El.Paragraph("ANSWER KEY");
+        public static Paragraph AnswerKeyTitleElement()
+        {
+            Paragraph titlePara = new Paragraph(
+                El.ParagraphStyle("AnswerKeyTitle"),
+                new Run(new Text("ANSWER KEY"))
+            );
 
-        //     El.AddBoldToParagraph(titleElement);
-        //     El.CenterParagraph(titleElement);
-        //     El.SetParagraphSize(titleElement, 40);
-        //     El.SetParagraphSpacing(titleElement, 0, 200);
-
-        //     return titleElement;
-        // }
+            return titlePara;
+        }
     }
 }

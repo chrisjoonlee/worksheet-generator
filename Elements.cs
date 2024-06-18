@@ -220,7 +220,7 @@ namespace WorksheetGenerator.Elements
 
         public static UInt32Value docPropertiesId = 0;
 
-        public static Paragraph? Image(Paragraph origImage, string relationshipId, Int64Value desiredHeight, string? styleId = null)
+        public static Paragraph? Image(Paragraph origImage, string relationshipId, Int64Value desiredHeight, string? styleId = null, bool rounded = true)
         {
             docPropertiesId++;
 
@@ -274,8 +274,7 @@ namespace WorksheetGenerator.Elements
                                             )
                                             {
                                                 Embed = relationshipId,
-                                                CompressionState =
-                                                D.BlipCompressionValues.Print
+                                                CompressionState = D.BlipCompressionValues.Print
                                             },
                                             new D.Stretch(
                                                 new D.FillRectangle())),
@@ -286,7 +285,7 @@ namespace WorksheetGenerator.Elements
                                             new D.PresetGeometry(
                                                 new D.AdjustValueList()
                                             )
-                                            { Preset = D.ShapeTypeValues.Rectangle }))
+                                            { Preset = rounded ? D.ShapeTypeValues.RoundRectangle : D.ShapeTypeValues.Rectangle }))
                                 )
                                 { Uri = "http://schemas.openxmlformats.org/drawingml/2006/picture" })
                         )

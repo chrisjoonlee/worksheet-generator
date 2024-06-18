@@ -81,6 +81,22 @@ namespace WorksheetGenerator
                 )
             ),
             El.Style(
+                "AnswerKeyTitle",
+                "Answer Key Title",
+                null,
+                new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center }
+                ),
+                new StyleRunProperties(
+                    new Bold(),
+                    new BoldComplexScript(),
+                    new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1, ThemeShade = "15" },
+                    new RunFonts() { Ascii = "Aptos" },
+                    new FontSize() { Val = "40" },
+                    new FontSizeComplexScript() { Val = "40" }
+                )
+            ),
+            El.Style(
                 "AnswerKeySectionTitle",
                 "Answer Key Section Title",
                 "Text",
@@ -271,7 +287,7 @@ namespace WorksheetGenerator
                 }
 
                 // Answer key
-                // body.Add(HF.AnswerKeyTitleElement());
+                body.Append(HF.AnswerKeyTitleElement());
                 body.Append(vocabAnswerKey);
 
 
