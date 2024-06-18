@@ -1,48 +1,12 @@
-using System;
-using System.Xml.Linq;
 using WorksheetGenerator.Elements;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Wordprocessing;
-using DocumentFormat.OpenXml.ExtendedProperties;
 using D = DocumentFormat.OpenXml.Drawing;
 
 namespace WorksheetGenerator.Utilities
 {
     public static class HF
     {
-        // public static XElement? GetElementOnly(XElement? element)
-        // {
-        //     if (element != null)
-        //     {
-        //         // Create a new element with the same name and attributes
-        //         XElement newElement = new XElement(element.Name);
-        //         foreach (XAttribute attribute in element.Attributes())
-        //             newElement.Add(new XAttribute(attribute));
-        //         return newElement;
-        //     }
-        //     else
-        //         return null;
-        // }
-
-        // public static XElement? GetDocumentAndBodyOnly(XDocument doc)
-        // {
-        //     XElement? originalDocElement = doc.Element(El.w + "document");
-        //     XElement? docElement = GetElementOnly(doc.Element(El.w + "document"));
-        //     if (docElement != null && originalDocElement != null)
-        //     {
-        //         XElement? body = GetElementOnly(originalDocElement.Element(El.w + "body"));
-        //         if (body != null)
-        //         {
-        //             docElement.Add(body);
-        //             return docElement;
-        //         }
-        //         else
-        //             return null;
-        //     }
-        //     else
-        //         return null;
-        // }
-
         public static bool IsIdentifier(OpenXmlElement element)
         {
             string text = GetParagraphText(element);
@@ -104,13 +68,13 @@ namespace WorksheetGenerator.Utilities
             return null;
         }
 
-        // public static bool ContainsIdentifier(IEnumerable<XElement> paragraphs, string identifierName)
-        // {
-        //     foreach (XElement paragraph in paragraphs)
-        //         if (IsIdentifier(paragraph) && ((string)paragraph).StartsWith(identifierName))
-        //             return true;
-        //     return false;
-        // }
+        public static bool ContainsIdentifier(OpenXmlElementList elements, string identifierName)
+        {
+            foreach (OpenXmlElement element in elements)
+                if (IsIdentifier(element) && ElementTextStartsWith(element, identifierName))
+                    return true;
+            return false;
+        }
 
         public static bool HasText(OpenXmlElement element)
         {
@@ -141,9 +105,20 @@ namespace WorksheetGenerator.Utilities
                     }
                 }
                 else if (isBetweenIdentifiers)
-                    if (!ElementTextStartsWith(element, "chatgpt:") && (HasText(element) || IsImage(element)))
+                    if (!ElementTextStartsWith(element, "chatgpt:") && element is not SectionProperties)
                         result.Add((Paragraph)element);
             }
+
+            return result;
+        }
+
+        public static List<Paragraph> NoEmptyParagraphs(List<Paragraph> paragraphs)
+        {
+            List<Paragraph> result = [];
+
+            foreach (Paragraph paragraph in paragraphs)
+                if (HasText(paragraph))
+                    result.Add(paragraph);
 
             return result;
         }
@@ -156,21 +131,6 @@ namespace WorksheetGenerator.Utilities
 
             return (Int64Value)Math.Round((double)(dH / h * w));
         }
-
-        // public static void AddSectionTitleStyles(XElement paragraph)
-        // {
-        //     El.CenterParagraph(paragraph);
-        //     El.SetParagraphSize(paragraph, 36);
-        //     El.AddBoldToParagraph(paragraph);
-        //     El.SetParagraphColor(paragraph, "0F9ED5", "accent4");
-        // }
-
-        // public static void AddWorksheetTitleStyles(Paragraph paragraph)
-        // {
-        //     El.CenterParagraph(paragraph);
-        //     El.SetParagraphSize(paragraph, 48);
-        //     El.AddBoldToParagraph(paragraph);
-        // }
 
         public static Paragraph? GetSectionTitleElement(List<Paragraph> paragraphs)
         {
@@ -325,7 +285,7 @@ namespace WorksheetGenerator.Utilities
 
         public static (List<OpenXmlElement>, List<Paragraph>) GetProcessedVocab(OpenXmlElementList allElements, int sectionNo = -1)
         {
-            List<Paragraph> paragraphs = GetParagraphsByIdentifier(allElements, "VOCAB");
+            List<Paragraph> paragraphs = NoEmptyParagraphs(GetParagraphsByIdentifier(allElements, "VOCAB"));
             List<OpenXmlElement> mainActivity = [];
             List<Paragraph> answerKey = [];
 
@@ -356,7 +316,7 @@ namespace WorksheetGenerator.Utilities
 
         public static List<Paragraph> GetProcessedReading(OpenXmlElementList allElements, Dictionary<string, string> imageRelIds, int sectionNo = -1)
         {
-            List<Paragraph> paragraphs = GetParagraphsByIdentifier(allElements, "READING");
+            List<Paragraph> paragraphs = NoEmptyParagraphs(GetParagraphsByIdentifier(allElements, "READING"));
             List<Paragraph> result = [];
 
             // Format & add title
@@ -401,84 +361,179 @@ namespace WorksheetGenerator.Utilities
             return result;
         }
 
-        // public static (List<XElement>, List<XElement>) TrueOrFalseQs(List<XElement> paragraphs)
-        // {
-        //     List<XElement> mainActivity = [];
+        public static (List<OpenXmlElement>, List<Paragraph>) TrueOrFalseQs(List<Paragraph> paragraphs)
+        {
+            List<OpenXmlElement> mainActivity = [];
 
-        //     // True-or-False header
-        //     XElement header = El.Paragraph("Circle \"T\" for True or \"F\" for False for the following statements:");
-        //     El.AddBoldToParagraph(header);
-        //     mainActivity.Add(header);
+            // True-or-False header
+            Paragraph header = new(
+                El.ParagraphStyle("SubsectionTitle"),
+                new Run(new Text("Circle \"T\" for True or \"F\" for False for the following statements:")
+            ));
+            mainActivity.Add(header);
 
-        //     Dictionary<string, string> TFStatements = [];
-        //     for (int i = 0; i < paragraphs.Count; i += 2)
-        //     {
-        //         if (StartsWith(paragraphs[i + 1], "t"))
-        //             TFStatements.Add((string)paragraphs[i], "T");
-        //         else
-        //             TFStatements.Add((string)paragraphs[i], "F");
-        //     }
+            // Organize statements and answers
+            Dictionary<string, string> TFStatements = [];
+            for (int i = 0; i < paragraphs.Count; i += 2)
+            {
+                if (ElementTextStartsWith(paragraphs[i + 1], "t"))
+                    TFStatements.Add(GetParagraphText(paragraphs[i]), "T");
+                else
+                    TFStatements.Add(GetParagraphText(paragraphs[i]), "F");
+            }
 
-        //     // Create table
-        //     int[] tableColWidths = [9639, 851, 662];
-        //     XElement mainTable = El.Table(
-        //         tableColWidths,
-        //         El.TableBorderAttributes("none", 0, 0, "auto")
-        //     );
+            // Turn statements into a list
+            List<Paragraph> TFStatementList = El.NumberList(TFStatements.Keys, "ListActivity");
 
-        //     // Turn statements into a list
-        //     List<XElement> TFStatementList = El.NumberList(TFStatements.Keys);
+            // Add statements to table
+            Table mainTable = new(El.TableStyle("NoBorderTable"));
+            foreach (Paragraph item in TFStatementList)
+            {
+                mainTable.AppendChild(
+                    new TableRow(
+                        new TableCell(
+                            new TableCellProperties(
+                                El.TableCellWidth(9639)
+                            ),
+                            item
+                        ),
+                        new TableCell(
+                            new TableCellProperties(
+                                El.TableCellWidth(851)
+                            ),
+                            new Paragraph(
+                                El.ParagraphStyle("Text"),
+                                new Run(new Text("T"))
+                            )
+                        ),
+                        new TableCell(
+                            new TableCellProperties(
+                                El.TableCellWidth(662)
+                            ),
+                            new Paragraph(
+                                El.ParagraphStyle("Text"),
+                                new Run(new Text("F"))
+                            )
+                        )
+                    )
+                );
+            }
 
-        //     // Add statements to table
-        //     foreach (XElement item in TFStatementList)
-        //     {
-        //         mainTable.Add(El.TableRow(tableColWidths, [
-        //             [item],
-        //             [El.Paragraph("T")],
-        //             [El.Paragraph("F")]
-        //         ]));
-        //     }
+            // Add table
+            mainActivity.Add(mainTable);
 
-        //     // Add table
-        //     mainActivity.Add(mainTable);
+            // Answer list
+            List<Paragraph> answerList = El.NumberList(TFStatements.Values);
 
-        //     // Answer list
-        //     List<XElement> answerList = El.NumberList(TFStatements.Values);
+            return (mainActivity, answerList);
+        }
 
-        //     return (mainActivity, answerList);
-        // }
+        public static List<List<Paragraph>> GetParagraphChunks(List<Paragraph> paragraphs)
+        {
+            List<List<Paragraph>> chunkedList = new();
+            List<Paragraph> currentChunk = new();
 
-        // public static (List<XElement>, List<XElement>) GetProcessedCompQs(IEnumerable<XElement> allParagraphs, int sectionNo = -1)
-        // {
-        //     List<XElement> mainActivity = [];
-        //     List<XElement> answerKey = [];
+            foreach (Paragraph paragraph in paragraphs)
+            {
+                if (HasText(paragraph))
+                    currentChunk.Add(paragraph);
+                else
+                {
+                    if (currentChunk.Count > 0)
+                    {
+                        chunkedList.Add(currentChunk);
+                        currentChunk = new();
+                    }
+                }
+            }
 
-        //     if (ContainsIdentifier(allParagraphs, "QUESTIONS"))
-        //     {
-        //         // Format & add title
-        //         mainActivity.Add(GetFormattedSectionTitleElement("Vocabulary", sectionNo));
+            if (currentChunk.Count > 0)
+                chunkedList.Add(currentChunk);
 
-        //         // True-or-False questions
-        //         List<XElement> TFParagraphs = GetParagraphsByIdentifier(allParagraphs, "TF");
-        //         (List<XElement> TFQuestions, List<XElement> TFAnswerKey) = TrueOrFalseQs(TFParagraphs);
-        //         foreach (XElement paragraph in TFQuestions)
-        //             mainActivity.Add(paragraph);
+            return chunkedList;
+        }
 
-        //         // Multiple choice questions
-        //         List<XElement> MCParagraphs = GetParagraphsByIdentifier(allParagraphs, "MC");
+        public static bool HasBold(Paragraph paragraph)
+        {
+            return paragraph.Descendants<Run>().Any(run => IsBoldRun(run));
+        }
 
-        //         // Page break
-        //         mainActivity.Add(El.PageBreak());
+        public static bool IsBoldRun(Run run)
+        {
+            return run.RunProperties != null && run.RunProperties.Bold != null;
+        }
 
-        //         // Answer key
-        //         answerKey.Add(GetFormattedAnswerKeySectionTitleElement("Vocabulary", sectionNo));
-        //         foreach (XElement paragraph in TFAnswerKey)
-        //             answerKey.Add(paragraph);
-        //         answerKey.Add(El.Paragraph());
-        //     }
+        public static (List<Paragraph>, List<Paragraph>) MultipleChoiceQs(List<Paragraph> paragraphs)
+        {
+            List<Paragraph> mainActivity = [];
+            List<Paragraph> answerList = [];
 
-        //     return (mainActivity, answerKey);
-        // }
+            // Multiple choice header
+            Paragraph header = new(
+                El.ParagraphStyle("SubsectionTitle"),
+                new Run(new Text("Circle the correct answer to the following questions:")
+            ));
+            mainActivity.Add(header);
+
+            // Organize multiple choice questions
+            List<MultipleChoice> multipleChoiceQs = [];
+            List<List<Paragraph>> paragraphChunks = GetParagraphChunks(paragraphs);
+            foreach (List<Paragraph> paragraphChunk in paragraphChunks)
+            {
+                // Question
+                string question = GetParagraphText(paragraphChunk[0]);
+                string[] choices = new string[paragraphChunk.Count - 1];
+                string? answer = null;
+
+                for (int i = 1; i < paragraphChunk.Count; i++)
+                {
+                    choices[i - 1] = GetParagraphText(paragraphChunk[i]);
+                    if (HasBold(paragraphChunk[i]))
+                        answer = GetParagraphText(paragraphChunk[i]);
+                }
+
+                if (answer != null)
+                    multipleChoiceQs.Add(new MultipleChoice(question, choices, answer));
+            }
+
+            foreach (MultipleChoice mc in multipleChoiceQs)
+                Console.WriteLine(mc);
+
+            return (mainActivity, answerList);
+        }
+
+        public static (List<OpenXmlElement>, List<Paragraph>) GetProcessedCompQs(OpenXmlElementList allElements, int sectionNo = -1)
+        {
+            List<OpenXmlElement> mainActivity = [];
+            List<Paragraph> answerKey = [];
+
+            if (ContainsIdentifier(allElements, "QUESTIONS"))
+            {
+                // Format & add title
+                mainActivity.Add(GetFormattedSectionTitleElement("Vocabulary", sectionNo));
+
+                // True-or-False questions
+                List<Paragraph> TFParagraphs = NoEmptyParagraphs(GetParagraphsByIdentifier(allElements, "TF"));
+                (List<OpenXmlElement> TFQuestions, List<Paragraph> TFAnswerKey) = TrueOrFalseQs(TFParagraphs);
+                foreach (OpenXmlElement paragraph in TFQuestions)
+                    mainActivity.Add(paragraph);
+
+                // Multiple choice questions
+                List<Paragraph> MCParagraphs = GetParagraphsByIdentifier(allElements, "MC");
+                (List<Paragraph> MCQuestions, List<Paragraph> MCAnswerKey) = MultipleChoiceQs(MCParagraphs);
+
+                // Page break
+                mainActivity.Add(El.PageBreak());
+
+                // Answer key
+                answerKey.Add(GetFormattedAnswerKeySectionTitleElement("Vocabulary", sectionNo));
+                foreach (Paragraph paragraph in TFAnswerKey)
+                    answerKey.Add(paragraph);
+                answerKey.Add(new Paragraph());
+            }
+
+            return (mainActivity, answerKey);
+        }
 
         public static Paragraph AnswerKeyTitleElement()
         {

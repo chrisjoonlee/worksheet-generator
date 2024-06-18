@@ -69,7 +69,11 @@ namespace WorksheetGenerator
                 "Section Title",
                 null,
                 new ParagraphProperties(
-                    new Justification() { Val = JustificationValues.Center }
+                    new Justification() { Val = JustificationValues.Center },
+                    new SpacingBetweenLines()
+                    {
+                        After = "400"
+                    }
                 ),
                 new StyleRunProperties(
                     new Bold(),
@@ -78,6 +82,21 @@ namespace WorksheetGenerator
                     new RunFonts() { Ascii = "Aptos" },
                     new FontSize() { Val = "36" },
                     new FontSizeComplexScript() { Val = "36" }
+                )
+            ),
+            El.Style(
+                "SubsectionTitle",
+                "Subsection Title",
+                "Text",
+                new ParagraphProperties(
+                    new SpacingBetweenLines()
+                    {
+                        After = "280"
+                    }
+                ),
+                new StyleRunProperties(
+                    new Bold(),
+                    new BoldComplexScript()
                 )
             ),
             El.Style(
@@ -115,7 +134,6 @@ namespace WorksheetGenerator
                     {
                         After = "280"
                     }
-
                 )
             ),
             El.Style(
@@ -286,17 +304,21 @@ namespace WorksheetGenerator
                     body.Append(readingParagraphs);
                 }
 
+                // Comprehension questions section
+                (List<OpenXmlElement> compQParagaphs, List<Paragraph> compQAnswerKey) = HF.GetProcessedCompQs(origElementList, sectionNo);
+                if (compQParagaphs.Count > 0)
+                {
+                    sectionNo++;
+                    body.Append(compQParagaphs);
+                }
+
                 // Answer key
                 body.Append(HF.AnswerKeyTitleElement());
                 body.Append(vocabAnswerKey);
+                body.Append(compQAnswerKey);
 
-
-                // origPackage.Dispose();
+                origPackage.Dispose();
             }
-            // Comprehension questions section
-            // (List<XElement> compQParagaphs, List<XElement> compQAnswerKey) = HF.GetProcessedCompQs(paragraphs, sectionNo);
-
-            // newDoc.Save(filePath);
         }
     }
 }
