@@ -117,7 +117,7 @@ namespace WorksheetGenerator.Utilities
             List<Paragraph> result = [];
 
             foreach (Paragraph paragraph in paragraphs)
-                if (HasText(paragraph))
+                if (HasText(paragraph) || IsImage(paragraph))
                     result.Add(paragraph);
 
             return result;
@@ -463,6 +463,23 @@ namespace WorksheetGenerator.Utilities
             return run.RunProperties != null && run.RunProperties.Bold != null;
         }
 
+        public static T[] ShuffledArray<T>(T[] array)
+        {
+            T[] shuffledArray = new T[array.Length];
+            Array.Copy(array, shuffledArray, array.Length);
+
+            Random random = new Random();
+
+            // Perform Fisher-Yates shuffle
+            for (int i = shuffledArray.Length - 1; i > 0; i--)
+            {
+                int j = random.Next(0, i + 1);
+                (shuffledArray[j], shuffledArray[i]) = (shuffledArray[i], shuffledArray[j]);
+            }
+
+            return shuffledArray;
+        }
+
         public static (List<Paragraph>, List<Paragraph>) MultipleChoiceQs(List<Paragraph> paragraphs)
         {
             List<Paragraph> mainActivity = [];
@@ -471,7 +488,7 @@ namespace WorksheetGenerator.Utilities
             // Multiple choice header
             Paragraph header = new(
                 El.ParagraphStyle("SubsectionTitle"),
-                new Run(new Text("Circle the correct answer to the following questions:")
+                new Run(new Text("Choose the correct answer for each of the following questions:")
             ));
             mainActivity.Add(header);
 
@@ -496,8 +513,23 @@ namespace WorksheetGenerator.Utilities
                     multipleChoiceQs.Add(new MultipleChoice(question, choices, answer));
             }
 
+            int q_no = 1;
             foreach (MultipleChoice mc in multipleChoiceQs)
-                Console.WriteLine(mc);
+            {
+                // Shuffle choices
+                if (!mc.Choices[^1].Equals("all of the above", StringComparison.CurrentCultureIgnoreCase))
+                    mc.Choices = ShuffledArray(mc.Choices);
+
+                // Format text
+                mainActivity.Add(new Paragraph(
+                    El.ParagraphStyle("Text"),
+                    new Run(new Text($"{q_no}. {mc.Question}"))
+                ));
+                mainActivity.Add(new Paragraph(El.ParagraphStyle("Text")));
+
+                // Keep track of question number
+                q_no++;
+            }
 
             return (mainActivity, answerList);
         }
@@ -510,17 +542,19 @@ namespace WorksheetGenerator.Utilities
             if (ContainsIdentifier(allElements, "QUESTIONS"))
             {
                 // Format & add title
-                mainActivity.Add(GetFormattedSectionTitleElement("Vocabulary", sectionNo));
+                mainActivity.Add(GetFormattedSectionTitleElement("Comprehension Questions", sectionNo));
 
                 // True-or-False questions
                 List<Paragraph> TFParagraphs = NoEmptyParagraphs(GetParagraphsByIdentifier(allElements, "TF"));
                 (List<OpenXmlElement> TFQuestions, List<Paragraph> TFAnswerKey) = TrueOrFalseQs(TFParagraphs);
-                foreach (OpenXmlElement paragraph in TFQuestions)
-                    mainActivity.Add(paragraph);
+                foreach (OpenXmlElement element in TFQuestions)
+                    mainActivity.Add(element);
 
                 // Multiple choice questions
                 List<Paragraph> MCParagraphs = GetParagraphsByIdentifier(allElements, "MC");
                 (List<Paragraph> MCQuestions, List<Paragraph> MCAnswerKey) = MultipleChoiceQs(MCParagraphs);
+                foreach (OpenXmlElement paragraph in MCQuestions)
+                    mainActivity.Add(paragraph);
 
                 // Page break
                 mainActivity.Add(El.PageBreak());
@@ -530,6 +564,8 @@ namespace WorksheetGenerator.Utilities
                 foreach (Paragraph paragraph in TFAnswerKey)
                     answerKey.Add(paragraph);
                 answerKey.Add(new Paragraph());
+                foreach (Paragraph paragraph in MCAnswerKey)
+                    answerKey.Add(paragraph);
             }
 
             return (mainActivity, answerKey);
