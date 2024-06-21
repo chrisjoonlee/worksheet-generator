@@ -503,6 +503,7 @@ namespace WorksheetGenerator.Utilities
                 string[] choices = new string[paragraphChunk.Count - 1];
                 string? answer = null;
 
+                // Choices
                 for (int i = 1; i < paragraphChunk.Count; i++)
                 {
                     choices[i - 1] = GetParagraphText(paragraphChunk[i]);
@@ -521,11 +522,16 @@ namespace WorksheetGenerator.Utilities
                 if (!mc.Choices[^1].Equals("all of the above", StringComparison.CurrentCultureIgnoreCase))
                     mc.Choices = ShuffledArray(mc.Choices);
 
-                // Format text
-                mainActivity.Add(new Paragraph(
+                // Format question
+                Paragraph question = new(
                     El.ParagraphStyle("Text"),
                     new Run(new Text($"{q_no}.  {mc.Question}"))
-                ));
+                );
+                El.KeepNext(question);
+                mainActivity.Add(question);
+
+
+                // Format choices
                 List<Paragraph> choiceList = El.LetterList(mainPart, mc.Choices, "Text", 800, 500);
                 foreach (Paragraph choice in choiceList)
                     mainActivity.Add(choice);

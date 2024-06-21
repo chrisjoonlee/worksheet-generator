@@ -374,5 +374,17 @@ namespace WorksheetGenerator.Elements
         {
             return List("upperLetter", mainPart, texts, styleId, left, hanging);
         }
+
+        public static void KeepNext(Paragraph paragraph)
+        {
+            ParagraphProperties? pPr = paragraph.Elements<ParagraphProperties>().FirstOrDefault();
+            if (pPr == null)
+            {
+                pPr = new ParagraphProperties();
+                paragraph.PrependChild(pPr);
+            }
+
+            pPr.Append(new KeepNext());
+        }
     }
 }
