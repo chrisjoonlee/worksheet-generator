@@ -240,23 +240,36 @@ namespace WorksheetGenerator
 
                 // Numbering definitions
                 NumberingDefinitionsPart numberingPart = mainPart.AddNewPart<NumberingDefinitionsPart>("NumberingDefinitionsPart");
-                numberingPart.Numbering = new(
-                    new AbstractNum(
-                        new Level(
-                            new NumberingFormat() { Val = NumberFormatValues.Decimal },
-                            new LevelText() { Val = "%1." },
-                            new StartNumberingValue() { Val = 1 },
-                            new ParagraphProperties(
-                                new Indentation() { Left = "450", Hanging = "450" }
-                            )
-                        )
-                    )
-                    { AbstractNumberId = 1 },
-                    new NumberingInstance(
-                        new AbstractNumId() { Val = 1 }
-                    )
-                    { NumberID = 1 }
-                );
+                numberingPart.Numbering = new();
+
+                //     // Numbered lists
+                //     new AbstractNum(
+                //         new Level(
+                //             new NumberingFormat() { Val = NumberFormatValues.Decimal },
+                //             new LevelText() { Val = "%1." },
+                //             new StartNumberingValue() { Val = 1 },
+                //             new ParagraphProperties(
+                //                 new Indentation() { Left = "450", Hanging = "450" }
+                //             )
+                //         )
+                //         { LevelIndex = 0 }
+                //     )
+                //     { AbstractNumberId = 1, },
+
+                //     // Lettered lists
+                //     new AbstractNum(
+                //         new Level(
+                //             new NumberingFormat() { Val = NumberFormatValues.UpperLetter },
+                //             new LevelText() { Val = "%1." },
+                //             new StartNumberingValue() { Val = 1 },
+                //             new ParagraphProperties(
+                //                 new Indentation() { Left = "450", Hanging = "450" }
+                //             )
+                //         )
+                //         { LevelIndex = 0 }
+                //     )
+                //     { AbstractNumberId = 2 }
+                // );
 
                 // Styles
                 StyleDefinitionsPart stylePart = mainPart.AddNewPart<StyleDefinitionsPart>();
@@ -289,7 +302,7 @@ namespace WorksheetGenerator
                 int sectionNo = 1;
 
                 // Vocab section
-                (List<OpenXmlElement> vocabParagraphs, List<Paragraph> vocabAnswerKey) = HF.GetProcessedVocab(origElementList, sectionNo);
+                (List<OpenXmlElement> vocabParagraphs, List<Paragraph> vocabAnswerKey) = HF.GetProcessedVocab(mainPart, origElementList, sectionNo);
                 if (vocabParagraphs.Count > 0)
                 {
                     sectionNo++;
@@ -305,7 +318,7 @@ namespace WorksheetGenerator
                 }
 
                 // Comprehension questions section
-                (List<OpenXmlElement> compQParagaphs, List<Paragraph> compQAnswerKey) = HF.GetProcessedCompQs(origElementList, sectionNo);
+                (List<OpenXmlElement> compQParagaphs, List<Paragraph> compQAnswerKey) = HF.GetProcessedCompQs(mainPart, origElementList, sectionNo);
                 if (compQParagaphs.Count > 0)
                 {
                     sectionNo++;

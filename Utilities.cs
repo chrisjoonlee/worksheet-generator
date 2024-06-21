@@ -2,6 +2,7 @@ using WorksheetGenerator.Elements;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Wordprocessing;
 using D = DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Packaging;
 
 namespace WorksheetGenerator.Utilities
 {
@@ -238,7 +239,7 @@ namespace WorksheetGenerator.Utilities
             return keyValuePairs.ToDictionary(pair => pair.Key, pair => pair.Value);
         }
 
-        public static (Table, List<Paragraph>) VocabBlanksAndDefinitions(Dictionary<string, string> vocab)
+        public static (Table, List<Paragraph>) VocabBlanksAndDefinitions(MainDocumentPart mainPart, Dictionary<string, string> vocab)
         {
             int[] tableColWidths = [3261, 7938];
 
@@ -250,7 +251,7 @@ namespace WorksheetGenerator.Utilities
 
             // Blanks
             string[] blank = ["__________________"];
-            List<Paragraph> blankList = El.NumberList(blank);
+            List<Paragraph> blankList = El.NumberList(mainPart, blank);
 
             // Add table rows
             foreach (string word in shuffledVocab.Keys)
@@ -278,12 +279,12 @@ namespace WorksheetGenerator.Utilities
             }
 
             // Create answer list
-            List<Paragraph> answerList = El.NumberList(shuffledVocab.Keys);
+            List<Paragraph> answerList = El.NumberList(mainPart, shuffledVocab.Keys);
 
             return (mainTable, answerList);
         }
 
-        public static (List<OpenXmlElement>, List<Paragraph>) GetProcessedVocab(OpenXmlElementList allElements, int sectionNo = -1)
+        public static (List<OpenXmlElement>, List<Paragraph>) GetProcessedVocab(MainDocumentPart mainPart, OpenXmlElementList allElements, int sectionNo = -1)
         {
             List<Paragraph> paragraphs = NoEmptyParagraphs(GetParagraphsByIdentifier(allElements, "VOCAB"));
             List<OpenXmlElement> mainActivity = [];
@@ -300,7 +301,7 @@ namespace WorksheetGenerator.Utilities
             mainActivity.Add(new Paragraph());
 
             // Blanks and definitions
-            (Table blanksAndDefinitions, List<Paragraph> answerList) = VocabBlanksAndDefinitions(vocab);
+            (Table blanksAndDefinitions, List<Paragraph> answerList) = VocabBlanksAndDefinitions(mainPart, vocab);
             mainActivity.Add(blanksAndDefinitions);
 
             // Page break
@@ -361,7 +362,7 @@ namespace WorksheetGenerator.Utilities
             return result;
         }
 
-        public static (List<OpenXmlElement>, List<Paragraph>) TrueOrFalseQs(List<Paragraph> paragraphs)
+        public static (List<OpenXmlElement>, List<Paragraph>) TrueOrFalseQs(MainDocumentPart mainPart, List<Paragraph> paragraphs)
         {
             List<OpenXmlElement> mainActivity = [];
 
@@ -383,7 +384,7 @@ namespace WorksheetGenerator.Utilities
             }
 
             // Turn statements into a list
-            List<Paragraph> TFStatementList = El.NumberList(TFStatements.Keys, "ListActivity");
+            List<Paragraph> TFStatementList = El.NumberList(mainPart, TFStatements.Keys, "ListActivity");
 
             // Add statements to table
             Table mainTable = new(El.TableStyle("NoBorderTable"));
@@ -423,7 +424,7 @@ namespace WorksheetGenerator.Utilities
             mainActivity.Add(mainTable);
 
             // Answer list
-            List<Paragraph> answerList = El.NumberList(TFStatements.Values);
+            List<Paragraph> answerList = El.NumberList(mainPart, TFStatements.Values);
 
             return (mainActivity, answerList);
         }
@@ -534,7 +535,7 @@ namespace WorksheetGenerator.Utilities
             return (mainActivity, answerList);
         }
 
-        public static (List<OpenXmlElement>, List<Paragraph>) GetProcessedCompQs(OpenXmlElementList allElements, int sectionNo = -1)
+        public static (List<OpenXmlElement>, List<Paragraph>) GetProcessedCompQs(MainDocumentPart mainPart, OpenXmlElementList allElements, int sectionNo = -1)
         {
             List<OpenXmlElement> mainActivity = [];
             List<Paragraph> answerKey = [];
@@ -546,7 +547,7 @@ namespace WorksheetGenerator.Utilities
 
                 // True-or-False questions
                 List<Paragraph> TFParagraphs = NoEmptyParagraphs(GetParagraphsByIdentifier(allElements, "TF"));
-                (List<OpenXmlElement> TFQuestions, List<Paragraph> TFAnswerKey) = TrueOrFalseQs(TFParagraphs);
+                (List<OpenXmlElement> TFQuestions, List<Paragraph> TFAnswerKey) = TrueOrFalseQs(mainPart, TFParagraphs);
                 foreach (OpenXmlElement element in TFQuestions)
                     mainActivity.Add(element);
 

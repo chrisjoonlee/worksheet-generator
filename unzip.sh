@@ -16,7 +16,7 @@ if [ ! -f "$FILENAME" ]; then
 fi
 
 # Get the base directory name without extension
-BASE_DIR="${FILENAME%.*}_new"
+BASE_DIR="${FILENAME%.*}"
 
 # Function to find the next available directory name
 get_next_dir_name() {

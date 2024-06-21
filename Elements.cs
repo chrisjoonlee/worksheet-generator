@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using D = DocumentFormat.OpenXml.Drawing;
 using DW = DocumentFormat.OpenXml.Drawing.Wordprocessing;
 using DP = DocumentFormat.OpenXml.Drawing.Pictures;
+using DocumentFormat.OpenXml.Packaging;
 
 namespace WorksheetGenerator.Elements
 {
@@ -276,28 +277,81 @@ namespace WorksheetGenerator.Elements
             return randomHex.ToUpper();
         }
 
-        public static Paragraph NumberListItem(int numId, string text, string styleId = "Text")
+        // public static Paragraph NumberListItem(int numId, string text, string styleId = "Text")
+        // {
+        //     Paragraph item = new Paragraph(
+        //         El.ParagraphStyle(styleId),
+        //         new Run(new Text(text))
+        //     );
+
+        //     ParagraphProperties? pPr = item.Elements<ParagraphProperties>().FirstOrDefault();
+        //     pPr?.AppendChild(new NumberingProperties(
+        //             new NumberingLevelReference() { Val = 0 },
+        //             new NumberingId() { Val = numId }
+        //         ));
+
+        //     return item;
+        // }
+
+        public static Paragraph ListItem(int numId, string text, string styleId = "Text")
         {
-            return new Paragraph(
+            Paragraph item = new Paragraph(
                 El.ParagraphStyle(styleId),
-                new NumberingProperties(
-                    new NumberingLevelReference() { Val = 0 },
-                    new NumberingId() { Val = numId }
-                ),
                 new Run(new Text(text))
             );
+
+            ParagraphProperties? pPr = item.Elements<ParagraphProperties>().FirstOrDefault();
+            pPr?.AppendChild(new NumberingProperties(
+                    new NumberingLevelReference() { Val = 0 },
+                    new NumberingId() { Val = numId }
+                ));
+
+            return item;
         }
 
-        private static int numberListCount = 1;
+        private static int currentListNumId = 1;
 
-        public static List<Paragraph> NumberList(IEnumerable<string> texts, string styleId = "Text")
+        public static List<Paragraph> NumberList(MainDocumentPart mainPart, IEnumerable<string> texts, string styleId = "Text")
         {
+            // Get numbering part
+            NumberingDefinitionsPart? numberingPart = mainPart.NumberingDefinitionsPart;
+            if (numberingPart == null) throw new InvalidOperationException("NumberingDefinitionsPart is missing.");
+            Numbering numbering = numberingPart.Numbering;
+
+            // Create a new abstract numbering definition
+            AbstractNum newAbstractNum = new AbstractNum(
+                new Level(
+                    new NumberingFormat() { Val = NumberFormatValues.Decimal },
+                    new LevelText() { Val = "%1." },
+                    new StartNumberingValue() { Val = 1 },
+                    new ParagraphProperties(
+                        new Indentation() { Left = "500", Hanging = "500" }
+                    )
+                )
+                { LevelIndex = 0 }
+            )
+            { AbstractNumberId = currentListNumId };
+
+            AbstractNum? lastAbstractNum = numbering.Elements<AbstractNum>().LastOrDefault();
+            if (lastAbstractNum != null)
+                lastAbstractNum.InsertAfterSelf(newAbstractNum);
+            else
+                numbering.AppendChild(newAbstractNum);
+
+            // Create a new numbering instance
+            numbering.AppendChild(new NumberingInstance(
+                new AbstractNumId() { Val = currentListNumId }
+            )
+            { NumberID = currentListNumId }
+            );
+
+            // Create list
             List<Paragraph> result = [];
-
             foreach (string text in texts)
-                result.Add(NumberListItem(numberListCount, text, styleId));
+                result.Add(ListItem(currentListNumId, text, styleId));
 
-            numberListCount++;
+            currentListNumId++;
+
             return result;
         }
     }
