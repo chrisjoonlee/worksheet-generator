@@ -484,7 +484,6 @@ namespace WorksheetGenerator.Utilities
         public static (List<Paragraph>, List<Paragraph>) MultipleChoiceQs(MainDocumentPart mainPart, List<Paragraph> paragraphs)
         {
             List<Paragraph> mainActivity = [];
-            List<Paragraph> answerList = [];
 
             // Multiple choice header
             Paragraph header = new(
@@ -516,6 +515,8 @@ namespace WorksheetGenerator.Utilities
             }
 
             int q_no = 1;
+            List<string> answers = [];
+
             foreach (MultipleChoice mc in multipleChoiceQs)
             {
                 // Shuffle choices
@@ -530,18 +531,43 @@ namespace WorksheetGenerator.Utilities
                 El.KeepNext(question);
                 mainActivity.Add(question);
 
-
                 // Format choices
                 List<Paragraph> choiceList = El.LetterList(mainPart, mc.Choices, "Text", 800, 500);
                 foreach (Paragraph choice in choiceList)
                     mainActivity.Add(choice);
                 mainActivity.Add(new Paragraph(El.ParagraphStyle("Text")));
 
+                // Get letter for right answer
+                int correctIndex = -1;
+                for (int i = 0; i < mc.Choices.Length; i++)
+                    if (mc.Choices[i] == mc.Answer)
+                        correctIndex = i;
+                if (correctIndex < 0) throw new InvalidOperationException("Couldn't find a correct answer for a multiple choice question.");
+                answers.Add(IndexToLetter(correctIndex));
+
                 // Keep track of question number
                 q_no++;
             }
 
+            // Ansewr list
+            List<Paragraph> answerList = El.NumberList(mainPart, answers);
+
             return (mainActivity, answerList);
+        }
+
+        public static string IndexToLetter(int index)
+        {
+            if (index < 0)
+                throw new ArgumentOutOfRangeException("number", "Input must be a non-negative integer.");
+
+            string result = string.Empty;
+            while (index >= 0)
+            {
+                result = (char)('A' + (index % 26)) + result;
+                index = index / 26 - 1;
+            }
+
+            return result;
         }
 
         public static (List<OpenXmlElement>, List<Paragraph>) GetProcessedCompQs(MainDocumentPart mainPart, OpenXmlElementList allElements, int sectionNo = -1)
@@ -572,7 +598,7 @@ namespace WorksheetGenerator.Utilities
                 mainActivity.Add(El.PageBreak());
 
                 // Answer key
-                answerKey.Add(GetFormattedAnswerKeySectionTitleElement("Vocabulary", sectionNo));
+                answerKey.Add(GetFormattedAnswerKeySectionTitleElement("Comprehension Questions", sectionNo));
                 foreach (Paragraph paragraph in TFAnswerKey)
                     answerKey.Add(paragraph);
                 answerKey.Add(new Paragraph());

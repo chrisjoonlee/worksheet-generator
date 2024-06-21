@@ -307,7 +307,9 @@ namespace WorksheetGenerator
                 // Answer key
                 body.Append(HF.AnswerKeyTitleElement());
                 body.Append(vocabAnswerKey);
+                body.Append(new Paragraph());
                 body.Append(compQAnswerKey);
+                body.Append(new Paragraph());
 
                 origPackage.Dispose();
             }
