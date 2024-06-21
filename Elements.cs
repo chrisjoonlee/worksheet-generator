@@ -5,6 +5,7 @@ using D = DocumentFormat.OpenXml.Drawing;
 using DW = DocumentFormat.OpenXml.Drawing.Wordprocessing;
 using DP = DocumentFormat.OpenXml.Drawing.Pictures;
 using DocumentFormat.OpenXml.Packaging;
+// using DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace WorksheetGenerator.Elements
 {
@@ -311,21 +312,30 @@ namespace WorksheetGenerator.Elements
 
         private static int currentListNumId = 1;
 
-        public static List<Paragraph> NumberList(MainDocumentPart mainPart, IEnumerable<string> texts, string styleId = "Text")
+        public static List<Paragraph> List(string numberFormatName, MainDocumentPart mainPart, IEnumerable<string> texts, string styleId = "Text", int left = 500, int hanging = 500)
         {
             // Get numbering part
             NumberingDefinitionsPart? numberingPart = mainPart.NumberingDefinitionsPart;
             if (numberingPart == null) throw new InvalidOperationException("NumberingDefinitionsPart is missing.");
             Numbering numbering = numberingPart.Numbering;
 
+            // Number format
+            EnumValue<NumberFormatValues> numberFormat;
+            if (numberFormatName == "decimal")
+                numberFormat = NumberFormatValues.Decimal;
+            else if (numberFormatName == "upperLetter")
+                numberFormat = NumberFormatValues.UpperLetter;
+            else
+                numberFormat = NumberFormatValues.Bullet;
+
             // Create a new abstract numbering definition
-            AbstractNum newAbstractNum = new AbstractNum(
+            AbstractNum newAbstractNum = new(
                 new Level(
-                    new NumberingFormat() { Val = NumberFormatValues.Decimal },
+                    new NumberingFormat() { Val = numberFormat },
                     new LevelText() { Val = "%1." },
                     new StartNumberingValue() { Val = 1 },
                     new ParagraphProperties(
-                        new Indentation() { Left = "500", Hanging = "500" }
+                        new Indentation() { Left = $"{left}", Hanging = $"{hanging}" }
                     )
                 )
                 { LevelIndex = 0 }
@@ -353,6 +363,16 @@ namespace WorksheetGenerator.Elements
             currentListNumId++;
 
             return result;
+        }
+
+        public static List<Paragraph> NumberList(MainDocumentPart mainPart, IEnumerable<string> texts, string styleId = "Text", int left = 500, int hanging = 500)
+        {
+            return List("decimal", mainPart, texts, styleId, left, hanging);
+        }
+
+        public static List<Paragraph> LetterList(MainDocumentPart mainPart, IEnumerable<string> texts, string styleId = "Text", int left = 500, int hanging = 500)
+        {
+            return List("upperLetter", mainPart, texts, styleId, left, hanging);
         }
     }
 }

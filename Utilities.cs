@@ -481,7 +481,7 @@ namespace WorksheetGenerator.Utilities
             return shuffledArray;
         }
 
-        public static (List<Paragraph>, List<Paragraph>) MultipleChoiceQs(List<Paragraph> paragraphs)
+        public static (List<Paragraph>, List<Paragraph>) MultipleChoiceQs(MainDocumentPart mainPart, List<Paragraph> paragraphs)
         {
             List<Paragraph> mainActivity = [];
             List<Paragraph> answerList = [];
@@ -524,8 +524,11 @@ namespace WorksheetGenerator.Utilities
                 // Format text
                 mainActivity.Add(new Paragraph(
                     El.ParagraphStyle("Text"),
-                    new Run(new Text($"{q_no}. {mc.Question}"))
+                    new Run(new Text($"{q_no}.  {mc.Question}"))
                 ));
+                List<Paragraph> choiceList = El.LetterList(mainPart, mc.Choices, "Text", 800, 500);
+                foreach (Paragraph choice in choiceList)
+                    mainActivity.Add(choice);
                 mainActivity.Add(new Paragraph(El.ParagraphStyle("Text")));
 
                 // Keep track of question number
@@ -551,9 +554,11 @@ namespace WorksheetGenerator.Utilities
                 foreach (OpenXmlElement element in TFQuestions)
                     mainActivity.Add(element);
 
+                mainActivity.Add(new Paragraph());
+
                 // Multiple choice questions
                 List<Paragraph> MCParagraphs = GetParagraphsByIdentifier(allElements, "MC");
-                (List<Paragraph> MCQuestions, List<Paragraph> MCAnswerKey) = MultipleChoiceQs(MCParagraphs);
+                (List<Paragraph> MCQuestions, List<Paragraph> MCAnswerKey) = MultipleChoiceQs(mainPart, MCParagraphs);
                 foreach (OpenXmlElement paragraph in MCQuestions)
                     mainActivity.Add(paragraph);
 

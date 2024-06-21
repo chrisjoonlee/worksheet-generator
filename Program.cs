@@ -49,6 +49,14 @@ namespace WorksheetGenerator
                 )
             ),
             El.Style(
+                "IndentedText",
+                "Indented Text",
+                "Text",
+                new ParagraphProperties(
+                    new Indentation() { Left = "720" }
+                )
+            ),
+            El.Style(
                 "WorksheetTitle",
                 "Worksheet Title",
                 null,
@@ -241,35 +249,6 @@ namespace WorksheetGenerator
                 // Numbering definitions
                 NumberingDefinitionsPart numberingPart = mainPart.AddNewPart<NumberingDefinitionsPart>("NumberingDefinitionsPart");
                 numberingPart.Numbering = new();
-
-                //     // Numbered lists
-                //     new AbstractNum(
-                //         new Level(
-                //             new NumberingFormat() { Val = NumberFormatValues.Decimal },
-                //             new LevelText() { Val = "%1." },
-                //             new StartNumberingValue() { Val = 1 },
-                //             new ParagraphProperties(
-                //                 new Indentation() { Left = "450", Hanging = "450" }
-                //             )
-                //         )
-                //         { LevelIndex = 0 }
-                //     )
-                //     { AbstractNumberId = 1, },
-
-                //     // Lettered lists
-                //     new AbstractNum(
-                //         new Level(
-                //             new NumberingFormat() { Val = NumberFormatValues.UpperLetter },
-                //             new LevelText() { Val = "%1." },
-                //             new StartNumberingValue() { Val = 1 },
-                //             new ParagraphProperties(
-                //                 new Indentation() { Left = "450", Hanging = "450" }
-                //             )
-                //         )
-                //         { LevelIndex = 0 }
-                //     )
-                //     { AbstractNumberId = 2 }
-                // );
 
                 // Styles
                 StyleDefinitionsPart stylePart = mainPart.AddNewPart<StyleDefinitionsPart>();
