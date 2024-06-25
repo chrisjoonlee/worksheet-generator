@@ -1,5 +1,6 @@
 ﻿using WorksheetGeneratorLibrary.Utilities;
 using WorksheetGeneratorLibrary.Elements;
+using WorksheetGeneratorLibrary.Styles;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -9,196 +10,6 @@ namespace WorksheetGenerator
 {
     class WorksheetGenerator
     {
-        public static Styles Styles = new(
-            El.Style(
-                "Text",
-                "Text",
-                null,
-                new ParagraphProperties(
-                    new SpacingBetweenLines()
-                    {
-                        Line = "276",
-                        LineRule = LineSpacingRuleValues.Auto,
-                        Before = "0",
-                        After = "0"
-                    }
-
-                ),
-                new StyleRunProperties(
-                    new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1, ThemeShade = "15" },
-                    new RunFonts() { Ascii = "Aptos" },
-                    new FontSize() { Val = "28" },
-                    new FontSizeComplexScript() { Val = "48" }
-                )
-            ),
-            El.Style(
-                "Paragraph",
-                "Paragraph",
-                "Text",
-                new ParagraphProperties(
-                    new SpacingBetweenLines() { After = "280" }
-                )
-            ),
-            El.Style(
-                "IndentedText",
-                "Indented Text",
-                "Text",
-                new ParagraphProperties(
-                    new Indentation() { Left = "720" }
-                )
-            ),
-            El.Style(
-                "WorksheetTitle",
-                "Worksheet Title",
-                null,
-                new ParagraphProperties(
-                    new Justification() { Val = JustificationValues.Center }
-                ),
-                new StyleRunProperties(
-                    new Bold(),
-                    new BoldComplexScript(),
-                    new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1, ThemeShade = "15" },
-                    new RunFonts() { Ascii = "Aptos" },
-                    new FontSize() { Val = "48" },
-                    new FontSizeComplexScript() { Val = "48" }
-                )
-            ),
-            El.Style(
-                "SectionTitle",
-                "Section Title",
-                null,
-                new ParagraphProperties(
-                    new Justification() { Val = JustificationValues.Center },
-                    new SpacingBetweenLines()
-                    {
-                        After = "400"
-                    }
-                ),
-                new StyleRunProperties(
-                    new Bold(),
-                    new BoldComplexScript(),
-                    new Color() { Val = "0F9ED5", ThemeColor = ThemeColorValues.Accent4 },
-                    new RunFonts() { Ascii = "Aptos" },
-                    new FontSize() { Val = "36" },
-                    new FontSizeComplexScript() { Val = "36" }
-                )
-            ),
-            El.Style(
-                "SubsectionTitle",
-                "Subsection Title",
-                "Text",
-                new ParagraphProperties(
-                    new SpacingBetweenLines()
-                    {
-                        After = "280"
-                    }
-                ),
-                new StyleRunProperties(
-                    new Bold(),
-                    new BoldComplexScript()
-                )
-            ),
-            El.Style(
-                "AnswerKeyTitle",
-                "Answer Key Title",
-                null,
-                new ParagraphProperties(
-                    new Justification() { Val = JustificationValues.Center }
-                ),
-                new StyleRunProperties(
-                    new Bold(),
-                    new BoldComplexScript(),
-                    new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1, ThemeShade = "15" },
-                    new RunFonts() { Ascii = "Aptos" },
-                    new FontSize() { Val = "40" },
-                    new FontSizeComplexScript() { Val = "40" }
-                )
-            ),
-            El.Style(
-                "AnswerKeySectionTitle",
-                "Answer Key Section Title",
-                "Text",
-                null,
-                new StyleRunProperties(
-                    new Bold(),
-                    new BoldComplexScript()
-                )
-            ),
-            El.Style(
-                "ListActivity",
-                "List Activity",
-                "Text",
-                new ParagraphProperties(
-                    new SpacingBetweenLines()
-                    {
-                        After = "280"
-                    }
-                )
-            ),
-            El.Style(
-                "NoBorderTable",
-                "No Border Table",
-                null,
-                null,
-                null,
-                new TableProperties(
-                    new TableWidth()
-                    {
-                        Width = "5000",
-                        Type = TableWidthUnitValues.Pct
-                    },
-                    El.TableBorders(BorderValues.Nil, 0, ThemeColorValues.Background1)
-                )
-            ),
-            El.Style(
-                "Box",
-                "Box",
-                null,
-                null,
-                null,
-                new TableProperties(
-                    new TableWidth()
-                    {
-                        Width = "5000",
-                        Type = TableWidthUnitValues.Pct
-                    },
-                    El.TableBorders(BorderValues.Single, 24, ThemeColorValues.Accent4)
-                )
-            ),
-            El.Style(
-                "VocabBox",
-                "Vocab Box",
-                "Text",
-                new ParagraphProperties(
-                    new Justification() { Val = JustificationValues.Center },
-                    new SpacingBetweenLines()
-                    {
-                        Line = "440",
-                        LineRule = LineSpacingRuleValues.Auto,
-                        Before = "0",
-                        After = "220"
-                    }
-                ),
-                new StyleRunProperties(
-                    new Bold(),
-                    new BoldComplexScript()
-                )
-            ),
-            El.Style(
-                "InlineImage",
-                "Inline Image",
-                null,
-                new ParagraphProperties(
-                    new Justification() { Val = JustificationValues.Center },
-                    new SpacingBetweenLines()
-                    {
-                        Before = "240",
-                        After = "400"
-                    }
-                )
-            )
-        );
-
         static void Main(string[] args)
         {
             if (args.Length < 2)
@@ -243,7 +54,7 @@ namespace WorksheetGenerator
 
                 // Styles
                 StyleDefinitionsPart stylePart = mainPart.AddNewPart<StyleDefinitionsPart>();
-                Styles styles = Styles;
+                Styles styles = new(S.styleList);
                 styles.Save(stylePart);
 
                 // Copy all images
