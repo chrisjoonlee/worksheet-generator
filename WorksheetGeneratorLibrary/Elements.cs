@@ -1,4 +1,4 @@
-using WorksheetGenerator.Utilities;
+using WorksheetGeneratorLibrary.Utilities;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Wordprocessing;
 using D = DocumentFormat.OpenXml.Drawing;
@@ -7,7 +7,7 @@ using DP = DocumentFormat.OpenXml.Drawing.Pictures;
 using DocumentFormat.OpenXml.Packaging;
 // using DocumentFormat.OpenXml.Drawing.Charts;
 
-namespace WorksheetGenerator.Elements
+namespace WorksheetGeneratorLibrary.Elements
 {
     public static class El
     {

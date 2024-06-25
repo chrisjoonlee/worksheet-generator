@@ -1,17 +1,8 @@
-﻿using System;
-using System.Xml.Linq;
-using WorksheetGenerator.Utilities;
-using WorksheetGenerator.Elements;
+﻿using WorksheetGeneratorLibrary.Utilities;
+using WorksheetGeneratorLibrary.Elements;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
-using System.IO;
-using System.Text;
 using DocumentFormat.OpenXml.Wordprocessing;
-using System.Xml;
-using DocumentFormat.OpenXml.ExtendedProperties;
-using D = DocumentFormat.OpenXml.Drawing;
-using DW = DocumentFormat.OpenXml.Drawing.Wordprocessing;
-using DP = DocumentFormat.OpenXml.Drawing.Pictures;
 
 
 namespace WorksheetGenerator

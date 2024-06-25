@@ -1,0 +1,1522 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas"
+    xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex"
+    xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex"
+    xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex"
+    xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex"
+    xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex"
+    xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex"
+    xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex"
+    xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex"
+    xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink"
+    xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d"
+    xmlns:o="urn:schemas-microsoft-com:office:office"
+    xmlns:oel="http://schemas.microsoft.com/office/2019/extlst"
+    xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+    xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"
+    xmlns:v="urn:schemas-microsoft-com:vml"
+    xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing"
+    xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
+    xmlns:w10="urn:schemas-microsoft-com:office:word"
+    xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+    xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
+    xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
+    xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex"
+    xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid"
+    xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml"
+    xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash"
+    xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex"
+    xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"
+    xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk"
+    xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml"
+    xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh wp14">
+    <w:body>
+        <w:p w14:paraId="731E1EF9" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="WorksheetTitle"/>
+            </w:pPr>
+            <w:r>
+                <w:t>INTRODUCTION TO ECONOMICS</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="6597378E" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="SectionTitle"/>
+            </w:pPr>
+            <w:r>
+                <w:t>1. Vocabulary</w:t>
+            </w:r>
+        </w:p>
+        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="Box"/>
+                <w:tblW w:w="0" w:type="auto"/>
+                <w:tblInd w:w="440" w:type="dxa"/>
+                <w:tblCellMar>
+                    <w:top w:w="0" w:type="dxa"/>
+                    <w:left w:w="0" w:type="dxa"/>
+                    <w:bottom w:w="0" w:type="dxa"/>
+                    <w:right w:w="0" w:type="dxa"/>
+                </w:tblCellMar>
+                <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="11169"/>
+            </w:tblGrid>
+            <w:tr w:rsidR="00E31921" w14:paraId="7D50131F" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="11169" w:type="dxa"/>
+                        <w:tcMar>
+                            <w:top w:w="440" w:type="dxa"/>
+                            <w:left w:w="440" w:type="dxa"/>
+                            <w:bottom w:w="0" w:type="dxa"/>
+                            <w:right w:w="440" w:type="dxa"/>
+                        </w:tcMar>
+                    </w:tcPr>
+                    <w:p w14:paraId="753B4196" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="VocabBox"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>economics        transaction        scarce        finite        ultimate        invest        shelter        budget        infrastructure        goods        specialize        poverty        critical</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+        </w:tbl>
+        <w:p w14:paraId="03FA813B" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00E31921"/>
+        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="NoBorderTable"/>
+                <w:tblW w:w="0" w:type="auto"/>
+                <w:tblInd w:w="0" w:type="dxa"/>
+                <w:tblCellMar>
+                    <w:top w:w="0" w:type="dxa"/>
+                    <w:left w:w="0" w:type="dxa"/>
+                    <w:bottom w:w="0" w:type="dxa"/>
+                    <w:right w:w="0" w:type="dxa"/>
+                </w:tblCellMar>
+                <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="3259"/>
+                <w:gridCol w:w="7903"/>
+            </w:tblGrid>
+            <w:tr w:rsidR="00E31921" w14:paraId="01735D67" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="3C3C5660" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="71CA8593" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>to concentrate one's efforts in a special activity, field, or practice</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="07C290F7" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="41D2FBC7" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="5611E672" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>having a limited nature or existence; not endless</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="1ACDDB33" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="4E3FF646" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="06D7AB28" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>an exchange or transfer of goods, services, or funds</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="44AC7C37" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="665EF9CF" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="64A26293" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>the best or most extreme</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="14CE2673" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="28262984" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="5B137721" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>to make use of for future benefits or advantages</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="3411334F" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="43A5CE1D" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="4AE0FB30" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>deficient in quantity or number; not plentiful or abundant</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="79D6B420" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="12EA337F" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="3DC641CA" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>the amount of money that is available for, required for, or assigned to a particular purpose</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="65349AD0" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="3CC93659" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="0E36BE71" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>exercising or involving careful judgment</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="5395A921" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="2E240C62" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="37FBD7E1" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>something that covers or affords protection</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="7D32D129" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="2F864163" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="4C874A1B" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>something manufactured or produced for sale</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="6CD57B76" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="218F0C8E" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="07E16467" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>the state of lacking money or material possessions</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="3F2C7250" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="54EE58F9" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="56D83314" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>a social science concerned with the production, distribution, and consumption of goods and services</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="58D15566" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3261" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="272A3E0E" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="1"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>__________________</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7938" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="1A9B7482" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>the system of public works of a country, state, or region</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+        </w:tbl>
+        <w:p w14:paraId="71C61067" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:r>
+                <w:br w:type="page"/>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="56704444" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="SectionTitle"/>
+            </w:pPr>
+            <w:r>
+                <w:lastRenderedPageBreak/>
+                <w:t>2. Introduction to Economics</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="2BF7C07E" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="InlineImage"/>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:noProof/>
+                </w:rPr>
+                <w:drawing>
+                    <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="024AD565" wp14:editId="0BE9433C">
+                        <wp:extent cx="3345180" cy="2230120"/>
+                        <wp:effectExtent l="19050" t="0" r="9525" b="0"/>
+                        <wp:docPr id="1" name="Picture"/>
+                        <wp:cNvGraphicFramePr>
+                            <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
+                        </wp:cNvGraphicFramePr>
+                        <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                            <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                    <pic:nvPicPr>
+                                        <pic:cNvPr id="1" name="Image.jpg"/>
+                                        <pic:cNvPicPr/>
+                                    </pic:nvPicPr>
+                                    <pic:blipFill>
+                                        <a:blip r:embed="rId5" cstate="print"/>
+                                        <a:stretch>
+                                            <a:fillRect/>
+                                        </a:stretch>
+                                    </pic:blipFill>
+                                    <pic:spPr>
+                                        <a:xfrm>
+                                            <a:off x="0" y="0"/>
+                                            <a:ext cx="3345180" cy="2230120"/>
+                                        </a:xfrm>
+                                        <a:prstGeom prst="roundRect">
+                                            <a:avLst/>
+                                        </a:prstGeom>
+                                    </pic:spPr>
+                                </pic:pic>
+                            </a:graphicData>
+                        </a:graphic>
+                    </wp:inline>
+                </w:drawing>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="5AA068CE" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Paragraph"/>
+            </w:pPr>
+            <w:r>
+                <w:t>What is economics? Economics is about more than just money and financial transactions. More accurately, economics is a study that helps us understand how people make choices in the face of scarcity. "Scarcity" means that there are not enough resources for people who want them. Such resources are finite, meaning they have a limit, and include money, land, labor, and materials. Time is considered the ultimate finite resource, as every person has the same number of hours in a day.</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="56E1882B" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Paragraph"/>
+            </w:pPr>
+            <w:r>
+                <w:t>When resources are limited, people must make certain decisions. What should I buy? What can I sell? What should I invest my time into? These decisions can be made by individuals, families, or businesses. Governments and societies are also faced with these decisions. When certain people don't have access to food, shelter, or healthcare, this is a result of the scarcity of resources. Just as people have to choose whether to spend their money on a car or a vacation, governments must also decide how to divide their budget between schools, emergency services, and other infrastructure. Meanwhile, countries must choose how much to fund the military as opposed to protecting the environment. These decisions are not always easy to make.</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="2531B197" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Paragraph"/>
+            </w:pPr>
+            <w:r>
+                <w:t xml:space="preserve">One of the most important people in the history of economics is Adam Smith, an economist and philosopher from the 18th century. He explained how producing goods can be made more efficient by dividing the work into smaller tasks. This is known as the "division of labor." For example, running a bakery involves many different tasks, including buying ingredients, mixing the dough, baking it, selling the bread, and managing the store. It would be difficult for one person to become an expert in all these different tasks. Instead, it would be smarter to have different people specialize, or become experts in, different tasks. This way, people </w:t>
+            </w:r>
+            <w:r>
+                <w:lastRenderedPageBreak/>
+                <w:t>could carry out tasks more quickly, and the bakery would be able to sell more bread. This is an example of the power and efficiency of the division of labor.</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="7E76AAC5" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Paragraph"/>
+            </w:pPr>
+            <w:r>
+                <w:t>Specialization allows workers to become really good at one task, which makes production faster and better. This is true not just for bakeries but for many different kinds of businesses. Oftentimes, it is a better decision for a business to focus on specializing in a few products than many different ones. This is one area that economists have been interested in, but economics is not limited to just that. Economics also helps us understand and solve issues like poverty, education, and climate change. Learning economics can help you become a better decision-maker in your personal life, as well as a more critical thinker about current events and politics.</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="29823B42" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="InlineImage"/>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:noProof/>
+                </w:rPr>
+                <w:drawing>
+                    <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="0EC5097A" wp14:editId="38094C07">
+                        <wp:extent cx="1721987" cy="2230120"/>
+                        <wp:effectExtent l="19050" t="0" r="9525" b="0"/>
+                        <wp:docPr id="2" name="Picture"/>
+                        <wp:cNvGraphicFramePr>
+                            <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
+                        </wp:cNvGraphicFramePr>
+                        <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                            <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                    <pic:nvPicPr>
+                                        <pic:cNvPr id="2" name="Image.jpg"/>
+                                        <pic:cNvPicPr/>
+                                    </pic:nvPicPr>
+                                    <pic:blipFill>
+                                        <a:blip r:embed="rId6" cstate="print"/>
+                                        <a:stretch>
+                                            <a:fillRect/>
+                                        </a:stretch>
+                                    </pic:blipFill>
+                                    <pic:spPr>
+                                        <a:xfrm>
+                                            <a:off x="0" y="0"/>
+                                            <a:ext cx="1721987" cy="2230120"/>
+                                        </a:xfrm>
+                                        <a:prstGeom prst="roundRect">
+                                            <a:avLst/>
+                                        </a:prstGeom>
+                                    </pic:spPr>
+                                </pic:pic>
+                            </a:graphicData>
+                        </a:graphic>
+                    </wp:inline>
+                </w:drawing>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="042817D7" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:r>
+                <w:br w:type="page"/>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="112743D0" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="SectionTitle"/>
+            </w:pPr>
+            <w:r>
+                <w:lastRenderedPageBreak/>
+                <w:t>3. Comprehension Questions</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="2A613896" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="SubsectionTitle"/>
+            </w:pPr>
+            <w:r>
+                <w:t>Circle "T" for True or "F" for False for the following statements:</w:t>
+            </w:r>
+        </w:p>
+        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="NoBorderTable"/>
+                <w:tblW w:w="0" w:type="auto"/>
+                <w:tblInd w:w="0" w:type="dxa"/>
+                <w:tblCellMar>
+                    <w:top w:w="0" w:type="dxa"/>
+                    <w:left w:w="0" w:type="dxa"/>
+                    <w:bottom w:w="0" w:type="dxa"/>
+                    <w:right w:w="0" w:type="dxa"/>
+                </w:tblCellMar>
+                <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="9639"/>
+                <w:gridCol w:w="851"/>
+                <w:gridCol w:w="662"/>
+            </w:tblGrid>
+            <w:tr w:rsidR="00E31921" w14:paraId="6E0EED47" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="9639" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="6EC4AAE8" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="3"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>The division of labor can make production more efficient.</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="851" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="09DD6D03" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>T</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="662" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="0EABC0C5" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>F</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="0D4362A4" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="9639" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="4DB1A0F9" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="3"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>Specialization can make workers slower and less productive.</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="851" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="327944C1" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>T</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="662" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="714F60D9" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>F</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr w:rsidR="00E31921" w14:paraId="3ED1CE71" w14:textId="77777777">
+                <w:tblPrEx>
+                    <w:tblCellMar>
+                        <w:top w:w="0" w:type="dxa"/>
+                        <w:left w:w="0" w:type="dxa"/>
+                        <w:bottom w:w="0" w:type="dxa"/>
+                        <w:right w:w="0" w:type="dxa"/>
+                    </w:tblCellMar>
+                </w:tblPrEx>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="9639" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="6D2BE027" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="ListActivity"/>
+                            <w:numPr>
+                                <w:ilvl w:val="0"/>
+                                <w:numId w:val="3"/>
+                            </w:numPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>Learning economics can help you in multiple areas in life.</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="851" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="4743294F" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>T</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="662" w:type="dxa"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="7694A02D" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+                        <w:pPr>
+                            <w:pStyle w:val="Text"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>F</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+        </w:tbl>
+        <w:p w14:paraId="11E994B4" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00E31921"/>
+        <w:p w14:paraId="48FA7417" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="SubsectionTitle"/>
+            </w:pPr>
+            <w:r>
+                <w:t>Choose the correct answer for each of the following questions:</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="4B4460C2" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+            </w:pPr>
+            <w:r>
+                <w:t>1.  Who out of the following is a famous economist?</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="1940DA7B" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="5"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Adam Smith</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="680A58A7" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="5"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>George Washington</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="6FF7F2CE" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="5"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Marie Curie</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="162AB782" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="5"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Immanuel Kant</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="7FCEB4A3" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00E31921">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+            </w:pPr>
+        </w:p>
+        <w:p w14:paraId="37F4DD2F" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+            </w:pPr>
+            <w:r>
+                <w:t>2.  What is an example of division of labor?</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="47D6133D" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="6"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Having a group of people all work on the same task</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="7AACE9B7" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="6"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Having different people specialize in different tasks</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="568F1A86" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="6"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Outsourcing a task from one person to another</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="4AF9690F" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="6"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Controlling all steps in the process of making a product</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="5D40513E" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00E31921">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+            </w:pPr>
+        </w:p>
+        <w:p w14:paraId="0779ADD7" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+            </w:pPr>
+            <w:r>
+                <w:t>3.  Why might a business choose to specialize in only a few products?</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="620EBD50" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="7"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>To lower competition</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="6A818658" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="7"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>To increase competition</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="060BC779" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="7"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>To improve efficiency and quality in making those products</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="0CF016D8" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="7"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>To find customers in new markets</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="71A9248C" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00E31921">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+            </w:pPr>
+        </w:p>
+        <w:p w14:paraId="00EC0507" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+            </w:pPr>
+            <w:r>
+                <w:t>4.  Which of the following is not a scarce resource?</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="79897BE3" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="8"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Time</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="2A62A2F6" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="8"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Human wants</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="2512812C" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="8"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Money</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="51F24B9A" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="8"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Labor</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="574B2BE2" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00E31921">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+            </w:pPr>
+        </w:p>
+        <w:p w14:paraId="79DF6E3D" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000" w:rsidP="00295DF2">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:keepNext/>
+            </w:pPr>
+            <w:r>
+                <w:lastRenderedPageBreak/>
+                <w:t>5.  Who makes economic decisions?</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="0B952501" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000" w:rsidP="00295DF2">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="9"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Governments</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="73B9612A" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000" w:rsidP="00295DF2">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="9"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>People</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="29D1853D" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000" w:rsidP="00295DF2">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="9"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>Businesses</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="65F14E19" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000" w:rsidP="00295DF2">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="9"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>All of the above</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="754E0639" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00E31921" w:rsidP="00295DF2">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+            </w:pPr>
+        </w:p>
+        <w:p w14:paraId="4D519D2F" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:r>
+                <w:br w:type="page"/>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="4F08043E" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="AnswerKeyTitle"/>
+            </w:pPr>
+            <w:r>
+                <w:lastRenderedPageBreak/>
+                <w:t>ANSWER KEY</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="01979525" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="AnswerKeySectionTitle"/>
+            </w:pPr>
+            <w:r>
+                <w:t>1. VOCABULARY</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="2F415F05" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>specialize</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="79E70D98" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>finite</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="30017033" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>transaction</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="423A2CDE" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>ultimate</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="4CD82068" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>invest</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="1A6014DE" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>scarce</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="730D4F61" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>budget</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="60AB280F" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>critical</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="212CAFFA" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>shelter</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="4A67CC35" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>goods</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="0B11E48D" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>poverty</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="487999CA" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>economics</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="7C0DA66F" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>infrastructure</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="32B6D82D" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="AnswerKeySectionTitle"/>
+            </w:pPr>
+            <w:r>
+                <w:t>3. VOCABULARY</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="2B9006BF" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="4"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>T</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="4F5FA367" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="4"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>F</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="230C9457" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00000000">
+            <w:pPr>
+                <w:pStyle w:val="Text"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="4"/>
+                </w:numPr>
+            </w:pPr>
+            <w:r>
+                <w:t>T</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="34A392FD" w14:textId="77777777" w:rsidR="00E31921" w:rsidRDefault="00E31921"/>
+        <w:sectPr w:rsidR="00E31921">
+            <w:pgSz w:w="12240" w:h="15840"/>
+            <w:pgMar w:top="539" w:right="539" w:bottom="539" w:left="539" w:header="720" w:footer="720" w:gutter="0"/>
+            <w:cols w:space="720"/>
+        </w:sectPr>
+    </w:body>
+</w:document>
