@@ -1,6 +1,6 @@
 ﻿using WorksheetGeneratorLibrary.Utilities;
 using WorksheetGeneratorLibrary.Elements;
-using WorksheetGeneratorLibrary.Styles;
+using WorksheetGeneratorLibrary.StyleList;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -31,31 +31,8 @@ namespace WorksheetGenerator
                 Body origBody = origMainPart!.Document!.Body!;
                 OpenXmlElementList origElementList = origBody.ChildElements;
 
-                // Create document structure in new package
-                MainDocumentPart mainPart = newPackage.AddMainDocumentPart();
-                mainPart.Document = new Document();
-                Body body = mainPart.Document.AppendChild(new Body());
-
-                // Add section properties & set page margins
-                SectionProperties sectionProperties = new();
-                PageMargin pageMargin = new()
-                {
-                    Top = 539,
-                    Right = 539,
-                    Bottom = 539,
-                    Left = 539
-                };
-                sectionProperties.Append(pageMargin);
-                body.Append(sectionProperties);
-
-                // Numbering definitions
-                NumberingDefinitionsPart numberingPart = mainPart.AddNewPart<NumberingDefinitionsPart>("NumberingDefinitionsPart");
-                numberingPart.Numbering = new();
-
-                // Styles
-                StyleDefinitionsPart stylePart = mainPart.AddNewPart<StyleDefinitionsPart>();
-                Styles styles = new(S.styleList);
-                styles.Save(stylePart);
+                // Populate new package
+                (MainDocumentPart mainPart, Body body) = El.PopulateNewWordPackage(newPackage, 539);
 
                 // Copy all images
                 Dictionary<string, string> imageRelIds = []; // <old, new>
