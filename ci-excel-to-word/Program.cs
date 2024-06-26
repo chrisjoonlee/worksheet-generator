@@ -11,7 +11,6 @@ using System.Linq;
 using System.IO;
 using System.IO.Compression;
 
-
 namespace CIExcelToWord
 {
     class CIExcelToWord
@@ -24,9 +23,11 @@ namespace CIExcelToWord
                 return;
             }
 
-            string filePath = $"docs/{args[0]}";
-            using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(filePath, false))
-            using (WordprocessingDocument newPackage = WordprocessingDocument.Create($"docs/{args[1]}", WordprocessingDocumentType.Document))
+            string excelFilePath = $"docs/{args[0]}";
+            string baseFileName = Path.GetFileNameWithoutExtension(args[0]);
+            string wordFilePath = $"docs/{args[1]}";
+            using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(excelFilePath, false))
+            using (WordprocessingDocument newPackage = WordprocessingDocument.Create(wordFilePath, WordprocessingDocumentType.Document))
             {
                 if (spreadsheetDocument is null)
                     throw new ArgumentNullException(nameof(spreadsheetDocument));
@@ -40,14 +41,14 @@ namespace CIExcelToWord
                     throw new ArgumentNullException(nameof(sharedStringTable));
                 WorksheetPart worksheetPart = workbookPart.WorksheetParts.First();
                 SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
-                // DrawingsPart? drawingsPart = worksheetPart.DrawingsPart;
-                // if (drawingsPart is null)
-                //     throw new ArgumentNullException(nameof(drawingsPart));
+
+                // Access the media folder and extract images
+                Excel.ExtractImages(excelFilePath, $"docs/{baseFileName}-imgs");
 
                 // Populate new package
                 (MainDocumentPart mainPart, Body body) = El.PopulateNewWordPackage(newPackage);
 
-                // Read excel data
+                // Read excel text
                 foreach (Row row in sheetData.Elements<Row>())
                 {
                     foreach (Cell cell in row.Elements<Cell>())
@@ -60,36 +61,6 @@ namespace CIExcelToWord
                         else
                         {
                             // Console.WriteLine("Not text");
-                        }
-                    }
-                }
-
-                // Access the media folder and extract images
-                using (FileStream zipToOpen = new FileStream(filePath, FileMode.Open))
-                using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Read))
-                {
-                    var mediaEntries = archive.Entries.Where(e => e.FullName.StartsWith("xl/media/")).ToList();
-
-                    if (!mediaEntries.Any())
-                    {
-                        Console.WriteLine("No images found in the workbook.");
-                    }
-                    else
-                    {
-                        foreach (var mediaEntry in mediaEntries)
-                        {
-                            // using (Stream stream = mediaEntry.Open())
-                            // using (MemoryStream memoryStream = new MemoryStream())
-                            // {
-                            //     stream.CopyTo(memoryStream);
-                            //     byte[] imageBytes = memoryStream.ToArray();
-
-                            //     // Save the image or process it as needed
-                            //     string newImagePath = $"docs/{mediaEntry.Name}";
-                            //     File.WriteAllBytes(newImagePath, imageBytes);
-                            //     Console.WriteLine($"Image saved to {newImagePath}");
-                            // }
-                            Console.WriteLine(mediaEntry);
                         }
                     }
                 }
