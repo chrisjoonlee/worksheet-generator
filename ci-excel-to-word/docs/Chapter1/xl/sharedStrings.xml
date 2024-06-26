@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="94" uniqueCount="67">
+    <si>
+        <t>Title</t>
+    </si>
+    <si>
+        <t>Theo is a dog</t>
+    </si>
+    <si>
+        <t>Chapter #</t>
+    </si>
+    <si>
+        <t>Theo is a dog.</t>
+    </si>
+    <si>
+        <t>Image</t>
+    </si>
+    <si>
+        <t>This is a dog.</t>
+    </si>
+    <si>
+        <t>This is also a dog.</t>
+    </si>
+    <si>
+        <t>This is a cat.</t>
+    </si>
+    <si>
+        <t>This is also a cat.</t>
+    </si>
+    <si>
+        <t>Theo is not a cat.</t>
+    </si>
+    <si>
+        <t>This is Chris.</t>
+    </si>
+    <si>
+        <t>This is a person.</t>
+    </si>
+    <si>
+        <t>Is this a person?</t>
+    </si>
+    <si>
+        <t>Y/N</t>
+    </si>
+    <si>
+        <t>This is a boy.</t>
+    </si>
+    <si>
+        <t>This is also a boy.</t>
+    </si>
+    <si>
+        <t>This is a girl.</t>
+    </si>
+    <si>
+        <t>This is also a girl.</t>
+    </si>
+    <si>
+        <t>Is this a boy?</t>
+    </si>
+    <si>
+        <t>Is this a girl?</t>
+    </si>
+    <si>
+        <t>This is Lucy.
+Lucy is a person.
+Lucy is a girl.
+Lucy is not a boy.</t>
+    </si>
+    <si>
+        <t>Is Lucy a boy or a girl?</t>
+    </si>
+    <si>
+        <t>Boy</t>
+    </si>
+    <si>
+        <t>Girl</t>
+    </si>
+    <si>
+        <t>Is Lucy a person or a dog?</t>
+    </si>
+    <si>
+        <t>Dog</t>
+    </si>
+    <si>
+        <t>Mark is a man.</t>
+    </si>
+    <si>
+        <t>This is Mark.
+Mark is a person.
+Mark is a man.</t>
+    </si>
+    <si>
+        <t>This is also a man.</t>
+    </si>
+    <si>
+        <t>Is this a man?</t>
+    </si>
+    <si>
+        <t>This is a woman.</t>
+    </si>
+    <si>
+        <t>This is also a woman.</t>
+    </si>
+    <si>
+        <t>Is this a woman?</t>
+    </si>
+    <si>
+        <t>This is a man.</t>
+    </si>
+    <si>
+        <t>Mark is not a woman.</t>
+    </si>
+    <si>
+        <t>Wendy is a woman.</t>
+    </si>
+    <si>
+        <t>Is Wendy a man or a woman?</t>
+    </si>
+    <si>
+        <t>Man</t>
+    </si>
+    <si>
+        <t>Woman</t>
+    </si>
+    <si>
+        <t>This is Theo.
+Theo is a dog.</t>
+    </si>
+    <si>
+        <t>This is not a dog.
+This is a cat.</t>
+    </si>
+    <si>
+        <t>Is this a cat?
+Yes, this is a cat.</t>
+    </si>
+    <si>
+        <t>Is this a cat?
+No, this is not a cat.</t>
+    </si>
+    <si>
+        <t>This is a person.
+This is also a person.</t>
+    </si>
+    <si>
+        <t>Chris is not a dog.
+Chris is not a cat.
+Chris is a boy.</t>
+    </si>
+    <si>
+        <t>Is Chris a boy?
+Yes, he is.</t>
+    </si>
+    <si>
+        <t>This is Wendy.
+Wendy is also a person.
+Wendy is a woman.
+Wendy is not a man.</t>
+    </si>
+    <si>
+        <t>Boy
+Girl</t>
+    </si>
+    <si>
+        <t>Person
+Dog</t>
+    </si>
+    <si>
+        <t>Man
+Woman</t>
+    </si>
+    <si>
+        <t>Is Chris a girl?
+No, Chris is not a girl.</t>
+    </si>
+    <si>
+        <t>Text</t>
+    </si>
+    <si>
+        <t>Choices</t>
+    </si>
+    <si>
+        <t>This is Theo. Theo is a dog. Theo is not a cat.</t>
+    </si>
+    <si>
+        <t>This is Chris. Chris is not a dog. Chris is not a cat.
+Chris is a person. Chris is a boy. Chris is not a girl.</t>
+    </si>
+    <si>
+        <t>This is Lucy. Lucy is also a person.
+Lucy is a girl. Lucy is not a boy.</t>
+    </si>
+    <si>
+        <t>This is Mark. Mark is a person.
+Mark is a man. Mark is not a woman.</t>
+    </si>
+    <si>
+        <t>This is Wendy. Wendy is also a person.
+Wendy is a woman. Wendy is not a man.</t>
+    </si>
+    <si>
+        <t>MATCHING</t>
+    </si>
+    <si>
+        <t>TRUE OR FALSE</t>
+    </si>
+    <si>
+        <t>Word</t>
+    </si>
+    <si>
+        <t>Chris is a dog.</t>
+    </si>
+    <si>
+        <t>Lucy is a boy.</t>
+    </si>
+    <si>
+        <t>Answer</t>
+    </si>
+    <si>
+        <t>Statement</t>
+    </si>
+    <si>
+        <t>T</t>
+    </si>
+    <si>
+        <t>F</t>
+    </si>
+</sst>
