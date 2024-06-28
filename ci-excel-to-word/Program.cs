@@ -47,31 +47,31 @@ namespace CIExcelToWord
                 SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
 
                 // Access the media folder and extract images
-                List<string> imageFilePaths = Excel.ExtractImages(excelFilePath, imagesFolderPath);
+                List<string> imageFilePaths = EF.ExtractImages(excelFilePath, imagesFolderPath);
 
                 // Populate new Word package
-                (MainDocumentPart mainPart, WXML.Body body) = El.PopulateNewWordPackage(newPackage);
+                (MainDocumentPart mainPart, WXML.Body body) = WF.PopulateNewWordPackage(newPackage);
 
                 // Read excel text
                 foreach (Row row in sheetData.Elements<Row>())
                 {
                     foreach (Cell cell in row.Elements<Cell>())
                     {
-                        if (Excel.IsTextCell(cell))
+                        if (EF.IsTextCell(cell))
                         {
                             // Get text
-                            string text = Excel.GetCellText(cell, sharedStringTable);
+                            string text = EF.GetCellText(cell, sharedStringTable);
                             Console.WriteLine(text);
 
                             // Place in document
                             body.AppendChild(
-                                new WXML.Paragraph(new WXML.Run(new WXML.Text(text)))
+                                WF.Paragraph(text)
                             );
                         }
-                        else if (Excel.IsImageCell(cell))
+                        else if (EF.IsImageCell(cell))
                         {
                             // Get image path
-                            string? imagePath = Excel.GetImagePath(cell, imagesFolderPath);
+                            string? imagePath = EF.GetImagePath(cell, imagesFolderPath);
                             if (imagePath != null)
                                 Console.WriteLine(imagePath);
                         }
