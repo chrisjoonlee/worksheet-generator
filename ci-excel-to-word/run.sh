@@ -1,11 +1,12 @@
 # Check if a filename name argument is provided
-if [ -z "$1" ]; then
-  echo "Usage: $0 filename.xlsx"
+if [ -z "$2" ]; then
+  echo "Usage: $0 filename.xlsx language"
   exit 1
 fi
 
 # Assign file names
 FILENAME="$1"
+LANGUAGE="$2"
 BASE_FILENAME="${FILENAME%.*}_new"
 
 # Function to find the next available directory name
@@ -24,4 +25,4 @@ BASE_FILENAME="${FILENAME%.*}_new"
 # fi
 
 echo dotnet run "$FILENAME" "$BASE_FILENAME.docx"
-dotnet run "$FILENAME" "$BASE_FILENAME.docx"
+dotnet run "$FILENAME" "$BASE_FILENAME.docx" "$LANGUAGE"

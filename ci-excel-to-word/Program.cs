@@ -17,9 +17,9 @@ namespace CIExcelToWord
     {
         static void Main(string[] args)
         {
-            if (args.Length < 2)
+            if (args.Length < 3)
             {
-                Console.WriteLine("Usage: dotnet run original.xlsx new.docx");
+                Console.WriteLine("Usage: dotnet run original.xlsx new.docx language");
                 return;
             }
 
@@ -28,6 +28,9 @@ namespace CIExcelToWord
             string baseFileName = Path.GetFileNameWithoutExtension(args[0]);
             string wordFilePath = $"docs/{args[1]}";
             string imagesFolderPath = $"docs/{baseFileName}-imgs";
+
+            // Language
+            string language = args[2].ToLower();
 
             // Open Excel file, create Word package
             using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(excelFilePath, false))
@@ -52,6 +55,26 @@ namespace CIExcelToWord
                 // Populate new Word package
                 (MainDocumentPart mainPart, WXML.Body body) = WF.PopulateNewWordPackage(newPackage);
 
+                // Get excel data
+                IEnumerable<Row> rows = sheetData.Elements<Row>();
+
+                // Establish which columns to read from
+                List<Cell> headerRow = EF.GetCellList(rows.First());
+                int mainColIndex = 0;
+                for (int i = 0; i < headerRow.Count; i++)
+                {
+                    Cell cell = headerRow[i];
+                    if (EF.IsTextCell(cell))
+                    {
+                        string text = EF.GetCellText(cell, sharedStringTable);
+                        if (text.ToLower() == language)
+                        {
+                            mainColIndex = i;
+                            break;
+                        }
+                    }
+                }
+
                 // Read excel text
                 foreach (Row row in sheetData.Elements<Row>())
                 {
@@ -75,8 +98,15 @@ namespace CIExcelToWord
                             if (imagePath != null)
                                 Console.WriteLine(imagePath);
                         }
+                        else if (EF.IsNumberCell(cell))
+                        {
+                            // Get number as string
+                            Console.WriteLine(EF.GetNumberAsString(cell));
+                        }
                     }
                 }
+
+                Console.WriteLine(mainColIndex);
 
                 newPackage.Dispose();
             }
