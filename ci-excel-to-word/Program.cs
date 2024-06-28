@@ -80,6 +80,38 @@ namespace CIExcelToWord
                     }
                 }
 
+                // Get chapter # and title
+                string? chapterNo = "";
+                string title = "";
+                int titleRowIndex = 1;
+                foreach (Row row in rows.Skip(1))
+                {
+                    List<Cell> cells = EF.GetCellList(row);
+
+                    // Find image cell that contains a number
+                    Cell imageCell = cells[imageColIndex];
+                    if (EF.IsNumberCell(imageCell))
+                    {
+                        chapterNo = EF.GetNumberAsString(imageCell);
+
+                        // Get title
+                        Cell mainCell = cells[mainColIndex];
+                        if (EF.IsTextCell(mainCell))
+                            title = EF.GetCellText(mainCell, sharedStringTable);
+                        break;
+                    }
+
+                    titleRowIndex++;
+                }
+                if (string.IsNullOrWhiteSpace(chapterNo))
+                    throw new NullReferenceException("No chapter number provided");
+                if (string.IsNullOrWhiteSpace(title))
+                    throw new NullReferenceException("No title provided");
+
+                // Add chapter # and title to Word doc
+                body.AppendChild(WF.Paragraph($"CHAPTER {chapterNo}", "WorksheetTitle"));
+                body.AppendChild(WF.Paragraph(title, "WorksheetSubtitle"));
+
                 // Read excel text
                 foreach (Row row in sheetData.Elements<Row>())
                 {
