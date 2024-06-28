@@ -53,7 +53,7 @@ namespace CIExcelToWord
                 List<string> imageFilePaths = EF.ExtractImages(excelFilePath, imagesFolderPath);
 
                 // Populate new Word package
-                (MainDocumentPart mainPart, WXML.Body body) = WF.PopulateNewWordPackage(newPackage);
+                (MainDocumentPart mainPart, WXML.Body body) = WF.PopulateNewWordPackage(newPackage, 1134, "blue");
 
                 // Get excel data
                 IEnumerable<Row> rows = sheetData.Elements<Row>();
@@ -109,8 +109,8 @@ namespace CIExcelToWord
                     throw new NullReferenceException("No title provided");
 
                 // Add chapter # and title to Word doc
-                body.AppendChild(WF.Paragraph($"CHAPTER {chapterNo}", "WorksheetTitle"));
-                body.AppendChild(WF.Paragraph(title, "WorksheetSubtitle"));
+                body.AppendChild(WF.Paragraph($"CHAPTER {chapterNo}", "ChapterTitle"));
+                body.AppendChild(WF.Paragraph(title, "ChapterSubtitle"));
 
                 // Read excel text
                 foreach (Row row in sheetData.Elements<Row>())
