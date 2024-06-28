@@ -109,10 +109,11 @@ namespace CIExcelToWord
                     throw new NullReferenceException("No title provided");
 
                 // Add chapter # and title to Word doc
-                body.AppendChild(WF.Paragraph($"CHAPTER {chapterNo}", "ChapterTitle"));
-                body.AppendChild(WF.Paragraph(title, "ChapterSubtitle"));
+                WF.AppendToBody(body, WF.Paragraph($"CHAPTER {chapterNo}", "ChapterTitle"));
+                WF.AppendToBody(body, WF.Paragraph(title, "ChapterSubtitle"));
+                WF.AppendToBody(body, WF.SectionBreak());
 
-                // Read excel text
+                // Read rest of excel sheet
                 foreach (Row row in sheetData.Elements<Row>())
                 {
                     foreach (Cell cell in row.Elements<Cell>())
@@ -124,9 +125,7 @@ namespace CIExcelToWord
                             Console.WriteLine(text);
 
                             // Place in document
-                            body.AppendChild(
-                                WF.Paragraph(text)
-                            );
+                            WF.AppendToBody(body, WF.Paragraph(text));
                         }
                         else if (EF.IsImageCell(cell))
                         {
