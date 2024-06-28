@@ -59,18 +59,23 @@ namespace CIExcelToWord
                 IEnumerable<Row> rows = sheetData.Elements<Row>();
 
                 // Establish which columns to read from
-                List<Cell> headerRow = EF.GetCellList(rows.First());
                 int mainColIndex = 0;
+                int imageColIndex = 0;
+                int choiceColIndex = 0;
+
+                List<Cell> headerRow = EF.GetCellList(rows.First());
                 for (int i = 0; i < headerRow.Count; i++)
                 {
                     Cell cell = headerRow[i];
                     if (EF.IsTextCell(cell))
                     {
                         string text = EF.GetCellText(cell, sharedStringTable);
-                        if (text.ToLower() == language)
+                        if (text.ToLower().StartsWith("image"))
+                            imageColIndex = i;
+                        if (text.ToLower().StartsWith(language))
                         {
                             mainColIndex = i;
-                            break;
+                            choiceColIndex = i + 1;
                         }
                     }
                 }
@@ -105,8 +110,6 @@ namespace CIExcelToWord
                         }
                     }
                 }
-
-                Console.WriteLine(mainColIndex);
 
                 newPackage.Dispose();
             }
