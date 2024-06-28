@@ -162,6 +162,8 @@ namespace CIExcelToWord
                     // }
                 }
 
+                WF.AppendToBody(body, WF.SectionBreak("blue", 2));
+
                 newPackage.Dispose();
             }
         }
