@@ -111,35 +111,55 @@ namespace CIExcelToWord
                 // Add chapter # and title to Word doc
                 WF.AppendToBody(body, WF.Paragraph($"CHAPTER {chapterNo}", "ChapterTitle"));
                 WF.AppendToBody(body, WF.Paragraph(title, "ChapterSubtitle"));
-                WF.AppendToBody(body, WF.SectionBreak());
+                WF.AppendToBody(body, WF.Paragraph());
+                WF.AppendToBody(body, WF.SectionBreak("blue"));
 
                 // Read rest of excel sheet
-                foreach (Row row in sheetData.Elements<Row>())
+                foreach (Row row in sheetData.Elements<Row>().Skip(titleRowIndex + 1))
                 {
-                    foreach (Cell cell in row.Elements<Cell>())
-                    {
-                        if (EF.IsTextCell(cell))
-                        {
-                            // Get text
-                            string text = EF.GetCellText(cell, sharedStringTable);
-                            Console.WriteLine(text);
+                    List<Cell> cells = EF.GetCellList(row);
 
-                            // Place in document
-                            WF.AppendToBody(body, WF.Paragraph(text));
-                        }
-                        else if (EF.IsImageCell(cell))
+                    // Image
+                    Cell imageCell = cells[imageColIndex];
+                    if (EF.IsImageCell(imageCell))
+                        WF.AppendToBody(body, WF.Paragraph("IMAGE"));
+
+                    // Main text
+                    if (cells.Count > mainColIndex)
+                    {
+                        Cell mainCell = cells[mainColIndex];
+                        if (EF.IsTextCell(mainCell))
                         {
-                            // Get image path
-                            string? imagePath = EF.GetImagePath(cell, imagesFolderPath);
-                            if (imagePath != null)
-                                Console.WriteLine(imagePath);
-                        }
-                        else if (EF.IsNumberCell(cell))
-                        {
-                            // Get number as string
-                            Console.WriteLine(EF.GetNumberAsString(cell));
+                            string[] lines = EF.GetCellText(mainCell, sharedStringTable).Split('\n');
+                            foreach (string line in lines)
+                                WF.AppendToBody(body, WF.Paragraph(line, "TextCentered"));
                         }
                     }
+
+                    // foreach (Cell cell in row.Elements<Cell>())
+                    // {
+                    //     if (EF.IsTextCell(cell))
+                    //     {
+                    //         // Get text
+                    //         string text = EF.GetCellText(cell, sharedStringTable);
+                    //         Console.WriteLine(text);
+
+                    //         // Place in document
+                    //         WF.AppendToBody(body, WF.Paragraph(text));
+                    //     }
+                    //     else if (EF.IsImageCell(cell))
+                    //     {
+                    //         // Get image path
+                    //         string? imagePath = EF.GetImagePath(cell, imagesFolderPath);
+                    //         if (imagePath != null)
+                    //             Console.WriteLine(imagePath);
+                    //     }
+                    //     else if (EF.IsNumberCell(cell))
+                    //     {
+                    //         // Get number as string
+                    //         Console.WriteLine(EF.GetNumberAsString(cell));
+                    //     }
+                    // }
                 }
 
                 newPackage.Dispose();
