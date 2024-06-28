@@ -122,7 +122,15 @@ namespace CIExcelToWord
                     // Image
                     Cell imageCell = cells[imageColIndex];
                     if (EF.IsImageCell(imageCell))
-                        WF.AppendToBody(body, WF.Paragraph("IMAGE"));
+                    {
+                        string? imagePath = EF.GetImagePath(imageCell, imagesFolderPath);
+                        if (imagePath != null)
+                        {
+                            WXML.Paragraph? image = WF.ImageFromPath(mainPart, imagePath, 1440000, "TextCentered");
+                            if (image != null)
+                                WF.AppendToBody(body, image);
+                        }
+                    }
 
                     // Main text
                     if (cells.Count > mainColIndex)
