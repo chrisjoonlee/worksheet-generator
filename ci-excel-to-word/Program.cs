@@ -80,14 +80,15 @@ namespace CIExcelToWord
                     }
                 }
 
+                List<List<List<Cell>>> sections = HF.GetExcelSections(rows.Skip(1), imageColIndex, sharedStringTable);
+
                 // Get chapter # and title
+                List<List<Cell>> mainSection = sections[0];
                 string? chapterNo = "";
                 string title = "";
                 int titleRowIndex = 1;
-                foreach (Row row in rows.Skip(1))
+                foreach (List<Cell> cells in mainSection)
                 {
-                    List<Cell> cells = EF.GetCellList(row);
-
                     // Find image cell that contains a number
                     Cell imageCell = cells[imageColIndex];
                     if (EF.IsNumberCell(imageCell))
@@ -112,50 +113,58 @@ namespace CIExcelToWord
                 WF.AppendToBody(body, WF.Paragraph($"CHAPTER {chapterNo}", "ChapterTitle"));
                 WF.AppendToBody(body, WF.Paragraph(title, "ChapterSubtitle"));
                 WF.AppendToBody(body, WF.Paragraph());
-                WF.AppendToBody(body, WF.SectionBreak("blue"));
+                WF.AppendToBody(body, WF.SectionBreak("blue", 1));
 
-                int nextSectionRowIndex = titleRowIndex;
+                // int nextSectionRowIndex = titleRowIndex;
 
-                // Read rest of excel sheet
-                foreach (Row row in sheetData.Elements<Row>().Skip(titleRowIndex + 1))
-                {
-                    nextSectionRowIndex++;
+                // // Read rest of excel sheet
+                // foreach (Row row in sheetData.Elements<Row>().Skip(titleRowIndex + 1))
+                // {
+                //     nextSectionRowIndex++;
 
-                    List<Cell> cells = EF.GetCellList(row);
+                //     List<Cell> cells = EF.GetCellList(row);
 
-                    bool successfulWrite = HF.WriteImageAndTextFromExcelToWord(
-                        cells, mainPart, body,
-                        imageColIndex, mainColIndex,
-                        imagesFolderPath, sharedStringTable,
-                        1440000
-                    );
-                    if (!successfulWrite)
-                        break;
-                }
-                WF.AppendToBody(body, WF.SectionBreak("blue", 2));
+                //     bool successfulWrite = HF.WriteImageAndTextFromExcelToWord(
+                //         cells, mainPart, body,
+                //         imageColIndex, mainColIndex,
+                //         imagesFolderPath, sharedStringTable,
+                //         1440000
+                //     );
+                //     if (!successfulWrite)
+                //         break;
+                // }
+                // WF.AppendToBody(body, WF.SectionBreak("blue", 2));
+                // WF.AppendToBody(body, WF.PageBreak());
 
-                // Review section
-                Row sectionHeaderRow = sheetData.Elements<Row>().ToList()[nextSectionRowIndex];
-                string sectionType = EF.GetCellText(EF.GetCellList(sectionHeaderRow)[imageColIndex], sharedStringTable).ToLower();
-                if (sectionType == "review")
-                {
-                    foreach (Row row in sheetData.Elements<Row>().Skip(nextSectionRowIndex + 1))
-                    {
-                        List<Cell> cells = EF.GetCellList(row);
+                // // Summary section
+                // Row sectionHeaderRow = sheetData.Elements<Row>().ToList()[nextSectionRowIndex];
+                // string sectionType = EF.GetCellText(EF.GetCellList(sectionHeaderRow)[imageColIndex], sharedStringTable).ToLower();
+                // int rowsToSkip = ++nextSectionRowIndex;
 
-                        bool successfulWrite = HF.WriteImageAndTextFromExcelToWord(
-                            cells, mainPart, body,
-                            imageColIndex, mainColIndex,
-                            imagesFolderPath, sharedStringTable,
-                            1440000
-                        );
-                        if (!successfulWrite)
-                            break;
-                    }
-                    WF.AppendToBody(body, WF.SectionBreak("blue"));
-                }
+                // if (sectionType == "review" || sectionType == "summary")
+                // {
+                //     // Section title
+                //     WF.AppendToBody(body, WF.Paragraph("SUMMARY", "ChapterTitle"));
 
-                Console.WriteLine(sectionType);
+                //     // Content
+                //     foreach (Row row in sheetData.Elements<Row>().Skip(rowsToSkip))
+                //     {
+                //         nextSectionRowIndex++;
+
+                //         List<Cell> cells = EF.GetCellList(row);
+
+                //         bool successfulWrite = HF.WriteImageAndTextFromExcelToWord(
+                //             cells, mainPart, body,
+                //             imageColIndex, mainColIndex,
+                //             imagesFolderPath, sharedStringTable,
+                //             1440000
+                //         );
+                //         if (!successfulWrite)
+                //             break;
+                //     }
+
+                //     WF.AppendToBody(body, WF.PageBreak());
+                // }
 
                 newPackage.Dispose();
             }
