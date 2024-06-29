@@ -56,14 +56,40 @@ namespace CIExcelToWord
                 (MainDocumentPart mainPart, WXML.Body body) = WF.PopulateNewWordPackage(newPackage, 1134, "blue");
 
                 // Get excel data
-                IEnumerable<Row> rows = sheetData.Elements<Row>();
+                List<List<Cell>> rows = EF.GetRows(sheetData);
+
+                // DEBUGGING
+                // Console.WriteLine("guava");
+                // Console.WriteLine("FIRST ROW");
+                // foreach (var cell in rows.First())
+                // {
+                //     Console.Write(cell.InnerText);
+                //     Console.Write(" - ");
+                // }
+                // Console.WriteLine();
+                // Console.WriteLine("SECOND ROW");
+                // foreach (var cell in rows.ElementAt(1))
+                // {
+                //     Console.Write(cell.InnerText);
+                //     Console.Write(" - ");
+                // }
+                // Console.WriteLine();
+                // Console.WriteLine("THIRD ROW");
+                // foreach (var cell in rows.ElementAt(2))
+                // {
+                //     Console.Write(cell.InnerText);
+                //     Console.Write(" - ");
+                // }
+                // Console.WriteLine();
+
+                // Ok
 
                 // Establish which columns to read from
                 int mainColIndex = 0;
                 int imageColIndex = 0;
                 int choiceColIndex = 0;
 
-                List<Cell> headerRow = EF.GetCellList(rows.First());
+                List<Cell> headerRow = rows[0];
                 for (int i = 0; i < headerRow.Count; i++)
                 {
                     Cell cell = headerRow[i];
@@ -80,7 +106,7 @@ namespace CIExcelToWord
                     }
                 }
 
-                List<List<List<Cell>>> sections = HF.GetExcelSections(rows.Skip(1), imageColIndex, sharedStringTable);
+                List<List<List<Cell>>> sections = HF.GetExcelSections(rows.Skip(1).ToList(), imageColIndex, sharedStringTable);
 
                 // MAIN SECTION
                 List<List<Cell>> mainSection = sections[0];
@@ -121,14 +147,22 @@ namespace CIExcelToWord
                 for (int i = titleRowIndex + 1; i < mainSection.Count; i++)
                 {
                     List<Cell> cells = mainSection[i];
-                    bool successfulWrite = HF.WriteImageAndTextFromExcelToWord(
-                        cells, mainPart, body,
-                        imageColIndex, mainColIndex,
-                        imagesFolderPath, sharedStringTable,
-                        1440000
-                    );
-                    if (!successfulWrite)
+
+                    try
+                    {
+                        List<WXML.Paragraph> paragraphs = HF.GetImageAndTextFromExcel(
+                            cells, mainPart, body,
+                            imageColIndex, mainColIndex, choiceColIndex,
+                            imagesFolderPath, sharedStringTable,
+                            1440000
+                        );
+
+                        WF.AppendToBody(body, paragraphs);
+                    }
+                    catch
+                    {
                         break;
+                    }
                 }
                 WF.AppendToBody(body, WF.SectionBreak("blue", 2));
                 WF.AppendToBody(body, WF.PageBreak());
@@ -147,7 +181,7 @@ namespace CIExcelToWord
                     {
                         List<WXML.Paragraph> paragraphs = HF.GetProcessedSummaryFromExcel(
                             currentSection, mainPart, body,
-                            imageColIndex, mainColIndex,
+                            imageColIndex, mainColIndex, choiceColIndex,
                             imagesFolderPath, sharedStringTable,
                             1440000
                         );
@@ -159,7 +193,7 @@ namespace CIExcelToWord
                     {
                         List<OpenXmlElement> elements = HF.GetProcessedMatchingFromExcel(
                             currentSection, mainPart, body,
-                            imageColIndex, mainColIndex,
+                            imageColIndex, mainColIndex, choiceColIndex,
                             imagesFolderPath, sharedStringTable,
                             1440000
                         );
@@ -167,36 +201,6 @@ namespace CIExcelToWord
                         WF.AppendToBody(body, elements);
                     }
                 }
-
-                // Summary section
-                // Row sectionHeaderRow = sheetData.Elements<Row>().ToList()[nextSectionRowIndex];
-                // string sectionType =
-                // int rowsToSkip = ++nextSectionRowIndex;
-
-                // if (sectionType == "review" || sectionType == "summary")
-                // {
-                //     // Section title
-                //     // WF.AppendToBody(body, WF.Paragraph("SUMMARY", "ChapterTitle"));
-
-                //     // Content
-                //     foreach (Row row in sheetData.Elements<Row>().Skip(rowsToSkip))
-                //     {
-                //         nextSectionRowIndex++;
-
-                //         List<Cell> cells = EF.GetCellList(row);
-
-                //         bool successfulWrite = HF.WriteImageAndTextFromExcelToWord(
-                //             cells, mainPart, body,
-                //             imageColIndex, mainColIndex,
-                //             imagesFolderPath, sharedStringTable,
-                //             1440000
-                //         );
-                //         if (!successfulWrite)
-                //             break;
-                //     }
-
-                //     WF.AppendToBody(body, WF.PageBreak());
-                // }
 
                 newPackage.Dispose();
             }
