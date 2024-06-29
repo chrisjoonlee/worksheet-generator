@@ -58,32 +58,6 @@ namespace CIExcelToWord
                 // Get excel data
                 List<List<Cell>> rows = EF.GetRows(sheetData);
 
-                // DEBUGGING
-                // Console.WriteLine("guava");
-                // Console.WriteLine("FIRST ROW");
-                // foreach (var cell in rows.First())
-                // {
-                //     Console.Write(cell.InnerText);
-                //     Console.Write(" - ");
-                // }
-                // Console.WriteLine();
-                // Console.WriteLine("SECOND ROW");
-                // foreach (var cell in rows.ElementAt(1))
-                // {
-                //     Console.Write(cell.InnerText);
-                //     Console.Write(" - ");
-                // }
-                // Console.WriteLine();
-                // Console.WriteLine("THIRD ROW");
-                // foreach (var cell in rows.ElementAt(2))
-                // {
-                //     Console.Write(cell.InnerText);
-                //     Console.Write(" - ");
-                // }
-                // Console.WriteLine();
-
-                // Ok
-
                 // Establish which columns to read from
                 int mainColIndex = 0;
                 int imageColIndex = 0;
@@ -170,6 +144,7 @@ namespace CIExcelToWord
                     string sectionType = EF.GetCellText(sectionHeaderRow[imageColIndex], sharedStringTable).ToLower();
                     Console.WriteLine(sectionType);
 
+                    // Summary section
                     if (sectionType.StartsWith("summary") || sectionType.StartsWith("review"))
                     {
                         List<WXML.Paragraph> paragraphs = HF.GetProcessedSummaryFromExcel(
@@ -182,13 +157,27 @@ namespace CIExcelToWord
                         WF.AppendToBody(body, paragraphs);
                     }
 
+                    // Matching section
                     if (sectionType.StartsWith("match"))
                     {
                         List<OpenXmlElement> elements = HF.GetProcessedMatchingFromExcel(
                             currentSection, mainPart, body,
                             imageColIndex, mainColIndex, choiceColIndex,
                             imagesFolderPath, sharedStringTable,
-                            1440000
+                            1080000
+                        );
+
+                        WF.AppendToBody(body, elements);
+                    }
+
+                    // True or false section
+                    if (sectionType.StartsWith("true") || sectionType.StartsWith("t/f") || sectionType.StartsWith("t / f"))
+                    {
+                        List<OpenXmlElement> elements = HF.GetProcessedTrueOrFalseFromExcel(
+                            currentSection, mainPart, body,
+                            imageColIndex, mainColIndex, choiceColIndex,
+                            imagesFolderPath, sharedStringTable,
+                            1080000
                         );
 
                         WF.AppendToBody(body, elements);
