@@ -82,11 +82,13 @@ namespace CIExcelToWord
 
                 List<List<List<Cell>>> sections = HF.GetExcelSections(rows.Skip(1), imageColIndex, sharedStringTable);
 
-                // Get chapter # and title
+                // MAIN SECTION
                 List<List<Cell>> mainSection = sections[0];
+
+                // Get chapter # and title
                 string? chapterNo = "";
                 string title = "";
-                int titleRowIndex = 1;
+                int titleRowIndex = 0;
                 foreach (List<Cell> cells in mainSection)
                 {
                     // Find image cell that contains a number
@@ -115,36 +117,66 @@ namespace CIExcelToWord
                 WF.AppendToBody(body, WF.Paragraph());
                 WF.AppendToBody(body, WF.SectionBreak("blue", 1));
 
-                // int nextSectionRowIndex = titleRowIndex;
+                // Read rest of main section
+                for (int i = titleRowIndex + 1; i < mainSection.Count; i++)
+                {
+                    List<Cell> cells = mainSection[i];
+                    bool successfulWrite = HF.WriteImageAndTextFromExcelToWord(
+                        cells, mainPart, body,
+                        imageColIndex, mainColIndex,
+                        imagesFolderPath, sharedStringTable,
+                        1440000
+                    );
+                    if (!successfulWrite)
+                        break;
+                }
+                WF.AppendToBody(body, WF.SectionBreak("blue", 2));
+                WF.AppendToBody(body, WF.PageBreak());
 
-                // // Read rest of excel sheet
-                // foreach (Row row in sheetData.Elements<Row>().Skip(titleRowIndex + 1))
-                // {
-                //     nextSectionRowIndex++;
+                // ALL OTHER SECTIONS
+                for (int i = 1; i < sections.Count; i++)
+                {
+                    List<List<Cell>> currentSection = sections[i];
 
-                //     List<Cell> cells = EF.GetCellList(row);
+                    // Parse header row
+                    List<Cell> sectionHeaderRow = currentSection[0];
+                    string sectionType = EF.GetCellText(sectionHeaderRow[imageColIndex], sharedStringTable).ToLower();
+                    Console.WriteLine(sectionType);
 
-                //     bool successfulWrite = HF.WriteImageAndTextFromExcelToWord(
-                //         cells, mainPart, body,
-                //         imageColIndex, mainColIndex,
-                //         imagesFolderPath, sharedStringTable,
-                //         1440000
-                //     );
-                //     if (!successfulWrite)
-                //         break;
-                // }
-                // WF.AppendToBody(body, WF.SectionBreak("blue", 2));
-                // WF.AppendToBody(body, WF.PageBreak());
+                    if (sectionType.StartsWith("summary") || sectionType.StartsWith("review"))
+                    {
+                        List<WXML.Paragraph> paragraphs = HF.GetProcessedSummaryFromExcel(
+                            currentSection, mainPart, body,
+                            imageColIndex, mainColIndex,
+                            imagesFolderPath, sharedStringTable,
+                            1440000
+                        );
 
-                // // Summary section
+                        WF.AppendToBody(body, paragraphs);
+                    }
+
+                    if (sectionType.StartsWith("match"))
+                    {
+                        List<OpenXmlElement> elements = HF.GetProcessedMatchingFromExcel(
+                            currentSection, mainPart, body,
+                            imageColIndex, mainColIndex,
+                            imagesFolderPath, sharedStringTable,
+                            1440000
+                        );
+
+                        WF.AppendToBody(body, elements);
+                    }
+                }
+
+                // Summary section
                 // Row sectionHeaderRow = sheetData.Elements<Row>().ToList()[nextSectionRowIndex];
-                // string sectionType = EF.GetCellText(EF.GetCellList(sectionHeaderRow)[imageColIndex], sharedStringTable).ToLower();
+                // string sectionType =
                 // int rowsToSkip = ++nextSectionRowIndex;
 
                 // if (sectionType == "review" || sectionType == "summary")
                 // {
                 //     // Section title
-                //     WF.AppendToBody(body, WF.Paragraph("SUMMARY", "ChapterTitle"));
+                //     // WF.AppendToBody(body, WF.Paragraph("SUMMARY", "ChapterTitle"));
 
                 //     // Content
                 //     foreach (Row row in sheetData.Elements<Row>().Skip(rowsToSkip))
