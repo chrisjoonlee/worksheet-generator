@@ -114,63 +114,48 @@ namespace CIExcelToWord
                 WF.AppendToBody(body, WF.Paragraph());
                 WF.AppendToBody(body, WF.SectionBreak("blue"));
 
+                int nextSectionRowIndex = titleRowIndex;
+
                 // Read rest of excel sheet
                 foreach (Row row in sheetData.Elements<Row>().Skip(titleRowIndex + 1))
                 {
+                    nextSectionRowIndex++;
+
                     List<Cell> cells = EF.GetCellList(row);
 
-                    // Image
-                    Cell imageCell = cells[imageColIndex];
-                    if (EF.IsImageCell(imageCell))
+                    bool successfulWrite = HF.WriteImageAndTextFromExcelToWord(
+                        cells, mainPart, body,
+                        imageColIndex, mainColIndex,
+                        imagesFolderPath, sharedStringTable,
+                        1440000
+                    );
+                    if (!successfulWrite)
+                        break;
+                }
+                WF.AppendToBody(body, WF.SectionBreak("blue", 2));
+
+                // Review section
+                Row sectionHeaderRow = sheetData.Elements<Row>().ToList()[nextSectionRowIndex];
+                string sectionType = EF.GetCellText(EF.GetCellList(sectionHeaderRow)[imageColIndex], sharedStringTable).ToLower();
+                if (sectionType == "review")
+                {
+                    foreach (Row row in sheetData.Elements<Row>().Skip(nextSectionRowIndex + 1))
                     {
-                        string? imagePath = EF.GetImagePath(imageCell, imagesFolderPath);
-                        if (imagePath != null)
-                        {
-                            WXML.Paragraph? image = WF.ImageFromPath(mainPart, imagePath, 1440000, "TextCentered");
-                            if (image != null)
-                                WF.AppendToBody(body, image);
-                        }
+                        List<Cell> cells = EF.GetCellList(row);
+
+                        bool successfulWrite = HF.WriteImageAndTextFromExcelToWord(
+                            cells, mainPart, body,
+                            imageColIndex, mainColIndex,
+                            imagesFolderPath, sharedStringTable,
+                            1440000
+                        );
+                        if (!successfulWrite)
+                            break;
                     }
-
-                    // Main text
-                    if (cells.Count > mainColIndex)
-                    {
-                        Cell mainCell = cells[mainColIndex];
-                        if (EF.IsTextCell(mainCell))
-                        {
-                            string[] lines = EF.GetCellText(mainCell, sharedStringTable).Split('\n');
-                            foreach (string line in lines)
-                                WF.AppendToBody(body, WF.Paragraph(line, "TextCentered"));
-                        }
-                    }
-
-                    // foreach (Cell cell in row.Elements<Cell>())
-                    // {
-                    //     if (EF.IsTextCell(cell))
-                    //     {
-                    //         // Get text
-                    //         string text = EF.GetCellText(cell, sharedStringTable);
-                    //         Console.WriteLine(text);
-
-                    //         // Place in document
-                    //         WF.AppendToBody(body, WF.Paragraph(text));
-                    //     }
-                    //     else if (EF.IsImageCell(cell))
-                    //     {
-                    //         // Get image path
-                    //         string? imagePath = EF.GetImagePath(cell, imagesFolderPath);
-                    //         if (imagePath != null)
-                    //             Console.WriteLine(imagePath);
-                    //     }
-                    //     else if (EF.IsNumberCell(cell))
-                    //     {
-                    //         // Get number as string
-                    //         Console.WriteLine(EF.GetNumberAsString(cell));
-                    //     }
-                    // }
+                    WF.AppendToBody(body, WF.SectionBreak("blue"));
                 }
 
-                WF.AppendToBody(body, WF.SectionBreak("blue", 2));
+                Console.WriteLine(sectionType);
 
                 newPackage.Dispose();
             }
