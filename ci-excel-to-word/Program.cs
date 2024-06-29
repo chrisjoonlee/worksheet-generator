@@ -148,21 +148,14 @@ namespace CIExcelToWord
                 {
                     List<Cell> cells = mainSection[i];
 
-                    try
-                    {
-                        List<WXML.Paragraph> paragraphs = HF.GetImageAndTextFromExcel(
-                            cells, mainPart, body,
-                            imageColIndex, mainColIndex, choiceColIndex,
-                            imagesFolderPath, sharedStringTable,
-                            1440000
-                        );
+                    List<WXML.Paragraph> paragraphs = HF.GetImageAndTextFromExcel(
+                        cells, mainPart, body,
+                        imageColIndex, mainColIndex, choiceColIndex,
+                        imagesFolderPath, sharedStringTable,
+                        1440000
+                    );
 
-                        WF.AppendToBody(body, paragraphs);
-                    }
-                    catch
-                    {
-                        break;
-                    }
+                    WF.AppendToBody(body, paragraphs);
                 }
                 WF.AppendToBody(body, WF.SectionBreak("blue", 2));
                 WF.AppendToBody(body, WF.PageBreak());
