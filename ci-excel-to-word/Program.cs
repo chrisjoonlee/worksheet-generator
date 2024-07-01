@@ -3,6 +3,7 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using WorksheetGeneratorLibrary.Excel;
 using WorksheetGeneratorLibrary.Utilities;
+using WorksheetGeneratorLibrary.PowerPoint;
 using WorksheetGeneratorLibrary.Word;
 using WXML = DocumentFormat.OpenXml.Wordprocessing;
 using DocumentFormat.OpenXml.Drawing.Spreadsheet;
@@ -10,6 +11,7 @@ using System;
 using System.Linq;
 using System.IO;
 using System.IO.Compression;
+using DocumentFormat.OpenXml.Presentation;
 
 namespace CIExcelToWord
 {
@@ -27,6 +29,8 @@ namespace CIExcelToWord
             string excelFilePath = $"docs/{args[0]}";
             string baseFileName = Path.GetFileNameWithoutExtension(args[0]);
             string wordFilePath = $"docs/{args[1]}";
+            string pptFilePath = $"docs/{baseFileName}_new.pptx";
+            string pptntFilePath = $"docs/{baseFileName}_new_no_text.pptx";
             string imagesFolderPath = $"docs/{baseFileName}-imgs";
 
             // Language
@@ -54,6 +58,18 @@ namespace CIExcelToWord
 
                 // Populate new Word package
                 (MainDocumentPart mainPart, WXML.Body body) = WF.PopulateNewWordPackage(newPackage, 1134, "blue");
+                // WF.AddPageNumbers(mainPart);
+
+                // Create PowerPoint packages
+                PresentationDocument pptDoc = PresentationDocument.Create(pptFilePath, PresentationDocumentType.Presentation);
+                PresentationPart pptPresentationPart = pptDoc.AddPresentationPart();
+                pptPresentationPart.Presentation = new Presentation();
+                PF.CreatePresentationParts(pptPresentationPart);
+
+                PresentationDocument pptntDoc = PresentationDocument.Create(pptntFilePath, PresentationDocumentType.Presentation);
+                PresentationPart pptntPresentationPart = pptntDoc.AddPresentationPart();
+                pptntPresentationPart.Presentation = new Presentation();
+                PF.CreatePresentationParts(pptntPresentationPart);
 
                 // Get excel data
                 List<List<Cell>> rows = EF.GetRows(sheetData);
@@ -115,7 +131,7 @@ namespace CIExcelToWord
                 WF.AppendToBody(body, WF.Paragraph($"CHAPTER {chapterNo}", "ChapterTitle"));
                 WF.AppendToBody(body, WF.Paragraph(title, "ChapterSubtitle"));
                 WF.AppendToBody(body, WF.Paragraph());
-                WF.AppendToBody(body, WF.SectionBreak("blue", 1));
+                WF.AppendToBody(body, WF.SectionBreak(1134, "blue", 1));
 
                 // Read rest of main section
                 for (int i = titleRowIndex + 1; i < mainSection.Count; i++)
@@ -131,7 +147,7 @@ namespace CIExcelToWord
 
                     WF.AppendToBody(body, paragraphs);
                 }
-                WF.AppendToBody(body, WF.SectionBreak("blue", 2));
+                WF.AppendToBody(body, WF.SectionBreak(1134, "blue", 2));
                 WF.AppendToBody(body, WF.PageBreak());
 
                 // ALL OTHER SECTIONS
